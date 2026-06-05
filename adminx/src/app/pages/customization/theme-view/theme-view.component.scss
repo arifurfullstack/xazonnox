@@ -1,0 +1,13 @@
+@import "common/theme-settings";
+.image{
+  display: flex;
+  align-items: center;
+  background: #0a55e5;
+  justify-content: center;
+  max-width: 125px;
+  gap: .5rem;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,189 @@
+<section class="full-gallery">
+
+  <div class="header">
+    <div class="left">
+      <h1 class="title">Support</h1>
+    </div> <!-- END! left -->
+
+    <div class="right">
+
+      <a mat-button class="add-product-btn" color="primary"
+         routerLink="/support/add-support">
+        <mat-icon>add</mat-icon>
+        Add New
+      </a>
+    </div>
+
+  </div> <!-- END! header -->
+
+  <div class="support-filter-tabs">
+    <button
+      *ngFor="let t of filterTabs"
+      class="filter-tab"
+      [class.active]="activeTab === t.key"
+      (click)="onFilterChange(t.key)"
+    >
+      {{ t.label }}
+    </button>
+  </div>
+
+
+
+  <div class="gallery" appInfiniteScroll (scrollEnd)="loadMoreGalleries()" >
+
+
+    @defer (when !isLoadingData) {
+      <ng-container>
+
+        <div *ngFor="let item of allTableData; let i = index" [@fadeIn]="item.state" class="support-data-card" (click)="openFullView(item)">
+          <div class="card-header">
+            <div>
+              <span matTooltip="Support Type" class="type-badge" [ngClass]="item?.type">{{ item?.type }}</span>
+              <span matTooltip="Resolve Status" class="status-badge" [ngClass]="item?.status">{{ item?.status }}</span>
+            </div>
+
+            <div class="right-actions" (click)="$event.stopPropagation()">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                @if(item?.status === 'Pending') {
+                <a mat-menu-item [routerLink]="['/support/edit-support',item._id ]">
+                  <mat-icon>edit</mat-icon> <span>Edit</span>
+                </a>
+                <button mat-menu-item (click)="openConfirmDialog('delete', item._id)">
+                  <mat-icon>delete</mat-icon> <span>Delete</span>
+                </button>
+                }
+                <button mat-menu-item (click)="openFullView(item)">
+                  <mat-icon>visibility</mat-icon> <span>View</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <div class="support-meta">
+            <div class="support-date">
+              <mat-icon>event</mat-icon>
+              {{ item?.createdAt | date: 'dd MMM, y - hh:mma' }}
+            </div>
+
+            @if (item?.resolveDate) {
+              <div class="support-date resolved">
+                <mat-icon>event</mat-icon>
+                Resolve at: {{ item?.resolveDate | date: 'dd MMM, y - hh:mma' }}
+              </div>
+            }
+
+            @if (item?.assignUser) {
+              <div class="support-assigned">
+                <div class="assigned-label">Assigned To:</div>
+                <div class="assigned-person">
+                  {{ item?.assignUser?.name }}
+                  <span class="whatsapp">
+                  {{ item?.assignUser?.phoneNo }}
+      </span>
+                </div>
+              </div>
+            } @else {
+              <div class="support-assigned">
+                <div class="assigned-label">Assigned To:</div>
+                <div class="assigned-person" style="color: #d83333">
+                  Not Assign Yet!
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- After <p class="support-description"> -->
+          <p class="support-description">
+            {{ item?.descriptionShort }}
+          </p>
+
+
+
+
+        </div>
+
+
+        <div class="full-width-container">
+          <div *ngIf="isLoading" class="spinner">
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+      </ng-container>
+    } @placeholder(minimum 500ms)  {
+      <app-gallery-loader *ngFor="let image of [].constructor(8); let i = index" ></app-gallery-loader>
+    }
+
+
+  </div> <!-- END Gallery -->
+
+  <!-- Loader spinner -->
+
+</section>
+
+
+<!-- 🔹 Dialog Template -->
+<ng-template #supportDialog let-data>
+  <div class="dialog-card-wrapper">
+    <!-- Sticky Header -->
+    <div class="dialog-header">
+      <h2>{{ data?.type | titlecase }}</h2>
+      <button mat-icon-button mat-dialog-close class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div class="dialog-content-body">
+      <div class="dialog-status-type">
+        <span matTooltip="Support Type" class="type-badge" [ngClass]="data?.type">{{ data?.type }}</span>
+        <span matTooltip="Resolve Status" class="status-badge" [ngClass]="data?.status">{{ data?.status }}</span>
+      </div>
+
+      <div class="support-meta">
+        <div class="support-date">
+          <mat-icon>event</mat-icon>
+          {{ data?.createdAt | date: 'dd MMM, y - hh:mma' }}
+        </div>
+
+        @if (data?.resolveDate) {
+          <div class="support-date resolved">
+            <mat-icon>event</mat-icon>
+            Resolve at: {{ data?.resolveDate | date: 'dd MMM, y - hh:mma' }}
+          </div>
+        }
+
+        @if (data?.assignUser) {
+          <div class="support-assigned">
+            <div class="assigned-label">Assigned To:</div>
+            <div class="assigned-person">
+              {{ data?.assignUser?.name }}
+              <span class="whatsapp">
+                  {{ data?.assignUser?.phoneNo }}
+      </span>
+            </div>
+          </div>
+        } @else {
+          <div class="support-assigned">
+            <div class="assigned-label">Assigned To:</div>
+            <div class="assigned-person" style="color: #d83333">
+              Not Assign Yet!
+            </div>
+          </div>
+        }
+
+
+      </div>
+
+      <div class="dialog-desc" [innerHTML]="data?.description | safeHtmlCustom"></div>
+
+      <div *ngIf="data?.images?.length" class="dialog-image">
+        <img *ngFor="let image of data?.images" [src]="image" alt="support image" />
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+

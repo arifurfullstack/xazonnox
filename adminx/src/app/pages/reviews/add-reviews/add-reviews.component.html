@@ -1,0 +1,105 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+     <div class="gallery-picker">
+       <app-gallery-image-picker
+         [type]="'multiple'"
+         [maxImages]="3"
+         [isInvalid]="this.dataForm.get('images').touched && this.dataForm.get('images').invalid"
+         (onPicked)="onPickedImage($event)"
+         [images]="pickedImages">
+       </app-gallery-image-picker>
+<!--        &lt;!&ndash;          infoText="The 1st image for desktop (700px * 700px)  and the 2nd image for mobile image (1200px * any)"&ndash;&gt;-->
+     </div>
+      <div class="product-search-area">
+        <div class="title">
+          <h3>Product:</h3>
+        </div>
+        <app-product-search (onSelect)="onProductSelect($event)"></app-product-search>
+      </div>
+
+      <div class="product-area">
+<!--        <p>Name: {{allTableData[0]?.name}}</p>-->
+        <div class="search-results" [ngClass]="{'has-results': allTableData?.length > 0}">
+          <div class="search-item" >
+            <img [src]="allTableData[0]?.images && allTableData[0]?.images?.length ? allTableData[0]?.images[0] : ''" alt="product image" />
+            <div class="item-info">
+              <h3>{{ allTableData[0]?.name }}</h3>
+              <p>Category: {{ allTableData[0]?.category?.name }} > {{ allTableData[0]?.subCategory?.name }}</p>
+              <div class="price-info">
+                <span class="discounted-price">{{ allTableData[0]?.salePrice }}</span>
+                <span class="original-price">{{ allTableData[0]?.salePrice }}</span>
+              </div>
+            </div>
+            <div class="stock-info">In Stock: {{ allTableData[0]?.quantity }}pcs</div>
+          </div>
+        </div>
+      </div>
+      <h3>Rate:</h3>
+      <div class="rating">
+        <div class="star-rating">
+              <span
+                *ngFor="let star of stars; let i = index"
+                (click)="rate(i + 1)"
+                (mouseover)="hover(i + 1)"
+                (mouseleave)="hover(0)"
+                [class.filled]="i < currentHover || i < rating"
+                class="star"
+              >
+                ★
+              </span>
+        </div>
+        <span>{{ ratingText }}</span>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Reviewer Name</mat-label>
+        <input formControlName="name" matInput/>
+        <mat-error>This field is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mat-input-field" appearance="outline">
+        <mat-label>Review Detail</mat-label>
+        <textarea matInput formControlName="review"
+                  placeholder="What do you think of this product?" rows="4"></textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option *ngFor="let data of reviewStatus" [value]="data.value">
+            {{  data.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Reply</mat-label>
+        <textarea formControlName="reply" matInput placeholder="Reply here"></textarea>
+      </mat-form-field>
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update Review' : 'Add Review' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update Review' : 'Add Review' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->

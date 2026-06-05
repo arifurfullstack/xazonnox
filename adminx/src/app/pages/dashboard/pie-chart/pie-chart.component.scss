@@ -1,0 +1,13 @@
+canvas{
+  height: 350px;
+  max-width: 350px !important;
+  width: 100% !important;
+  margin: auto;
+}
+
+@media (max-width: 360px) {
+  canvas{
+    height: 300px;
+    max-width: 300px !important;
+  }
+}

@@ -1,0 +1,67 @@
+<div class="dashboard">
+
+  <div class="section recent-orders">
+    <div class="header">
+      <h2>Cart Items</h2>
+
+
+    </div>
+
+    <div class="order-list">
+
+      <div class="order-item" *ngFor="let item of carts;let i=index">
+        <div class="order-image">
+          <!--          <span class="status">{{ item?.orderedItems?.length }}</span>-->
+          <img (click)="openGallery($event, [item?.product?.images[0]])"
+               [src]="item?.product?.images ? item?.product?.images[0] : '/assets/images/temp/pl_1.png'" alt="Order Image">
+          <!--          <img src="/assets/images/temp/pl_1.png" alt="Order Image">-->
+        </div>
+        <div class="order-details">
+          <p class="order-id"># {{ i + 1 }}</p>
+          <p class="customer-name">{{ item?.product?.name }}</p>
+
+        </div>
+        <div class="order-time">{{ item?.createdAt | date:  'dd MMM, yyyy, hh:mm a' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!--  card 2-->
+
+
+  <div class="section recent-orders" >
+    <div class="header">
+      <h2>Wishlist Items</h2>
+
+
+    </div>
+
+    <div class="order-list">
+
+      <div class="order-item" *ngFor="let item of wishlists;let i=index">
+        <div class="order-image">
+          <!--          <span class="status">{{ item?.orderedItems?.length }}</span>-->
+          <img (click)="openGallery($event, [item?.product?.images[0]])"
+               [src]="item?.product?.images ? item?.product?.images[0] : '/assets/images/temp/pl_1.png'" alt="Order Image">
+          <!--          <img src="/assets/images/temp/pl_1.png" alt="Order Image">-->
+        </div>
+        <div class="order-details">
+          <p class="order-id"># {{ i + 1 }}</p>
+          <p class="customer-name">{{ item?.product?.name }}</p>
+
+        </div>
+        <div class="order-time">{{ item?.createdAt | date:  'dd MMM, yyyy, hh:mm a' }}</div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+@if (isGalleryOpen) {
+  <app-gallery-image-viewer [images]="galleryImages"
+                            [startIndex]="selectedImageIndex"
+                            (closeEvent)="closeGallery()">
+  </app-gallery-image-viewer>
+}

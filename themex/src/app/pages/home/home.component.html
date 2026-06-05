@@ -1,0 +1,63 @@
+<div class="home-container">
+
+  @switch (showcaseViews) {
+    @case ('Showcase 1') {
+<!--      <app-showcase-1></app-showcase-1>-->
+      <app-showcase-2></app-showcase-2>
+    }
+    @case ('Showcase 2') {
+      <app-showcase-2></app-showcase-2>
+    }
+    @case ('Showcase 3') {
+      <app-showcase-3></app-showcase-3>
+    }
+  }
+  <!-- END! Showcase Multiple Views -->
+
+  @if (isShowCategoryOnHomePage){
+    <app-categories></app-categories>
+  }
+
+  @if (shopId === '68d9505e94601f37c0aa3281') {
+    <app-return-policy></app-return-policy>
+  }
+
+  @switch (homeViews) {
+    @case ('home view 1') {
+      @for (tag of tags; let i = $index; track i) {
+        <app-tag-products [tag]="tag" [index]="i"></app-tag-products>
+      }
+      <app-all-products></app-all-products>
+    }
+    @default {
+      <app-all-products></app-all-products>
+    }
+  }
+
+  <!-- END Tag View -->
+  @if(isEnableBlog === true){
+    <app-blog></app-blog>
+  }
+
+</div>
+
+<div class="footer-wrapper">
+  @switch (footerViews) {
+    @case ('Footer 1') {
+      <app-footer-xl-1 [shopInfo]="shopInfo"></app-footer-xl-1>
+    }
+    @case ('Footer 2') {
+      <app-footer-xl-2 [shopInfo]="shopInfo"></app-footer-xl-2>
+    }
+    @case ('Footer 3') {
+      <app-footer-xl-3 [shopInfo]="shopInfo"></app-footer-xl-3>
+    }
+    @default {
+      <app-footer-xl-1 [shopInfo]="shopInfo"></app-footer-xl-1>
+    }
+  }
+</div>
+
+@if (isEnableUserNotification) {
+  <app-notification-card *ngIf="isEnableUserNotification"></app-notification-card>
+}

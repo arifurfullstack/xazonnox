@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="content">
+    <div class="left">
+      <div class="img-placeholder">
+        <app-image-slider
+          [showIndicators]="true"
+          [autoPlay]="true"
+          [slides]="storys"
+          [autoPlayTime]="3000"
+          [showControls]="true"
+          [pauseOnHoverOrTouch]="true"
+        ></app-image-slider>
+      </div>
+    </div>
+
+    <div class="right">
+
+      <div class="card">
+        <div class="top-tittle">
+          <h1>Login</h1>
+          <p>Enter your details bellow to continue</p>
+        </div>
+        <form class="login-form" [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+          <div class="input-group margin-bottom" [ngClass]="{'is-invalid': isFieldInvalid('identifier')}">
+            <input type="text" formControlName="identifier" class="input-field"
+                   placeholder="Enter username, email or phone">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24"
+                 height="24" viewBox="0 0 256 256" xml:space="preserve">
+
+  <defs>
+  </defs>
+                <g
+                  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                  transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+    <path d="M 85.347 90 c 0 -22.283 -18.064 -40.347 -40.347 -40.347 S 4.653 67.717 4.653 90 H 85.347 z"
+          style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+          transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                  <circle cx="45.003" cy="21.413" r="21.413"
+                          style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                          transform="  matrix(1 0 0 1 0 0) "/>
+  </g>
+  </svg>
+            </div>
+
+
+          <!-- Password input -->
+          <div class="input-group" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
+            <input [type]="!passwordVisibility ? 'password' : 'text'" (input)="checkPasswordStrength()"
+                   [required]="true"
+                   [minlength]="6" class="input-field" formControlName="password" placeholder="Password*">
+
+            <span [class.visible]="!passwordVisibility" class="input-icon password-eye"
+                  (click)="togglePasswordVisibility()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#3e3e3e"><path
+            d="M0 0h24v24H0z" fill="none"/><path
+            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </span>
+
+            <span [class.visible]="passwordVisibility" class="input-icon password-eye"
+                  (click)="togglePasswordVisibility()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#3e3e3e"><path
+            d="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z" fill="none"/><path
+            d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+            </span>
+          </div>
+
+          <!-- Password requirement and forgot password -->
+          <div class="password-hint" [ngClass]="passwordStrength">
+            <span class="hint-text"><span class="hint-icon">&#x2022;</span> Password must have 6 characters</span>
+            <a class="forgot-password" (click)="navigateToForgetPassword()">Forget Password?</a>
+          </div>
+
+          <div class="submit-area">
+            @if (!isLoading) {
+              <button class="btn-login" mat-button color="primary" type="submit">LOGIN</button>
+            } @else {
+              <button class="btn-loader" mat-button type="button" color="primary">
+                <div><span class="loader"></span></div>
+                <div><span class="txt">Login</span></div>
+              </button>
+            }
+          </div>
+
+        </form>
+
+      </div>
+      <div class="footer">
+        <p>Copyright &copy; {{ year }}. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+

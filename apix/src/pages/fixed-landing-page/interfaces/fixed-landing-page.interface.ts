@@ -1,0 +1,36 @@
+export interface FixedLandingPage {
+  _id?: string;
+  readOnly?: boolean;
+  name?: string;
+  slug?: string;
+  image?: string;
+  priority?: number;
+  description?: string;
+  whyBuyDescription?: string;
+  whyBuy?: string;
+  whyBestTitle?: string;
+  whyBestImage?: string;
+  whyBestDescription?: string;
+  whyBest?: any;
+  videoUrl?: any;
+  type?: any;
+  title?: any;
+  textColor?: any;
+  status?: any;
+  specifications?: any;
+  specificationImage?: any;
+  reviews?: any;
+  reviewTitle?: any;
+  reviewScreenShoot?: any;
+  productInfo?: any;
+  product?: any;
+  paymentTitle?: any;
+  offerText?: any;
+  images?: any;
+  faqTitle?: any;
+  faqList?: any;
+  certificateImage?: any;
+  backgroundColor?: any;
+  createdAt?: string;
+  updatedAt?: string;
+}

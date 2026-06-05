@@ -1,0 +1,140 @@
+@import "common/setting-page";
+//[hide-menu]{
+//  display: none !important;
+//}
+body {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.container {
+  //text-align: center;
+}
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom:52px!important;
+}
+
+.icon-container {
+  background-color: #e7e2ff;
+  width:90px;
+  border-radius: 50%;
+  height: 90px;
+  //padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //margin-bottom: 20px;
+  svg {
+    width: 80px;
+    border-radius: 50%;
+    height: 39px;
+    fill: #5d36ff;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+
+.instructions {
+  border: 1px solid #9b4de3;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: left;
+  margin-bottom: 16px;
+  background-color: #f9f8fe;
+}
+.instructions .title {
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.instructions p {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  margin: 4px 0;
+  mat-icon{
+    //font-size: 18px;
+    color: #898a8e;
+    margin-left: 5px;
+  }
+}
+.video-btn {
+  background-color: #ef4444;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s;
+  span{
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+      width: 15px;
+      padding-left: 3px;
+    }
+  }
+}
+.video-btn:hover {
+  background-color: #dc2626;
+}
+.video-btn i {
+  margin-right: 8px;
+}
+.form-container {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.form-container label {
+  display: block;
+  color: #4b5563;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.input-field:focus {
+  border-color: #10b981;
+}
+.add-domain-btn {
+  width: 100%;
+  background-color: #10b981;
+  color: white;
+  padding: 13px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}

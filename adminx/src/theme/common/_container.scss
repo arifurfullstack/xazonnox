@@ -1,0 +1,16 @@
+@import "variables";
+
+.container {
+  width: 95%;
+  max-width: $container-max-width;
+  margin: 20px auto;
+}
+
+
+@media only screen and (max-width: 599px) {
+  .container {
+    width: 95%;
+    max-width: $container-max-width;
+    margin: calc($header-height-sm + 10px) auto;
+  }
+}

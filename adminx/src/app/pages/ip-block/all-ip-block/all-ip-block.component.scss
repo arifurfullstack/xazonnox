@@ -1,0 +1,41 @@
+@import "variables";
+@import "common/container-base";
+@import "common/title-header";
+@import "common/table-scroll";
+@import "common/search-table";
+@import "exports/table-tab";
+@import "exports/sticky-table-header";
+@import "exports/bottom-action";
+
+.total-expense {
+  border: 1px solid #37BC8E;
+  padding: 4px 10px;
+  border-radius: 4px;
+  p {
+    color: #37BC8E;
+  }
+}
+
+@media (max-width: 768px){
+  .total-expense {
+    margin-top: 20px;
+  }
+}
+
+.actions {
+  .overview-filter-btn {
+    border: 1px solid #37BC8E;
+    color: #37BC8E;
+
+    &.warn {
+      border: 1px solid $color-warn;
+      color: $color-warn;
+    }
+
+    &.date-picker {
+      border: 1px solid $color-primary;
+      color: $color-primary;
+      margin-right: 5px;
+    }
+  }
+}

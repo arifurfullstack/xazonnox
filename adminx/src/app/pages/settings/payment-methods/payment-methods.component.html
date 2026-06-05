@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="content">
+    <div class="view-item">
+      <div class="icon-checkbox" (click)="toggleCashOnDelivery()" [ngClass]="{ active: !isCashOnDeliveryOff }">
+        <mat-icon>
+          {{ !isCashOnDeliveryOff ? 'check_circle' : 'radio_button_unchecked' }}
+        </mat-icon>
+      </div>
+      <div class="info">
+        <h5>Cash On Delivery</h5>
+        <a class="manage-link">
+          Default payment method
+        </a>
+      </div>
+    </div>
+
+    @for (item of paymentMethods; let i = $index; track i) {
+      <div class="view-item" [ngClass]="{ 'active-item': selectedIndex === i }">
+        <div class="icon-checkbox"
+             (click)="toggleCheckbox(i)"
+             [ngClass]="{ active: item.status === 'active' }">
+          <mat-icon>
+            {{ item.status === 'active' ? 'check_circle' : 'radio_button_unchecked' }}
+          </mat-icon>
+        </div>
+        <div class="info" (click)="onSelectItem(i)">
+          <h5>{{ item.providerName }}</h5>
+          <a class="manage-link">
+            Show Setting Form
+            <span class="material-icons">expand_more</span>
+          </a>
+        </div>
+      </div>
+    }
+
+    @if (paymentMethods.length < 6) {
+      <div class="add-item" (click)="onAddNewPaymentType()">
+        <div class="icon">
+          <span class="material-icons">add</span>
+        </div>
+        <div class="title">
+          <h5>Add New Payment Method</h5>
+        </div>
+      </div>
+    }
+  </div>
+
+  <form [style.display]="formViewMode === '' ? 'none' : 'block'" [formGroup]="dataForm" (ngSubmit)="onSubmit()"
+        class="form-container">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Provider</mat-label>
+      <mat-select formControlName="providerName" (selectionChange)="onProviderChange($event)">
+        @for (item of paymentProviders; track $index) {
+          <mat-option [value]="item.value" [disabled]="isDisabledOpt(item.value)">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Payment Type</mat-label>
+      <mat-select formControlName="providerType">
+        @for (item of paymentProviderTypes; track $index) {
+          <mat-option [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    @if (dataForm.get('providerName').value && dataForm.get('providerName').value === 'Binance') {
+    <mat-form-field appearance="outline">
+      <mat-label>Select Binance Payment Type</mat-label>
+      <mat-select formControlName="binanceType">
+        @for (item of paymentBinanceTypes; track $index) {
+          <mat-option [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+    }
+
+    @if (dataForm.get('providerType').value && dataForm.get('providerType').value !== 'api') {
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Account Number</mat-label>
+        <input formControlName="accountNumber" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <div class="description-area">
+        <p>Payment Instruction</p>
+        <app-html-editor formControlName="paymentInstruction"></app-html-editor>
+      </div>
+    }
+
+
+    @if ((dataForm.get('providerName').value === 'Bkash' || dataForm.get('providerName').value === 'SSl Commerz') && dataForm.get('providerType').value === 'api') {
+      <mat-form-field appearance="outline">
+        <mat-label>Is Production Api?</mat-label>
+        <mat-select formControlName="production">
+          @for (item of dataBoolean; track $index) {
+            <mat-option [value]="item.value">
+              {{ item.viewValue }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error>This field is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Username / Store ID</mat-label>
+        <input formControlName="username" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Password / Store Password</mat-label>
+        <input formControlName="password" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+    }
+
+    @if (dataForm.get('providerName').value === 'Bkash' && dataForm.get('providerType').value === 'api' || dataForm.get('providerName').value === 'Stripe' && dataForm.get('providerType').value === 'api') {
+
+
+        @if ( dataForm.get('providerName').value === 'Stripe' && dataForm.get('providerType').value === 'api') {
+
+          <mat-form-field appearance="outline">
+            <mat-label>Is Production Api?</mat-label>
+            <mat-select formControlName="production">
+              @for (item of dataBoolean; track $index) {
+                <mat-option [value]="item.value">
+                  {{ item.viewValue }}
+                </mat-option>
+              }
+            </mat-select>
+            <mat-error>This field is required.</mat-error>
+          </mat-form-field>
+        }
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Api Key</mat-label>
+        <input formControlName="apiKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Secret Key</mat-label>
+        <input formControlName="secretKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+    }
+
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </form>
+
+
+</div>

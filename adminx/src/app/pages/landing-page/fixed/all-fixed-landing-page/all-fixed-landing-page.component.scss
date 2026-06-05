@@ -1,0 +1,30 @@
+@import "../../../../../theme/variables";
+@import "../../../../../theme/common/container-base";
+@import "../../../../../theme/common/title-header";
+@import "../../../../../theme/common/table-scroll";
+@import "../../../../../theme/common/search-table";
+@import "../../../../../theme/exports/table-tab";
+@import "../../../../../theme/exports/sticky-table-header";
+@import "../../../../../theme/exports/bottom-action";
+.button-area{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 15px;
+}
+.button-area-main{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.demo {
+  background: linear-gradient(to right, #6B46C1, #FF8C00);
+  color: white;
+  padding: 7px 20px;
+  border: none;
+  width: 100%;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+  //margin-top: 10px;
+}

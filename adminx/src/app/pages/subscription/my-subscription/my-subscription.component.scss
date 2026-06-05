@@ -1,0 +1,190 @@
+@import "variables";
+
+.container {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  max-width: 1440px;
+}
+
+.package-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.package {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+
+.package-header {
+  flex: 1;
+  margin-right: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.package-header h2 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.package-header p {
+  padding: 10px 0 20px;
+  color: black;
+}
+
+.price {
+  font-size: 38px;
+  font-family: $font-en-primary;
+  color: #26a69a;
+  font-weight: 750;
+}
+
+.price span {
+  font-size: 16px;
+  color: #999;
+  font-weight: 400;
+}
+
+button {
+  padding: 15px 20px;
+  width: 400px;
+  margin-top: 50px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease-in;
+}
+
+.renew-button {
+  background-color: white;
+  border: 1px solid #26a69a;
+  color: #26a69a;
+}
+
+.renew-button:hover {
+  background-color: #26a69a;
+  color: white;
+}
+
+.upgrade-button {
+  background-color: #26a69a;
+}
+
+.upgrade-button:hover {
+  background-color: white;
+  color: #26a69a;
+  border: 1px solid #26a69a;
+}
+
+.features {
+  flex: 1;
+  padding-left: 20px;
+  h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  ul li {
+    list-style: none;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+  }
+}
+
+.package.active {
+  background-color: #e0f7fa;
+  border-color: #26a69a;
+  .checkmark {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #26a69a;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+  .package {
+    padding: 20px;
+    height: 330px;
+
+    position: relative;
+  }
+
+  .package-header {
+    margin-bottom: 10px;
+  }
+
+  button {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .price {
+    font-size: 28px;
+  }
+
+  .features ul li {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 599px) {
+  .package-header h2 {
+    font-size: 20px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .features h3 {
+    font-size: 14px;
+  }
+
+  .features ul li {
+    font-size: 8px;
+  }
+
+  .package .checkmark {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,12 @@
+/* Hide everything not needed in the print view */
+@media print {
+  .side-nav {
+    display: none;
+  }
+  app-header {
+    display: none;
+  }
+  app-route-progress {
+    display: none;
+  }
+}

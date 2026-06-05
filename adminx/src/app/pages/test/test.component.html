@@ -1,0 +1,54 @@
+<div class="button-area">
+
+  <button class="add-product-btn"  mat-button color="accent" (click)="openTemplateEditor()">
+    <mat-icon>add</mat-icon> Template Editor
+  </button>
+
+  <!--<app-theme-selector></app-theme-selector>-->
+  <div class="view-buttons" >
+    <button  mat-button color="accent" (click)="setTabData(0)" [class.active]="selectedTab ===0">
+      <mat-icon>computer</mat-icon> Computer View
+    </button>
+    <button  mat-button color="accent" (click)="setTabData(1)" [class.active]="selectedTab ===1">
+      <mat-icon>phone_iphone</mat-icon> Mobile View
+    </button>
+  </div>
+</div>
+
+
+@if (selectedTab === 0 ) {
+ @if(selectedData){
+   <div class="container" #templateContainer contenteditable="true">
+
+     <button (click)="changeVideo()" class="ignore">Change Video</button>
+
+     <div class="gallery-picker ignore">
+       <app-gallery-image-picker
+         [type]="'multiple'"
+         [maxImages]="2"
+         (onPicked)="onPickedImage($event)"
+         infoText="The  image for any (154px * 100px)"
+       >
+       </app-gallery-image-picker>
+     </div>
+
+<!--     <button (click)="changeVideo()">Image</button>-->
+
+     <div class="template"  [innerHTML]="selectedData | safeHtmlCustom" (input)="onContentEdit()">
+     </div>
+   </div>
+ }
+}@else{
+  @if(selectedData){
+  <div class="container" >
+    <div class="mobile-template" [innerHTML]="selectedData | safeHtmlCustom">
+    </div>
+  </div>
+  }
+}
+
+
+
+
+<!-- Save Button -->
+<button class="save-btn" (click)="submitTemplate()">Save Template</button>

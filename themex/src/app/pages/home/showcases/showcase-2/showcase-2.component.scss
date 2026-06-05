@@ -1,0 +1,45 @@
+@import "variables";
+
+$container-height: 500px;
+$container-height-sm: 140px;
+
+.container {
+  width: 100%;
+  margin-top: 30px;
+  height: $container-height;
+}
+
+
+::ng-deep .carousel-component .carousel-container {
+  height: $container-height;
+}
+
+@media only screen and (max-width: 599px) {
+  .container {
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 92%;
+    height: 36.46667vw !important;
+    margin-top: 10px;
+    .right {
+      display: block;
+      height: 31.46667vw!important;
+      padding: 0 2vw;
+    }
+    .left {
+      display: none;
+    }
+    ::ng-deep .top-category-loader{
+      display: none;
+    }
+  }
+
+  ::ng-deep .carousel-component .carousel-container {
+    height: 36.46667vw !important;
+  }
+
+  ::ng-deep .carousel-component .carousel-container {
+    margin: 0 10px;
+  }
+
+}

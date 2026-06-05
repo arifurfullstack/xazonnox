@@ -1,0 +1,27 @@
+<div class="main-area">
+  <h2 *ngIf="courierMethods?.length">Select Your Courier</h2>
+
+  <div class="courier-list" *ngIf="courierMethods && courierMethods.length; else noCourier">
+    <div
+      class="courier-card"
+      *ngFor="let courier of courierMethods"
+      [class.selected]="courier === selectedCourier"
+      (click)="selectCourier(courier)"
+    >
+      <div class="checkmark" *ngIf="courier === selectedCourier">✔</div>
+      <img [src]="courier.providerName === 'Pathao Courier' ? '/assets/brand/Pathao-logo.jpg' : '/assets/brand/steadFast-1024x213.png'" alt="{{ courier.providerName }} Logo" />
+      <p>{{ courier.providerName }}</p>
+    </div>
+  </div>
+
+  <ng-template #noCourier>
+    <p class="no-provider">No provider found. Please add a provider.</p>
+  </ng-template>
+
+  <div class="actions">
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button *ngIf="courierMethods?.length" mat-raised-button color="primary" (click)="confirm()" [disabled]="!selectedCourier">
+      Confirm
+    </button>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="review" placeholder="Enter your comment"></textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Reply</mat-label>
+        <textarea matInput formControlName="reply" placeholder="Enter your reply"></textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+<!--      <div class="description-area">-->
+<!--        <mat-label>Short Description</mat-label>-->
+<!--        <app-html-editor formControlName="shortDesc"></app-html-editor>-->
+<!--      </div>-->
+
+
+      <div class="d-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for(data of dataStatus; track data.value) {
+              <mat-option [value]="data.value">
+                {{ data.viewValue }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div> <!-- END! d-row -->
+
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update BlogComment' : 'Add BlogComment' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update BlogComment' : 'Add BlogComment' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->

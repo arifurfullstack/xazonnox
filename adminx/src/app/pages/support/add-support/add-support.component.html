@@ -1,0 +1,86 @@
+<div class="container">
+
+  <div class="content add-page">
+
+    <div class="ticket-type-tab-wrapper">
+      <div
+        class="ticket-type-card"
+        *ngFor="let type of ticketTypes; let i = index"
+        [class.selected]="selectedTabIndex === i"
+        (click)="selectTicketType(i)"
+      >
+        <div class="checkbox-icon" *ngIf="selectedTabIndex === i">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="ticket-type-title">{{ type.label }}</div>
+        <div class="ticket-type-description">{{ type.description }}</div>
+      </div>
+    </div>
+
+
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+     <div class="gallery-picker">
+       <app-gallery-image-picker
+         [type]="'multiple'"
+         [maxImages]="3"
+         [isInvalid]="this.dataForm.get('images').touched && this.dataForm.get('images').invalid"
+         (onPicked)="onPickedImage($event)"
+         [images]="pickedImages">
+       </app-gallery-image-picker>
+<!--        &lt;!&ndash;          infoText="The 1st image for desktop (700px * 700px)  and the 2nd image for mobile image (1200px * any)"&ndash;&gt;-->
+     </div>
+
+
+      <div class="description-area">
+        <app-html-editor  formControlName="description"></app-html-editor>
+      </div>
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Submit Data' : 'Submit Data' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Submit Data' : 'Submit Data' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->
+
+
+<ng-template #successDialog>
+  <div class="success-dialog-card">
+    <mat-icon class="success-check-circle">check_circle</mat-icon>
+
+    <h2 class="success-title">Success!</h2>
+
+    <p class="success-message">
+      Thank you for reaching out!<br />
+      Our team will respond within 1 hour during office hours:<br />
+      <strong>09:00 AM – 06:00 PM</strong>
+    </p>
+
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="success-btn"
+      (click)="onDialogClose()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+

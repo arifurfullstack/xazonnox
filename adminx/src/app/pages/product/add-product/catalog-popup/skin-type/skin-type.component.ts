@@ -1,0 +1,182 @@
+import {Component, Inject, inject, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {SkinType} from "../../../../../interfaces/common/skin-type.interface";
+import {defaultUploadImage} from "../../../../../core/utils/app-data";
+import {Subscription} from "rxjs";
+import {UiService} from "../../../../../services/core/ui.service";
+import {SkinTypeService} from "../../../../../services/common/skin-type.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ReloadService} from "../../../../../services/core/reload.service";
+import {MyGalleryComponent} from "../../../../my-gallery/my-gallery.component";
+import {Gallery} from "../../../../../interfaces/gallery/gallery.interface";
+
+@Component({
+  selector: 'app-skin-type',
+  templateUrl: './skin-type.component.html',
+  styleUrl: './skin-type.component.scss'
+})
+export class SkinTypeComponent implements OnInit{
+
+  // Data Form
+  @ViewChild('formElement') formElement: NgForm;
+  dataForm?: FormGroup;
+
+  // Store Data
+  autoSlug: boolean = true;
+  id?: string;
+  skinType?: SkinType;
+
+  // Image Picker
+  pickedImage = defaultUploadImage;
+  featurePickedImage = defaultUploadImage;
+
+  // Subscriptions
+  private subDataOne: Subscription;
+  private subAutoSlug: Subscription;
+
+  // Inject
+  private readonly fb = inject(FormBuilder);
+  private readonly uiService = inject(UiService);
+  private readonly skinTypeService = inject(SkinTypeService);
+  private readonly dialog = inject(MatDialog);
+  private readonly reloadService = inject(ReloadService);
+
+  constructor(
+    public dialogRef: MatDialogRef<SkinTypeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+  }
+
+  ngOnInit(): void {
+    // Init Form
+    this.initDataForm();
+
+    // Auto Slug
+    this.autoGenerateSlug();
+  }
+
+
+  /**
+   * FORM METHODS
+   * initDataForm()
+   * setFormValue()
+   * onSubmit()
+   * onDiscard()
+   */
+  private initDataForm() {
+    this.dataForm = this.fb.group({
+      shop: [null],
+      name: [null, Validators.required],
+      description: [null],
+      slug: [null],
+      image: [null],
+      status: ['publish'],
+    });
+  }
+
+
+  onSubmit() {
+    if (this.dataForm.invalid) {
+      this.uiService.message('Please filed all the required field', 'warn');
+      return;
+    }
+    this.addSkinType();
+  }
+
+
+  private addSkinType() {
+    this.subDataOne = this.skinTypeService.addSkinType(this.dataForm.value)
+      .subscribe({
+        next: (res => {
+          if (res.success) {
+            this.uiService.message(res.message,"success");
+            this.formElement.resetForm();
+            this.pickedImage = defaultUploadImage;
+            this.featurePickedImage = defaultUploadImage;
+            this.reloadService.needRefreshData$();
+            this.onClose(res.data);
+          } else {
+            this.uiService.message(res.message,"warn");
+          }
+        }),
+        error: (error => {
+          console.log(error);
+        })
+      });
+  }
+
+  /**
+   * LOGICAL PART
+   * autoGenerateSlug()
+   */
+  autoGenerateSlug() {
+    if (this.autoSlug === true) {
+      this.subAutoSlug = this.dataForm.get('name').valueChanges
+        .pipe(
+          // debounceTime(200),
+          // distinctUntilChanged()
+        ).subscribe(d => {
+          const res = d?.trim().replace(/\s+/g, '-').toLowerCase();
+          this.dataForm.patchValue({
+            slug: res
+          });
+        });
+    } else {
+      if (!this.subAutoSlug) {
+        return;
+      }
+      this.subAutoSlug?.unsubscribe();
+    }
+  }
+
+
+  /**
+   * COMPONENT DIALOG
+   * openGalleryDialog
+   */
+
+  public openGalleryDialog() {
+    const dialogRef = this.dialog.open(MyGalleryComponent, {
+      data: {type: 'single', count: 1},
+      panelClass: ['theme-dialog', 'full-screen-modal-lg'],
+      width: '100%',
+      minHeight: '100%',
+      autoFocus: false,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        if (dialogResult.data && dialogResult.data.length > 0) {
+          const image: Gallery = dialogResult.data[0] as Gallery;
+          this.dataForm.patchValue({image: image.url});
+          this.pickedImage = image.url;
+        }
+      }
+    });
+  }
+
+  /**
+   * ON CLOSE DIALOG
+   * onClose()
+   */
+  onClose(data?:any) {
+    if(data){
+      this.dialogRef.close(data);
+    }else {
+      this.dialogRef.close()
+    }
+  }
+
+
+  /**
+   * ON DESTROY
+   */
+  ngOnDestroy() {
+    if (this.subDataOne) {
+      this.subDataOne.unsubscribe();
+    }
+    if (this.subAutoSlug) {
+      this.subAutoSlug.unsubscribe();
+    }
+  }
+}

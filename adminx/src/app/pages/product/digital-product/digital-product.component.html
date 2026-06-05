@@ -1,0 +1,648 @@
+<div class="main-body-area">
+  <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="area-border">
+    <div class="header-area">
+      <div class="container">
+        <div class="header-container">
+          <div class="instruction">
+            <mat-icon style="font-size: 25px">lightbulb</mat-icon> <!-- Using Material Icon for lightbulb -->
+            <div class="instruction-content-area">
+              <span class="instruction-title">Product Listing Instructions</span>
+              <span class="instruction-text">Only * mark field is required. Other fields you can add as needed.</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button mat-button [ngClass]="selectedOption === 'publish' ? 'publish-btn' : 'draft-btn'" type="button" color="primary" [matMenuTriggerFor]="menu" >
+              {{ selectedOption | titlecase }}
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+
+            <button mat-button class="add-product-btn" type="submit" color="accent">
+              <mat-icon>check</mat-icon>
+              {{this.id ? 'Update Product' : 'Add Product'}}
+            </button>
+          </div>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="setOption('publish')">Publish</button>
+            <button mat-menu-item (click)="setOption('draft')">Draft</button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content-area">
+        <div class="content-area-left">
+          <div class="general-info-area main-area">
+            <h2 class="title">General Information</h2>
+            <mat-form-field appearance="outline">
+              <mat-label>Product Name</mat-label>
+              <input formControlName="name" matInput required/>
+              <mat-error *ngIf="dataForm.get('name').hasError('required')">
+                This field is required.
+              </mat-error>
+              <mat-error *ngIf="dataForm.get('name').hasError('minlength')">
+                Your product title is too short. Please input at least 10 characters.
+              </mat-error>
+            </mat-form-field>
+
+            <div class="description-area">
+<!--              <h2 class="title">Description</h2>-->
+              <app-html-editor  formControlName="description"></app-html-editor>
+            </div>
+          </div>
+
+
+          <div class="general-info-area main-area" *ngIf="!dataForm.value['isVariation']">
+
+            <div class="wholesale-area">
+              <h2 class="title">Price And Stock</h2>
+              <label>
+                <input type="checkbox" formControlName="isWholesale">
+                Is Wholesale
+              </label>
+            </div>
+
+
+            <div *ngIf="!dataForm.value['isWholesale']">
+              <div class="price-area padding-bottom">
+                <mat-form-field appearance="outline">
+                  <mat-label>Regular Price</mat-label>
+                  <input formControlName="regularPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Sales Price</mat-label>
+                  <input formControlName="salePrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                  <!--                <mat-hint >Discount Amount:500</mat-hint>-->
+                </mat-form-field>
+              </div>
+              <div class="stock-area">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cost Price</mat-label>
+                  <input formControlName="costPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Stock Value</mat-label>
+                  <input formControlName="quantity" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Sku</mat-label>
+                  <input formControlName="sku" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="dataForm.value['isWholesale']">
+              <div class="price-area padding-bottom">
+                <mat-form-field appearance="outline">
+                  <mat-label>Regular Price</mat-label>
+                  <input formControlName="regularPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Sales Price</mat-label>
+                  <input formControlName="salePrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                  <!--                <mat-hint >Discount Amount:500</mat-hint>-->
+                </mat-form-field>
+              </div>
+              <div class="stock-area">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cost Price</mat-label>
+                  <input formControlName="costPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Stock Value</mat-label>
+                  <input formControlName="quantity" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Wholesale price</mat-label>
+                  <input  formControlName="wholesalePrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$"  />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Minimum wholesale quantity</mat-label>
+                  <input  formControlName="minimumWholesaleQuantity" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$"  />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Maximum wholesale quantity</mat-label>
+                  <input  formControlName="maximumWholesaleQuantity" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$"  />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Sku</mat-label>
+                  <input formControlName="sku" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="general-info-area main-area" >
+
+            <div class="wholesale-area">
+              <h2 class="title">Drive Link</h2>
+            </div>
+            <div class="specification" formArrayName="driveLinks">
+              <div class="price-area"  *ngFor="
+                    let data of driveLinkDataArray?.controls;
+                    let i = index
+                  "
+                   [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                  <mat-label>Title</mat-label>
+                  <input formControlName="name" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <div class="specification-area">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Url</mat-label>
+                    <input formControlName="value" matInput />
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+
+                  <mat-icon style="cursor: pointer; color: #ff2222" (click)="removeFormArrayField1('driveLinks', i)" *ngIf="i > 0">delete</mat-icon>
+                </div>
+              </div>
+              <div class="button-area">
+                <button mat-button class="add-btn" type="button" (click)="onAddNewLink()">Add New link.
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="general-info-area main-area">
+            <h2 class="title">Product Specification</h2>
+            <div class="price-area">
+              <div>
+                <mat-form-field appearance="outline" class="input-area">
+                  <mat-label>Brand</mat-label>
+                  <mat-select formControlName="brand">
+                    <mat-option
+                      *ngFor="let data of brands"
+                      [value]="data._id"
+                    >
+                      {{ data.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <div class="button-area">
+                  <button mat-button class="add-btn" type="button" (click)="openBrandDialog($event)">Add New Brand
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Model</mat-label>
+                  <input formControlName="model" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <h2 class="title">Others Specification</h2>
+            <div class="specification" formArrayName="specifications">
+              <div class="price-area"  *ngFor="
+                    let data of specificationDataArray?.controls;
+                    let i = index
+                  "
+                   [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                  <mat-label>Ex. Camera</mat-label>
+                  <input formControlName="name" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <div class="specification-area">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ex. 48 Megapixels</mat-label>
+                    <input formControlName="value" matInput />
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+
+                  <mat-icon style="cursor: pointer; color: #ff2222" (click)="removeFormArrayField1('specifications', i)" *ngIf="i > 0">delete</mat-icon>
+                  <!--                 <button-->
+                  <!--                   class="btn-form-field-remove"-->
+                  <!--                   type="button"-->
+                  <!--                   mat-mini-fab-->
+                  <!--                   color="warn"-->
+                  <!--                   (click)="removeFormArrayField('specifications', i)"-->
+                  <!--                 >-->
+                  <!--                   &lt;!&ndash;                    removeFormArrayField('variationOptions', i)&ndash;&gt;-->
+                  <!--                   <mat-icon>delete</mat-icon>-->
+                  <!--                 </button>-->
+                </div>
+              </div>
+              <div class="button-area">
+                <button mat-button class="add-btn" type="button" (click)="onAddNewSpecifications()">Add New Spec.
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="general-info-area main-area" *ngIf="!dataForm.value['isVariation']">
+            <p class="sub-title">For More Advance Multi Variant Product Manage For Example, Color, Size,etc. Based Price
+              and Stock Manage</p>
+            <button mat-button class="add-btn" type="button"  (click)="onToggleVariation(true)">Enable Variation
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <ng-container *ngIf="dataForm.value['isVariation']">
+            <div class="general-info-area main-area">
+              <p class="sub-title">For Cancel Variation all variation data will be remove</p>
+              <button mat-button class="cancel-btn"  type="button"
+                      (click)="onToggleVariation(false)">Cancel Variation
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <h2 class="title">Variation 1</h2>
+              <div class="price-area">
+                <mat-form-field appearance="outline">
+                  <mat-label>Variation name Ex. Colour, Size,etc</mat-label>
+                  <input formControlName="variation" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+
+              <h2 class="title">Options</h2>
+              <div class="variation-option-area" formArrayName="variationOptions">
+                <div class="variation-option"  *ngFor="
+                      let data of variationOptionsDataArray?.controls;
+                      let i = index
+                    ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Variation name Ex. Colour, Size,etc</mat-label>
+                    <input [formControlName]="i" matInput />
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+                  <button class="remove-btn" *ngIf="i !== variationOptionsDataArray.length - 1"
+                          [disabled]="i === 0"
+                          type="button"
+                          (click)="removeFormArrayField('variationOptions', i)">
+                    <mat-icon >delete</mat-icon>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="general-info-area main-area" *ngIf="!isEnableVariation2">
+            <p class="sub-title">For More Advance Multi Variant Product Manage For Example, Color, Size,etc. Based Price
+              and Stock Manage</p>
+            <button mat-button class="add-btn" type="button" (click)="onToggleVariation2('add')">Add Variation 2
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+
+          <ng-container *ngIf="isEnableVariation2">
+            <div class="general-info-area main-area">
+              <p class="sub-title">For Cancel Variation all variation data will be remove</p>
+              <button mat-button class="cancel-btn"  type="button"
+                      (click)="onToggleVariation2('remove')">Cancel Variation
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <h2 class="title">Variation 2</h2>
+              <div class="price-area">
+                <mat-form-field appearance="outline">
+                  <mat-label>Variation name Ex. Colour, Size,etc</mat-label>
+                  <input formControlName="variation2" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+
+              <h2 class="title">Options</h2>
+              <div class="variation-option-area" formArrayName="variation2Options">
+                <div class="variation-option" *ngFor="
+                        let data of variation2OptionsDataArray?.controls;
+                        let i = index
+                      ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Variation name Ex. Colour, Size,etc</mat-label>
+                    <input [formControlName]="i" matInput />
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+                  <button
+                    *ngIf="i !== variation2OptionsDataArray.length - 1"
+                    [disabled]="i === 0"
+                    class="remove-btn"
+                    type="button"
+                    (click)="removeFormArrayField('variation2Options', i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <div class="general-info-area main-area" *ngIf="dataForm.value['isVariation']">
+            <h2 class="title">Price And Stock</h2>
+            <div class="variation-price-area">
+              <mat-form-field appearance="outline">
+                <mat-label>Regular Price</mat-label>
+                <input formControlName="variationRegularPrice" type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" matInput />
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Sales Price</mat-label>
+                <input formControlName="variationPrice" type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" matInput />
+                <mat-error>This field is required.</mat-error>
+                <!--                <mat-hint>Discount Amount:500</mat-hint>-->
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Cost Price</mat-label>
+                <input formControlName="variationCostPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$"/>
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Stock Value</mat-label>
+                <input formControlName="variationQuantity" type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" matInput />
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Sku</mat-label>
+                <input formControlName="variationSku" matInput />
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+              <button mat-button class="add-btn" type="button" (click)="applyToAll()"
+                      [class.disabled]="!dataForm.value.variationSku && !dataForm.value.variationQuantity  && !dataForm.value.variationPrice && !dataForm.value.regularVariationPrice">
+                Apply To All
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+
+
+            <div class="variation-list-area">
+              <div formArrayName="variationList">
+                <div class="single-field-area"  *ngFor="
+                    let data of variationListDataArray?.controls;
+                    let i = index
+                  "
+                     [formGroupName]="i">
+                  <div class="variation-area-main">
+                    <div class="variation-image">
+                      <div
+                        class="flex-icon-img"
+                        *ngIf="dataForm.value.variationList[i].image"
+                      >
+                        <!-- View Image Button -->
+                        <div class="icon-area">
+                          <mat-icon (click)="openPopup(i)" class="view">visibility</mat-icon>
+                          <mat-icon (click)="removeImage(i)" class="delete">delete</mat-icon>
+                        </div>
+
+                        <div class="icon-img" type="button">
+                          <img
+                            class="icon-img"
+                            [src]="
+                              dataForm.value.variationList[i].image
+                                ? dataForm.value.variationList[i].image
+                                : ''
+                            "
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <button
+                        class="image-btn"
+                        type="button"
+                        *ngIf="!dataForm.value.variationList[i].image"
+                        (click)="onPickImage(i)"
+                      >
+                        <mat-icon>add_a_photo</mat-icon>
+                        <span>Upload Image</span>
+                      </button>
+                    </div>
+                    <div class="right-section">
+                      <div class="left-content">
+                        <mat-form-field
+                          appearance="outline"
+                        >
+                          <mat-label>Name</mat-label>
+                          <input
+                            readonly
+                            formControlName="name"
+                            type="text"
+                            matInput
+                            [placeholder]="'Enter name'"
+                          />
+                        </mat-form-field>
+                        <mat-form-field
+                          appearance="outline"
+                        >
+                          <mat-label>Sku</mat-label>
+                          <input
+                            formControlName="sku"
+                            type="text"
+                            matInput
+                            [placeholder]="'Enter sku'"
+                          />
+                        </mat-form-field>
+                        <mat-form-field
+                          appearance="outline"
+                        >
+                          <mat-label>Quantity</mat-label>
+                          <input
+                            formControlName="quantity"
+                            matInput
+                            type="number"
+                            [placeholder]="'Enter quantity'"
+                          />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="right-content">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cost Price</mat-label>
+                          <input formControlName="costPrice" matInput type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+                          <mat-error>This field is required.</mat-error>
+                        </mat-form-field>
+                        <mat-form-field
+                          appearance="outline"
+                        >
+                          <mat-label>Regular Price </mat-label>
+                          <input
+                            formControlName="regularPrice"
+                            type="number"
+                            matInput
+                            [placeholder]="'Enter price'"
+                          />
+                        </mat-form-field>
+                        <mat-form-field
+                          appearance="outline"
+                        >
+                          <mat-label>Sales Price</mat-label>
+                          <input
+                            formControlName="salePrice"
+                            type="number"
+                            matInput
+                            [placeholder]="'Enter price'"
+                          />
+                        </mat-form-field>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+        <div class="content-area-right">
+          <div class="container-right-main">
+            <div class="main-content-area">
+              <div class="gallery-picker gallery-picker-product main-area">
+                <app-gallery-image-picker
+                  [type]="'multiple'"
+                  [maxImages]="5"
+                  (onPicked)="onPickedImage($event)"
+                  infoText="The 1st image for desktop (700px * 700px)  and the 2nd image for mobile image (1200px * any)"
+                  [images]="pickedImages">
+                </app-gallery-image-picker>
+              </div>
+
+              @if (facebookCatalog?.isEnableFacebookCatalog) {
+                <div class="general-info-area main-area">
+                  <mat-checkbox formControlName="isFacebookCatalog" color="primary">Add This Product in Facebook Catalog</mat-checkbox>
+                </div>
+              }
+
+
+              <div class="general-info-area main-area">
+                <h2 class="title">Catalog</h2>
+                <mat-form-field appearance="outline" class="input-area">
+                  <mat-label>Select Category</mat-label>
+                  <mat-select formControlName="category" (selectionChange)="onCategorySelect($event)">
+                    <mat-option
+                      *ngFor="let data of categories"
+                      [value]="data._id"
+                    >
+                      {{ data.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <div class="button-area">
+                  <button mat-button class="add-btn" type="button" (click)="openCategoryDialog($event)">Add New Category
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+
+                <div class="category-content-area" *ngIf="subCategories?.length">
+                  <mat-form-field appearance="outline" class="input-area">
+                    <mat-label>Select SubCategory</mat-label>
+                    <mat-select formControlName="subCategory"  (selectionChange)="onSubCategorySelect($event)">
+                      <mat-option
+                        *ngFor="let data of subCategories"
+                        [value]="data._id"
+                      >
+                        {{ data.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+                  <div class="button-area">
+                    <button mat-button class="add-btn" type="button" (click)="openSubCategoryDialog($event)">Add New SubCategory
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="category-content-area" *ngIf="childCategories?.length">
+                  <mat-form-field appearance="outline" class="input-area">
+                    <mat-label>Select ChildCategory</mat-label>
+                    <mat-select formControlName="childCategory">
+                      <mat-option
+                        *ngFor="let data of childCategories"
+                        [value]="data._id"
+                      >
+                        {{ data.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>This field is required.</mat-error>
+                  </mat-form-field>
+                  <div class="button-area">
+                    <button mat-button class="add-btn" type="button" (click)="openChildCategoryDialog($event)">Add New ChildCategory
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="general-info-area main-area">
+                <h2 class="title">Tag & Deep Search</h2>
+                <mat-form-field appearance="outline" class="input-area">
+                  <mat-label>Select Tag</mat-label>
+                  <mat-select formControlName="tags" multiple>
+                    <mat-option
+                      *ngFor="let data of tags"
+                      [value]="data._id"
+                    >
+                      {{ data.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Deep Search. Ex. New Mobile, popular Mobile, etc.</mat-label>
+                  <input formControlName="keyWord" matInput />
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<!--&lt;!&ndash; Galley View &ndash;&gt;-->
+<!--@if (isGalleryOpen) {-->
+<!--  <app-gallery-image-viewer-->
+<!--    [images]="galleryImages"-->
+<!--    [startIndex]="selectedImageIndex"-->
+<!--    (closeEvent)="closeGallery()">-->
+<!--  </app-gallery-image-viewer>-->
+<!--}-->
+<!-- END Galley View -->
+<!-- Popup Modal -->
+<div class="popup-overlay" *ngIf="isPopupVisible" (click)="closePopup()">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <span class="close-popup" (click)="closePopup()">&times;</span>
+    <img [src]="popupImageUrl" alt="Image View"/>
+  </div>
+</div>

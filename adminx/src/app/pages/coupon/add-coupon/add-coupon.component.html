@@ -1,0 +1,114 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div class="gallery-picker">
+        <app-gallery-image-picker
+          [type]="'multiple'"
+          [maxImages]="1"
+          [isInvalid]="this.dataForm.get('bannerImage').touched && this.dataForm.get('bannerImage').invalid"
+          (onPicked)="onPickedImage($event)"
+          infoText="The 1st image for desktop (152px * 100px) "
+          [images]="pickedImages">
+        </app-gallery-image-picker>
+      </div>
+
+
+      <div class="d-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Enter name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Coupon Code</mat-label>
+        <input formControlName="couponCode" matInput placeholder="Enter Coupon Code" required/>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+      </div>
+
+
+
+
+
+      <div class="d-row">
+
+
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Discount Type</mat-label>
+          <mat-select formControlName="discountType">
+            <mat-option *ngFor="let data of discountTypes" [value]="data.value">
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Discount Amount</mat-label>
+          <input formControlName="discountAmount" matInput placeholder="Enter discount amount" type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Minimum Amount</mat-label>
+          <input formControlName="minimumAmount" matInput placeholder="Enter minimum amount" type="number" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+
+
+
+
+
+
+      </div> <!-- END! d-row -->
+      <div class="d-row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date Time</mat-label>
+          <input readonly (click)="picker1.open()" formControlName="startDateTime" matInput [matDatepicker]="picker1"
+                 placeholder="Choose Start Date Time"  [min]="today" >
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>End Date Time</mat-label>
+          <input readonly (click)="picker2.open()" formControlName="endDateTime" matInput [matDatepicker]="picker2"
+                 placeholder="Choose End Date Time" [min]="minDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+
+
+      </div> <!-- END! d-row -->
+
+
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update Coupon' : 'Add Coupon' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update Coupon' : 'Add Coupon' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->

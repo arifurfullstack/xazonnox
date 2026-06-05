@@ -1,0 +1,200 @@
+@import "variables";
+@import "common/container-base";
+@import "common/title-header";
+@import "common/data-form";
+@import "exports/mat-button-loader";
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px 32px;
+  height: calc(100vh - 150px);
+}
+
+
+
+.ticket-type-tab-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
+
+  @media (min-width: 992px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+}
+
+.ticket-type-card {
+  position: relative;
+  flex: 0 0 calc(100% - 80px);
+  scroll-snap-align: start;
+  width: 300px;
+  min-height: 90px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.3s, background-color 0.3s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  .ticket-type-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2e2e2e;
+    margin-bottom: 2px;
+  }
+
+  .ticket-type-description {
+    font-size: 14px;
+    color: #757575;
+  }
+
+  @media (min-width: 992px) {
+    flex: 1 0 calc(33.33% - 16px);
+    max-width: unset;
+  }
+
+  //@media (min-width: 992px) {
+  //  flex: 1 0 calc(33.33% - 16px);
+  //  max-width: unset;
+  //}
+}
+
+.ticket-type-card.selected {
+  border-color: #00c153;
+  background-color: #f0fff5;
+}
+
+.ticket-type-card .checkbox-icon {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #f0fff5;
+}
+
+.ticket-type-card.selected .checkbox-icon mat-icon {
+  color: #00c153;
+  font-size: 24px;
+}
+
+
+// kk
+
+form {
+  padding: 20px;
+  margin-top: 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+
+}
+
+.description-area{
+  margin-bottom: 10px;
+}
+
+
+.btn-loader {
+  background: $color-accent;
+  opacity: 0.85;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .content {
+    padding: 5px 8px;
+    height: calc(100vh - 205px);
+  }
+}
+
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+
+::ng-deep .success-dialog-panel .mat-dialog-container {
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.success-dialog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 32px 24px;
+
+  .success-check-circle {
+    font-size: 40px;
+    color: #fff;
+    background-color: #00c153;
+    border-radius: 50%;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    height: 72px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .success-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #2e2e2e;
+  }
+
+  .success-message {
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .success-btn {
+    margin-top: 8px;
+    padding: 20px 50px;
+    font-weight: 600;
+    border-radius: 8px;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-check-circle {
+  animation: pop 0.3s ease-in-out;
+}
+

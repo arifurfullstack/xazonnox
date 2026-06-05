@@ -1,0 +1,245 @@
+<div class="container">
+  <div class="header">
+
+    <form class="table-search" #searchForm=ngForm>
+      <input type="text"
+             name="searchTerm"
+             autocomplete="off"
+             [(ngModel)]="searchQuery"
+             placeholder="Search">
+      @if (!searchQuery) {
+        <button>
+          <mat-icon>search</mat-icon>
+        </button>
+      } @else {
+        <button (click)="onClearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </form> <!-- END! table-search -->
+
+    <div class="right">
+      <a mat-button class="add-product-btn" color="primary"
+         [routerLink]="['/catalog/add-skin-type']">
+        <mat-icon>add</mat-icon>
+        Add SkinType
+      </a>
+    </div> <!-- END! right -->
+
+  </div> <!-- END! header -->
+
+  <div class="content">
+
+    <div class="table-tab-container">
+      <div class="table-tab-content">
+        @for (data of tableTabData; track $index) {
+          <p (click)="onTabChange(data.value)" [ngClass]="{'active-tab': selectedTab == data.value}">
+            {{ data.viewValue }} <span class="tab-data-count">{{ totalData }}</span>
+          </p>
+        }
+      </div>
+
+      <div class="right-area">
+        @if(selectedTab === 'trash' && adminRole === 'owner'){
+          <button   (click)="openConfirmDialog('trash')">
+            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 593.727 593.727" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M491.362,593.727H102.374c-20.865,0-37.84-16.975-37.84-37.84v-448.5h464.668v448.5 C529.202,576.752,512.228,593.727,491.362,593.727z M79.677,122.529v433.357c0,12.516,10.182,22.697,22.697,22.697h388.989 c12.516,0,22.697-10.182,22.697-22.697V122.529H79.677z"></path> </g> <g> <path d="M550.8,91.913H42.927V58.382c0-20.86,16.973-37.831,37.835-37.831h192.852C276.618,8.58,286.12,0,297.506,0 c11.399,0,20.907,8.578,23.905,20.551H512.97c20.859,0,37.83,16.971,37.83,37.831V91.913L550.8,91.913z M58.07,76.77h477.587 V58.382c0-12.51-10.178-22.688-22.688-22.688h-205.57l-0.148-7.42c-0.145-7.24-4.516-13.131-9.745-13.131 c-5.219,0-9.586,5.893-9.736,13.136l-0.154,7.415H80.762c-12.512,0-22.692,10.177-22.692,22.688V76.77z"></path> </g> <g> <path d="M144.621,546.275c-15.949,0-28.924-12.977-28.924-28.926V196.011c0-15.95,12.975-28.926,28.924-28.926 c15.95,0,28.926,12.976,28.926,28.926V517.35C173.547,533.299,160.571,546.275,144.621,546.275z M144.621,182.228 c-7.599,0-13.781,6.183-13.781,13.783V517.35c0,7.6,6.183,13.783,13.781,13.783c7.601,0,13.783-6.184,13.783-13.783V196.011 C158.404,188.411,152.222,182.228,144.621,182.228z"></path> </g> <g> <path d="M243.094,546.275c-15.95,0-28.925-12.977-28.925-28.926V196.011c0-15.95,12.976-28.926,28.925-28.926 c15.949,0,28.925,12.976,28.925,28.926V517.35C272.019,533.299,259.043,546.275,243.094,546.275z M243.094,182.228 c-7.6,0-13.782,6.183-13.782,13.783V517.35c0,7.6,6.183,13.783,13.782,13.783s13.782-6.184,13.782-13.783V196.011 C256.876,188.411,250.694,182.228,243.094,182.228z"></path> </g> <g> <path d="M341.565,546.275c-15.949,0-28.926-12.977-28.926-28.926V196.011c0-15.95,12.977-28.926,28.926-28.926 s28.926,12.976,28.926,28.926V517.35C370.491,533.299,357.515,546.275,341.565,546.275z M341.565,182.228 c-7.6,0-13.783,6.183-13.783,13.783V517.35c0,7.6,6.184,13.783,13.783,13.783s13.783-6.184,13.783-13.783V196.011 C355.347,188.411,349.165,182.228,341.565,182.228z"></path> </g> <g> <path d="M440.038,546.275c-15.955,0-28.934-12.977-28.934-28.926V196.011c0-15.95,12.979-28.926,28.934-28.926 c15.949,0,28.924,12.976,28.924,28.926V517.35C468.962,533.299,455.987,546.275,440.038,546.275z M440.038,182.228 c-7.605,0-13.791,6.183-13.791,13.783V517.35c0,7.6,6.186,13.783,13.791,13.783c7.6,0,13.781-6.184,13.781-13.783V196.011 C453.819,188.411,447.638,182.228,440.038,182.228z"></path> </g> </g> </g></svg>
+            Empty Trash
+          </button>
+        }
+        <app-pagination [totalData]="totalData" [dataPerPage]="dataPerPage"
+                        (pageChange)="onPageChanged($event)"></app-pagination>
+      </div>
+
+    </div> <!-- END Tab & Pagination View -->
+
+
+    <div class="sub-content">
+      <div class="table-wrapper">
+        <table>
+          <tr class="td-border first-heading-row">
+            <th class="t-checkbox">
+              <mat-checkbox color="primary" [indeterminate]="isIndeterminate" #matCheckbox
+                            (change)="onAllSelectChange($event)"></mat-checkbox>
+            </th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th class="t-head-action">
+              <div class="filter">
+                <span>Priority</span>
+                <button (click)="sortData({priority: -1}, 1)" [class.active]="activeSort === 1"
+                        [matTooltip]="activeSort === 1 ? 'Sort Applied' : 'Apply Sort'">
+                  <span class="material-icons">arrow_downward</span>
+                </button>
+              </div>
+            </th>
+            <th>Status</th>
+            @if(this.selectedTab === 'trash'){
+              <th >Deletion Days</th>
+            }
+            <th>Actions</th>
+          </tr> <!-- END Table Head -->
+
+          @defer (when !isLoading) {
+            <tr class="td-gap"></tr>
+            @if (allTableData.length) {
+              @for (data of allTableData; track data._id) {
+                <ng-container>
+                  <tr class="td-border" (click)="onTableRowClick(data._id)" [class.selected]="data.select">
+                    <td class="t-checkbox">
+                      <mat-checkbox
+                        color="primary"
+                        (click)="$event.stopPropagation()"
+                        class="t-mat-checkbox"
+                        [(ngModel)]="data.select"
+                        (ngModelChange)="onCheckChange($event, data._id)">
+                      </mat-checkbox>
+                    </td>
+                    <td class="img-wrapper">
+                      <img class="table-image"
+                           matTooltip="Click to preview image"
+                           (click)="openGallery($event, data.images)"
+                           [src]="data.images?.length ? data.images[0] + '?&auto=format&w=384' : '/assets/images/png/placeholder.png'"
+                           [alt]="''">
+                    </td>
+                    <td>
+                      <p [matTooltip]="data.name">{{ (data.name | titlecase)| limitText: 45 }}</p>
+                    </td>          <td>
+                    <p [matTooltip]="data.description">{{ (data.description | titlecase)| limitText: 45 }}</p>
+                  </td>
+                    <td>
+                      <p>{{ data.priority ?? '-' }}</p>
+                    </td>
+                    <td>
+                      <p><span [ngClass]="getStatusClass(data.status)">{{ data.status | titlecase }}</span></p>
+                    </td>
+                    @if(this.selectedTab === 'trash'){
+                      <td>
+                        {{ data?.deleteDateString ? (data?.deleteDateString | daysRemaining) : '-' }}
+                      </td>
+                    }
+                    <td class="action-drop-button">
+                      <button mat-icon-button [matMenuTriggerFor]="tableMenu" (click)="$event.stopPropagation()">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #tableMenu="matMenu">
+                        <button [routerLink]="['/catalog/edit-skin-type', data._id]" mat-menu-item>
+                          <mat-icon>edit</mat-icon>
+                          Edit
+                        </button>
+                        <button mat-menu-item (click)="openDetailsDialog(data._id)">
+                          <mat-icon>visibility</mat-icon>
+                          Details
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </tr>
+                  <tr class="td-gap"></tr>
+                </ng-container>
+              }
+            } @else {
+              <tr>
+                <td colspan="7">
+                  <app-no-content
+                    [matIcon]="'summarize'"
+                    [title]="'No Data Found!'"
+                    [desc]="'Please add some data to show here.'">
+                  </app-no-content>
+                </td>
+
+              </tr>
+            }
+
+          } @placeholder (minimum 200ms) {
+            <tr>
+              <td colspan="7">
+                <app-page-loader></app-page-loader>
+              </td>
+            </tr>
+          }
+
+
+        </table>
+
+      </div> <!-- END! table-wrapper -->
+
+    </div> <!-- END! sub-content -->
+
+  </div> <!-- END! content -->
+
+</div> <!-- END! container -->
+
+
+<!-- Bottom Action -->
+<div class="bottom-action" [class.active]="selectedIds.length || isFilterChange">
+  <div class="action-bar-left">
+    <!--    <button (click)="clearSelectedItemByClick()" class="close-btn">-->
+    <!--      <span class="material-icons">close</span>-->
+    <!--    </button>-->
+
+
+    <span class="items-selected">
+      @if(selectedIds.length) {
+        <span class="item-count">{{ selectedIds.length }}</span>
+      }
+      @if (isFilterChange && !selectedIds.length) {
+        Filter Applied
+      } @else if (selectedIds.length && isFilterChange ) {
+        Items selected & Filter Applied
+      } @else {
+        Items selected
+      }
+    </span>
+
+  </div>
+  <div class="action-bar-right">
+    @if (isFilterChange) {
+      <button (click)="onClearDataQuery()" class="btn-black">
+        <span class="material-icons">filter_alt_off</span> Clear Filter
+      </button>
+    }
+
+
+    @if (selectedIds.length) {
+      <button (click)="onClearSelection()" class="btn-black">
+        <span class="material-icons">clear</span> Clear Selection
+      </button>
+
+      <button [matMenuTriggerFor]="menuChangeStatus" class="btn-green">
+        Change Status
+        <span class="material-icons right-icon">arrow_drop_down</span>
+      </button>
+
+      <mat-menu #menuChangeStatus="matMenu">
+        <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'publish'})">Publish</button>
+        <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'draft'})">Draft</button>
+      </mat-menu>
+
+
+      <button (click)="openConfirmDialog('delete')" class="btn-red">
+        <span class="material-icons">delete</span> Delete
+      </button>
+    }
+
+
+  </div>
+</div>
+<!-- END! Bottom Action-->
+
+
+<!-- Galley View -->
+@if (isGalleryOpen) {
+  <app-gallery-image-viewer
+    [images]="galleryImages"
+    [startIndex]="selectedImageIndex"
+    (closeEvent)="closeGallery()">
+  </app-gallery-image-viewer>
+}
+<!-- END Galley View -->
+
+
+
+
+
+
+

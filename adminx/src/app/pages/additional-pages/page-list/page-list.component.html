@@ -1,0 +1,14 @@
+<!--<mat-card>-->
+<!--  <mat-list role="list">-->
+<!--    <mat-list-item *ngFor="let page of allPages" role="listitem"-->
+<!--                   [routerLink]="['../', 'view', page.slug]" [queryParams]="{name:page.name}">{{page.name}}</mat-list-item>-->
+<!--  </mat-list>-->
+<!--</mat-card>-->
+
+<div class="page-list-container">
+  <div class="single-page-list"
+       *ngFor="let page of allPages"
+       [routerLink]="['../', 'view', page.slug]" [queryParams]="{name:page.name}">
+       <p>{{page.name}}</p>
+  </div>
+</div>

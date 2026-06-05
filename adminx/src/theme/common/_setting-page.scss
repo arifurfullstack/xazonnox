@@ -1,0 +1,130 @@
+@import "common/container";
+@import "variables";
+@import "exports/mat-button-loader";
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.add-item {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  border: 2px dashed #5F6368;
+  padding: 15px;
+  color: #5F6368;
+  cursor: pointer;
+  transition: background-color 0.1s ease-out;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #e8e8e8;
+  }
+
+  .icon {
+    span {
+      font-size: 34px;
+    }
+  }
+
+  .title {
+    h5 {
+      font-size: 14px;
+      font-weight: 800;
+    }
+  }
+}
+
+.view-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  border: 1px solid #CCCCCC;
+  padding: 20px;
+  border-radius: 5px;
+
+  &.active-item {
+    border: 1px solid $color-primary;
+    background: lighten($color-primary, 38%);
+
+    .info {
+      h5 {
+        color: $color-primary;
+      }
+
+      .manage-link {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .icon-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+    mat-icon {
+      width: 100%;
+      height: 100%;
+      font-size: 32px;
+      color: #9b9b9b; // Inactive color
+      transition: color 0.3s;
+    }
+
+    &.active mat-icon {
+      color: #34c759; // Active (checked) color
+    }
+  }
+
+  .info {
+    flex: 1;
+    cursor: pointer;
+
+    &:hover {
+      h5 {
+        color: #6540e3;
+      }
+    }
+
+
+    h5 {
+      font-size: 18px;
+      padding-bottom: 5px;
+    }
+
+    .manage-link {
+      color: #7b5de4;
+      font-size: 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 16px;
+        margin-left: 5px;
+      }
+
+      &:hover {
+        color: #6540e3;
+      }
+    }
+  }
+
+
+}
+
+.form-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 34px auto  24px auto;
+
+  mat-form-field {
+    width: 100%;
+  }
+}

@@ -1,0 +1,58 @@
+<div class="carousel-container">
+  <div
+    #carouselWrapper
+    class="carousel-wrapper"
+    [ngStyle]="{ transform: 'translateX(-' + (currentSlideIndex + 1) * 100 + '%)' }"
+  >
+
+    <!-- Clone the last slide at the beginning -->
+    <div class="carousel-slide">
+      <img [src]="isMobile < 600 && slides[slides.length - 1]?.images[1] ? slides[slides.length - 1]?.images[1] : slides[slides.length - 1]?.images[0]" alt="Slide" />
+    </div>
+
+    <!-- Original slides -->
+    <div class="carousel-slide" *ngFor="let slide of slides">
+      <img [src]="isMobile < 600 && slide?.images[1] ? slide?.images[1] : slide?.images[0]" alt="Slide" />
+    </div>
+
+    <!-- Clone the first slide at the end -->
+    <div class="carousel-slide">
+      <img [src]="isMobile < 600 && slides[0]?.images[1] ? slides[0]?.images[1] : slides[0]?.images[0]" alt="Slide" />
+    </div>
+  </div>
+
+  <!-- Control buttons -->
+  <button *ngIf="showControls" class="carousel-control prev" (click)="prevSlide()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 0 24 24"
+      width="20px"
+      fill="#FFFFFF"
+    >
+      <g><path d="M0,0h24v24H0V0z" fill="none" /></g>
+      <g><path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z" /></g>
+    </svg>
+  </button>
+  <button *ngIf="showControls" class="carousel-control next" (click)="nextSlide()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 0 24 24"
+      width="20px"
+    >
+      <g><path d="M0,0h24v24H0V0z" fill="none" /></g>
+      <g><polygon points="6.23,20.23 8,22 18,12 8,2 6.23,3.77 14.46,12" /></g>
+    </svg>
+  </button>
+
+  <!-- Indicators -->
+  <div *ngIf="showIndicators" class="carousel-indicators">
+    <span
+      *ngFor="let _ of slides; let i = index"
+      class="indicator"
+      [class.active]="i === currentSlideIndex"
+      (click)="goToSlide(i)"
+    ></span>
+  </div>
+</div>

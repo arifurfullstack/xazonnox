@@ -1,0 +1,134 @@
+@import "variables";
+@import "exports/spinner";
+
+.search-container {
+  width: 100%;
+  padding: 6px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #a8a8a8;
+}
+
+.search-bar {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input[type='text'] {
+    flex: 1;
+    padding: 10px 40px 10px 10px; /* Adjust padding to make space for the icon */
+    border: none;
+    outline: none;
+    font-size: 17px;
+    border-radius: 8px;
+    font-weight: 400;
+    color: #717171;
+    font-family: $font-en-primary;
+    &::placeholder {
+      font-size: 16px;
+      color: #717171;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    svg {
+      fill: #5f6368;
+    }
+
+    .loader {
+      border: 3px solid $color-primary;
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.search-results {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: none;
+  display: none;
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #efefef;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .item-info {
+      flex: 1;
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        font-family: $font-en-primary;
+      }
+
+      p {
+        margin: 5px 0 10px;
+        color: #888;
+        font-size: 14px;
+        font-family: $font-en-primary;
+      }
+
+      .price-info {
+        .discounted-price {
+          color: #d32f2f;
+          font-weight: bold;
+          margin-right: 10px;
+        }
+
+        .original-price {
+          color: #888;
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    .stock-info {
+      background-color: #aefcde;
+      color: #018e55;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-family: $font-en-primary;
+    }
+  }
+}
+
+.has-results {
+  border-top: 1px solid #e5e7eb;
+  display: block;
+}
+
+.custom-variation-list-design {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

@@ -1,0 +1,11 @@
+<div class="theme-selector">
+  <button *ngFor="let theme of themes" (click)="selectTheme(theme)">
+    {{ theme.name }}
+  </button>
+</div>
+
+<div class="container" #templateContainerElement>
+  <ng-container #templateContainer></ng-container>
+</div>
+
+<button (click)="submitTemplate()">Submit Template</button>

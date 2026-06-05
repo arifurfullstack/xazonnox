@@ -1,0 +1,96 @@
+@import "exports/button";
+
+.icon-fill-body {
+  .icon-border {
+    border: 2px dashed blue; // Dotted border
+  }
+  .icon-button {
+    background-color: blue;
+  }
+}
+.cards {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+.card {
+  width: 450px;
+  // border: 2px solid green;
+  border: 2px solid rgb(221, 220, 220);
+  padding: 20px;
+  .content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+  button {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    gap: 20px;
+    border: 2px solid green;
+    border-radius: 5px;
+    color: green;
+  }
+  &.active {
+    background-color: rgb(
+      211,
+      240,
+      211
+    ); // Change to any color you like when active
+    border: 2px solid rgb(17, 95, 17);
+  }
+  &.active button {
+    background-color: rgba(65, 153, 65, 0.521);
+  }
+}
+.alart {
+  // height: 80px;
+  margin-top: 50px;
+  max-width: 580px;
+  width: 100%;
+  background: rgba(215, 215, 247, 0.801);
+  border-radius: 20px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid rgb(153, 153, 243);
+  .icon {
+    background: rgb(95, 95, 255);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+  }
+  h3 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 10px;
+  }
+  a {
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .cards {
+    flex-direction: column;
+  }
+  .card {
+    width: 100%;
+  }
+  .alart {
+    flex-direction: column;
+    text-align: center;
+  }
+}

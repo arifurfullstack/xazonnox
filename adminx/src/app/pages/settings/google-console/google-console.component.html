@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="full-sec">
+    <h3>Google Search Console</h3>
+<!--    <div class="icon-fill-body">-->
+<!--      <div class="icon-container">-->
+<!--        <div class="icon-border">-->
+<!--          <button mat-icon-button class="icon-button icon-btn">-->
+<!--            <svg width="24px" height="24px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <polygon fill="#8AB4F8" points="150.261818 245.516364 105.825455 202.185455 201.258182 104.730909 247.265455 149.821818"> </polygon> <path d="M150.450909,53.9381818 L106.174545,8.73090909 L9.36,104.629091 C-3.12,117.109091 -3.12,137.341818 9.36,149.836364 L104.72,245.821818 L149.810909,203.64 L77.1563636,127.232727 L150.450909,53.9381818 Z" fill="#4285F4"> </path> <path d="M246.625455,105.370909 L150.625455,9.37090909 C138.130909,-3.12363636 117.869091,-3.12363636 105.374545,9.37090909 C92.88,21.8654545 92.88,42.1272727 105.374545,54.6218182 L201.374545,150.621818 C213.869091,163.116364 234.130909,163.116364 246.625455,150.621818 C259.12,138.127273 259.12,117.865455 246.625455,105.370909 Z" fill="#8AB4F8"> </path> <circle fill="#246FDB" cx="127.265455" cy="224.730909" r="31.2727273"> </circle> </g> </g></svg>-->
+
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="text">-->
+<!--        <h4>Adjust Tag Manager, Analytics & Data Layer</h4>-->
+<!--        <p>You can add Tag Manager, Analytics & Data Layer</p>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+
+
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+    <div class="input-fields">
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Google Search Console Verification token </mat-label>
+        <input formControlName="googleSearchConsoleToken" matInput placeholder="Enter google search console verification token"/>
+      </mat-form-field>
+
+      <button type="submit">Save</button>
+
+    </div>
+  </form>
+
+</div>

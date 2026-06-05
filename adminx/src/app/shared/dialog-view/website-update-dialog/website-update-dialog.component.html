@@ -1,0 +1,33 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <mat-icon color="primary" class="header-icon">info</mat-icon>
+    @if (buildStatus !== 'updated') {
+      <h3>
+        {{ data?.title }}: <span>{{ formatTime(totalTime - elapsedTime) }}</span>
+      </h3>
+    }
+    @if (buildStatus === 'updated') {
+      <h3>Completed</h3>
+    }
+  </div>
+  <div class="dialog-content">
+    <div class="status">
+      <span>Status: <strong [ngClass]="buildStatus">{{ buildStatus | titlecase }}</strong></span>
+    </div>
+    <mat-progress-bar
+
+      class="custom-progress-bar"
+      color="primary"
+      mode="determinate"
+      [value]="buildStatus === 'updated' ? progressValue : progressValue"
+    ></mat-progress-bar>
+    <div class="details">
+      <p>{{ data?.desc }}</p>
+    </div>
+  </div>
+  <div class="dialog-actions">
+    @if (buildStatus === 'updated') {
+      <button mat-button color="warn" (click)="closeDialog()">Close</button>
+    }
+  </div>
+</div>

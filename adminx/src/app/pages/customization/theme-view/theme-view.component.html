@@ -1,0 +1,145 @@
+<div class="view-container">
+  <div class="action-top">
+
+
+    @if(!isLoading) {
+      <button (click)="openConfirmDialog()" mat-raised-button color="primary">
+        <mat-icon>check</mat-icon> Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader"  mat-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </div>
+
+  <div class="theme-colors">
+    <h2>Theme Colors</h2>
+    <p>Enter primary, secondary and tertiary colors</p>
+    <div class="color-group">
+      <!-- Primary Color -->
+      <div class="color-item">
+        <input
+          type="color"
+          [(ngModel)]="themeColors.primary"
+          (input)="onColorChange('primaryColor')"
+        />
+        <input
+          type="text"
+          [(ngModel)]="themeColors.primary"
+          maxlength="7"
+          placeholder="#000000"
+          (input)="validateColorCode('primaryColor')"
+        />
+      </div>
+
+      <!-- Secondary Color -->
+      <div class="color-item">
+        <input
+          type="color"
+          [(ngModel)]="themeColors.secondary"
+          (input)="onColorChange('secondaryColor')"
+        />
+        <input
+          type="text"
+          [(ngModel)]="themeColors.secondary"
+          maxlength="7"
+          placeholder="#000000"
+          (input)="validateColorCode('secondaryColor')"
+        />
+      </div>
+
+      <!-- Tertiary Color -->
+      <div class="color-item">
+        <input
+          type="color"
+          [(ngModel)]="themeColors.tertiary"
+          (input)="onColorChange('tertiaryColor')"
+        />
+        <input
+          type="text"
+          [(ngModel)]="themeColors.tertiary"
+          maxlength="7"
+          placeholder="#000000"
+          (input)="validateColorCode('tertiaryColor')"
+        />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="search-hint">
+    <h2>Search Hints</h2>
+    <mat-form-field appearance="outline">
+      <input [(ngModel)]="searchHints" type="text" matInput placeholder="Ex: lipstick, foundation, face serum, moisturizer">
+    </mat-form-field>
+  </div>
+
+
+  <div class="section">
+    <h2 class="section-title">Order Language</h2>
+    <div class="content">
+      <div
+        *ngFor="let item of themeLanguageOptions; let i = index"
+        class="view-item"
+        [ngClass]="{ 'active-item': item.selected }"
+      >
+        <div
+          class="icon-checkbox"
+          (click)="onChangeOrderLanguage(item.value, i)"
+          [ngClass]="{ active: item.selected }"
+        >
+          <mat-icon *ngIf="item.selected">check_circle</mat-icon>
+          <mat-icon *ngIf="!item.selected">radio_button_unchecked</mat-icon>
+        </div>
+        <div class="info">
+          <h5>{{ item.name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let opt of themeCustomOptions; let sectionIndex = index" class="section">
+    <h2 class="section-title">{{ opt.name }}</h2>
+    <div class="content">
+      <div
+        *ngFor="let item of opt.value; let i = index"
+        class="view-item"
+        [ngClass]="{ 'active-item': item.selected }"
+      >
+        <div
+          class="icon-checkbox"
+          (click)="toggleCheckbox(opt.type, i)"
+          [ngClass]="{ active: item.selected }"
+        >
+          <mat-icon *ngIf="item.selected">check_circle</mat-icon>
+          <mat-icon *ngIf="!item.selected">radio_button_unchecked</mat-icon>
+        </div>
+        <div class="info">
+          <h5>{{ item.name }}</h5>
+          <span class="image"  (click)="openGallery($event, item.image)">
+            <mat-icon>visibility</mat-icon>
+            View demo
+          </span>
+<!--          <a href="javascript:" class="manage-link">-->
+<!--            Manage your {{ opt.name.toLowerCase() }} view from here-->
+<!--            <span class="material-icons">open_in_new</span>-->
+<!--          </a>-->
+        </div>
+      </div>
+    </div>
+  </div> <!-- END Theme View Setting -->
+</div>
+
+
+
+<!-- Galley View -->
+@if (isGalleryOpen) {
+  <app-gallery-image-viewer
+    [images]="galleryImages"
+    [startIndex]="selectedImageIndex"
+    (closeEvent)="closeGallery()">
+  </app-gallery-image-viewer>
+}
+<!-- END Galley View -->

@@ -1,0 +1,208 @@
+<div class="container">
+
+
+  <div class="content add-page">
+    <div class="button-area">
+
+      <button class="add-product-btn" mat-button color="accent" (click)="openTemplateEditor()">
+        <mat-icon>add</mat-icon>
+        Add Template
+      </button>
+
+      <!--<app-theme-selector></app-theme-selector>-->
+      <div class="view-buttons">
+        <button mat-button color="accent" (click)="setTabData(0)" [class.active]="selectedTab ===0">
+          <mat-icon>computer</mat-icon>
+          Computer View
+        </button>
+        <button mat-button color="accent" (click)="setTabData(1)" [class.active]="selectedTab ===1">
+          <mat-icon>phone_iphone</mat-icon>
+          Mobile View
+        </button>
+      </div>
+    </div>
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+
+      <div class="product-search-area">
+        <div class="title" style="text-align: start">
+          <h3>Product:</h3>
+        </div>
+        <app-product-search (onSelect)="onProductSelect($event)"></app-product-search>
+      </div>
+
+      <div class="product-area">
+        <!-- <p>Name: {{allTableData[0]?.name}}</p>-->
+        <div class="search-results" [ngClass]="{'has-results': allTableData?.length > 0}">
+          <div class="search-item">
+            <img [src]="allTableData[0]?.images && allTableData[0]?.images?.length ? allTableData[0]?.images[0] : ''"
+                 alt="product image"/>
+            <div class="item-info">
+              <h3>{{ allTableData[0]?.name }}</h3>
+              <p>Category: {{ allTableData[0]?.category?.name }} > {{ allTableData[0]?.subCategory?.name }}</p>
+              <div class="price-info">
+                <span class="discounted-price">{{ allTableData[0]?.salePrice }}</span>
+                <span class="original-price">{{ allTableData[0]?.salePrice }}</span>
+              </div>
+            </div>
+            <div class="stock-info">In Stock: {{ allTableData[0]?.quantity }}pcs</div>
+            <button type="button" class="remove-btn" (click)="deleteProduct(0)">
+              <mat-icon>close</mat-icon>
+            </button> <!-- Remove button -->
+          </div>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="name" matInput placeholder="Enter name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Slug</mat-label>
+        <input formControlName="slug" matInput placeholder="Enter slug" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Short Description</mat-label>
+        <textarea formControlName="shortDes" matInput placeholder="Enter short description" required></textarea>
+        <!--        <input formControlName="shortDes" matInput placeholder="Enter short description" required>-->
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Background Color</mat-label>
+        <!--        <textarea formControlName="background" matInput placeholder="Enter background color" required></textarea>-->
+        <input formControlName="background" matInput placeholder="Ex- #000000">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <div class="d-row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for (data of dataStatus; track data.value) {
+              <mat-option [value]="data.value">
+                {{ data.viewValue }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div> <!-- END! d-row -->
+
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        <button (click)="onPreview()" mat-stroked-button color="primary" type="button" class="preview">
+          <mat-icon>visibility</mat-icon>
+          Preview
+        </button>
+
+        @if (!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update LandingPage' : 'Add LandingPage' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update LandingPage' : 'Add LandingPage' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+      @if (selectedTab === 0) {
+        <div class="description-area">
+          <p>Theme</p>
+          <div class="button-area">
+            <button type="button" mat-button class="add-product-btn ignore" (click)="changeVideo()">
+              <mat-icon>add</mat-icon>
+              Video Link
+            </button>
+            <button type="button" mat-button class="add-product-btn ignore" (click)="changePhone()">
+              <mat-icon>add</mat-icon>
+              Phone
+            </button>
+            <button type="button" mat-button class="add-product-btn ignore" (click)="copyLink()">
+              <mat-icon>content_copy</mat-icon>
+              Copy button Url
+            </button>
+          </div>
+
+          <div class="w-100 px-1 check-option from" fxFlex="100">
+            <mat-checkbox formControlName="isHtml" (change)="onCheckChange($event)">Want to paste HTML?</mat-checkbox>
+          </div>
+
+          <div class="from">
+            <mat-form-field *ngIf="dataForm.value.isHtml" appearance="outline" class="w-100 px-1" fxFlex="100">
+              <mat-label>Paste HTML Code</mat-label>
+              <textarea
+                (ngModelChange)="onChangeBaseHtml($event)"
+                formControlName="htmlBase"
+                matInput
+                [rows]="6">
+           </textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="html-view from" fxFlex="100" *ngIf="dataForm.value.isHtml && dataForm.value.description">
+            <div class="description" [innerHTML]="dataForm.value.description | safeHtmlCustom"></div>
+          </div>
+
+          <div class="description-main" *ngIf="!dataForm.value.isHtml">
+            <app-html-editor formControlName="theme"></app-html-editor>
+          </div>
+        </div>
+      } @else {
+        <p>Theme</p>
+        <button type="button" mat-button class="add-product-btn ignore" (click)="changeVideo()">
+          <mat-icon>add</mat-icon>
+          Video Link
+        </button>
+        <button type="button" mat-button class="add-product-btn ignore" (click)="changePhone()">
+          <mat-icon>add</mat-icon>
+          Phone
+        </button>
+
+        <div class="w-100 px-1 check-option from" fxFlex="100">
+          <mat-checkbox formControlName="isHtml" (change)="onCheckChange($event)">Want to paste HTML?</mat-checkbox>
+        </div>
+
+        <div class="from">
+          <mat-form-field *ngIf="dataForm.value.isHtml" appearance="outline" class="w-100 px-1" fxFlex="100">
+            <mat-label>Paste HTML Code</mat-label>
+            <textarea
+              (ngModelChange)="onChangeBaseHtml($event)"
+              formControlName="htmlBase"
+              matInput
+              [rows]="6">
+           </textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="html-view from" fxFlex="100" *ngIf="dataForm.value.isHtml && dataForm.value.description">
+          <div class="description" [innerHTML]="dataForm.value.description | safeHtmlCustom"></div>
+        </div>
+        <div class="mobile-template">
+          <div class="description-area">
+            <div class="description-main">
+              <app-html-editor formControlName="theme"></app-html-editor>
+            </div>
+          </div>
+        </div>
+      }
+    </form> <!-- END! form -->
+
+
+  </div> <!-- END! content -->
+
+</div> <!-- END! container -->
+

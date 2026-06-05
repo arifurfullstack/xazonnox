@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="full-sec">
+    <h3>Affiliate Marketing</h3>
+  </div>
+
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+    <div class="input-fields">
+
+      <!-- Affiliate Marketing -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Affiliate Marketing</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isAffiliate" color="primary">
+        Enable Affiliate Marketing?
+      </mat-checkbox>
+
+      <!-- Affiliate Marketing -->
+
+    </div>
+
+    <button mat-button class="add-product-btn" color="primary" type="submit">Save</button>
+  </form>
+
+</div>

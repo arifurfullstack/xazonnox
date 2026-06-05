@@ -1,0 +1,38 @@
+@import "variables";
+
+.btn-primary {
+  user-select: none;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 12px;
+  background-color: $color-primary;
+  color: #fff;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: lighten($color-primary, 5%);
+  }
+
+  &.btn-loading {
+    width: 160px;
+    opacity: 0.9;
+
+    &:hover {
+      background-color: $color-primary;
+      opacity: 0.9;
+    }
+  }
+}

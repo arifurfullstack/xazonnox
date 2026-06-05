@@ -1,0 +1,99 @@
+@import "variables";
+@import "common/title-header";
+@import "common/search-table";
+.container {
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.main-content{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.card {
+  width: 100%;
+  padding: 20px 30px;
+  border-radius: 6px;
+  background: var(--setting-color-light);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+
+  &:hover {
+    .info {
+      h4 {
+        color: var(--setting-color-dark);
+      }
+      .text-icon {
+        p {
+          color: var(--setting-color-dark);;
+        }
+        svg {
+          transform: translateX(8px);
+        }
+      }
+    }
+  }
+
+  .circle-icon {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--setting-color-dark);
+
+    ::ng-deep svg {
+      width: 28px !important;
+      height: 28px !important;
+      fill: #ffffff !important;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 1px dashed var(--setting-color-dark);
+    }
+  }
+
+  .info {
+    flex: 1;
+    h4 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #4B4B4B;
+      transition: color 0.3s ease;
+    }
+    .text-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+
+      p {
+        font-size: 14px;
+        color: #5A5858;
+        transition: color 0.3s ease;
+      }
+      svg {
+        transition: transform 0.3s ease, fill 0.3s ease;
+        fill: var(--setting-color-dark) !important;
+      }
+    }
+  }
+
+}
+
+

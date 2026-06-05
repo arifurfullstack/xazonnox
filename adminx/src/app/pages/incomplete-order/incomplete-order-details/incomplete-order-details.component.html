@@ -1,0 +1,378 @@
+<div class="header">
+
+
+  <!--  <button class="padding"-->
+  <!--          mat-raised-button-->
+  <!--          color="accent" [routerLink]="['/order-invoice', order._id]"-->
+  <!--  >-->
+  <!--    <mat-icon>file_download</mat-icon>-->
+  <!--    Download Pdf-->
+  <!--  </button>-->
+
+<!--  @if (!isLoading) {-->
+<!--    <button class="padding" (click)="openAdvancePaymentDialog()" mat-raised-button color="warn">-->
+<!--      Fraud Checker-->
+<!--    </button>-->
+<!--  } @else {-->
+<!--    <button class="btn-loader" mat-raised-button type="button" color="warn">-->
+<!--      <div><span class="loader"></span></div>-->
+<!--      &lt;!&ndash;      <div><span class="txt"> Freaud Checker</span></div>&ndash;&gt;-->
+<!--      <div><p> Fraud Checker</p></div>-->
+<!--    </button>-->
+<!--  }-->
+
+
+  <!--  <button class="padding" mat-raised-button color="accent" [matMenuTriggerFor]="menu1" *ngIf="order?.advancePaymentStatus ">-->
+  <!--    Change Advance Payment Status-->
+  <!--    <mat-icon>arrow_drop_down</mat-icon>-->
+  <!--  </button>-->
+  <!--  <mat-menu #menu1="matMenu">-->
+  <!--    <button mat-menu-item (click)="updateOrderById({advancePaymentStatus: 'paid'})">Paid</button>-->
+  <!--    <button mat-menu-item (click)="updateOrderById({advancePaymentStatus: 'unpaid'})">Unpaid</button>-->
+  <!--  </mat-menu>-->
+
+
+  <!--  <button class="padding" mat-raised-button color="accent" [matMenuTriggerFor]="menu2">-->
+  <!--    Change Payment Status-->
+  <!--    <mat-icon>arrow_drop_down</mat-icon>-->
+  <!--  </button>-->
+  <!--  <mat-menu #menu2="matMenu">-->
+  <!--    <button mat-menu-item (click)="updateOrderById({paymentStatus: 'paid'})">Paid</button>-->
+  <!--    <button mat-menu-item (click)="updateOrderById({paymentStatus: 'unpaid'})">Unpaid</button>-->
+  <!--  </mat-menu>-->
+
+<!--  <button class="padding" mat-raised-button color="warn" [routerLink]="['/order-invoice', order?._id]">-->
+<!--    <mat-icon>print</mat-icon>-->
+<!--    Print Order-->
+<!--  </button>-->
+
+  <button class="padding"
+          mat-raised-button
+          color="primary"
+          [routerLink]="['../../', 'add-order']"
+          [queryParams]="{incompleteOrder: id}"
+  >
+    <mat-icon>add</mat-icon>
+    Add Order
+  </button>
+</div>
+
+<section class="admin-data-sec">
+  <div class="top-data-header">
+    <div class="title">
+      <h2>Order Details</h2>
+    </div>
+  </div>
+  <!-- END TOP DATA HEADER -->
+
+  <hr class="center-square"/>
+
+  <div class="profile">
+    <!--    <div class="img-thumb">-->
+    <!--      <img [src]="user?.profileImg ? user?.profileImg : '/assets/images/avatar/user_low.png'" alt="">-->
+    <!--    </div>-->
+    <div class="info">
+      <h2>Order ID: {{ order?.orderId }}</h2>
+      <h2>Checkout Date: {{ order?.checkoutDate }}</h2>
+      <div class="row ">
+        <h2>
+          Payment Status:
+          <span
+            [style.color]="order?.paymentStatus === 'paid' ? 'green' : 'red'"
+          >
+            {{ order?.paymentStatus | titlecase }}
+          </span>
+        </h2>
+
+<!--        <h2 class="change-btn" style="font-weight: bold"-->
+<!--            [matMenuTriggerFor]="menu2" *ngIf="order?.paymentStatus"-->
+<!--        >Change Status-->
+<!--          &lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000F5"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>&ndash;&gt;-->
+<!--          <mat-icon>arrow_drop_down</mat-icon>-->
+<!--        </h2>-->
+      </div>
+
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item (click)="updateOrderById({paymentStatus: 'paid'})">Paid</button>
+        <button mat-menu-item (click)="updateOrderById({paymentStatus: 'unpaid'})">Unpaid</button>
+      </mat-menu>
+
+
+      <h2>Payment Type: {{ order?.providerName ?? 'N/A' }}</h2>
+      <h2>Order Status: {{ order?.orderStatus | titlecase }}</h2>
+      <!--      <h2 *ngIf=" order?.advancePaymentStatus">Advance Payment Status: {{ order?.advancePaymentStatus | titlecase }}</h2>-->
+      <h2>Last Update: {{ order?.updatedAt | date : "mediumDate" }}</h2>
+      <h2 style="color: green; font-weight: bold" *ngIf="order?.preferredDateString || order?.preferredTime">Preferable
+        Delivery Time: {{ order?.preferredTime }} & Date: {{ order?.preferredDateString }}</h2>
+
+      <h2 style="color: green; font-weight: bold" *ngIf="order?.orderType">Order
+        Type: {{ order?.orderType | titlecase }} </h2>
+
+      <div class="advance-payment">
+        <h2 style=" font-weight: bold" *ngIf="order?.advancePaymentStatus ">Advance Payment Status:
+          <span
+            [style.color]="order?.advancePaymentStatus === 'paid' ? 'green' : 'red'"
+          >
+             {{ order?.advancePaymentStatus | titlecase }}
+          </span>
+
+        </h2>
+<!--        <h2 class="change-btn" style="font-weight: bold"-->
+<!--            [matMenuTriggerFor]="menu1" *ngIf="order?.advancePaymentStatus"-->
+
+<!--        >Change Status-->
+<!--          &lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000F5"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>&ndash;&gt;-->
+<!--          <mat-icon>arrow_drop_down</mat-icon>-->
+<!--        </h2>-->
+
+      </div>
+      <mat-menu #menu1="matMenu">
+        <button mat-menu-item (click)="updateOrderById({advancePaymentStatus: 'paid'})">Paid</button>
+        <button mat-menu-item (click)="updateOrderById({advancePaymentStatus: 'pending'})">Pending</button>
+      </mat-menu>
+
+
+      <h2 style="font-weight: 600" *ngIf="order?.orderFrom">Order From: {{ order?.orderFrom | titlecase }}</h2>
+
+      <h2 class="note-content" *ngIf="order?.note">Note: {{ order?.note }}</h2>
+    </div>
+  </div>
+  <div class="profile payment-info" *ngIf="order?.customerPaymentNo && order?.paymentTransactionId">
+    <div class="payment-method-icon">
+      <!--          <img [src]="user?.profileImg ? user?.profileImg : '/assets/images/avatar/user_low.png'" alt="">-->
+      <img
+        [src]="
+            order?.providerName === 'Bkash' && 'https://cdn.saleecom.com/upload/static/bkash-logo-200px.png' ||
+            order?.providerName === 'Nagad' && 'https://cdn.saleecom.com/upload/static/nagad_logo_200px.png' ||
+            order?.providerName === 'Rocket' && 'https://cdn.saleecom.com/upload/static/rocket_200px.png'
+"
+        alt="">
+    </div>
+    <div class="info">
+      <h2>Payment Method: <span>{{ order?.providerName }} ({{ order?.providerType }})</span></h2>
+      <h2>Payment No: <span>{{ order?.customerPaymentNo }}</span></h2>
+      <h2>Payment Transaction Id: <span>{{ order?.paymentTransactionId }}</span></h2>
+    </div>
+  </div>
+
+  <div class="table-wrapper space">
+    <!--    <div class="table-action dual" >-->
+    <!--      <div class="left"></div>-->
+    <!--      <div class="right">-->
+    <!--        <button mat-raised-button color="accent" (click)="openProductListDialog()">-->
+    <!--          <mat-icon>add</mat-icon>-->
+    <!--          Edit Product-->
+    <!--        </button>-->
+    <!--      </div>-->
+    <!--    </div> &lt;!&ndash; END Table Action &ndash;&gt;-->
+
+    <table>
+      <tr>
+        <th>SL</th>
+        <th>Image</th>
+        <th>Name</th>
+        <!--        <th>milligram</th>-->
+        <!--        <th>Unit</th>-->
+        <th>Category</th>
+        <th>Sub Category</th>
+        <th>Brand</th>
+        <th>Purchase Type</th>
+        <th>Quantity</th>
+        <th>MRP</th>
+        <th>Discount</th>
+        <th>Amount</th>
+
+      </tr>
+      <tr *ngFor="let data of order?.orderedItems; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <img
+            checkImageDefault
+            class="table-image"
+            [src]="data && data?.image ? data?.image + '?&auto=format&w=384' : ''"
+            [alt]=""
+          />
+        </td>
+
+        <td>{{ data?.name }}{{ data?.variation ? ' - ' + data?.variation?.name : '' }}{{data?.phoneModel ? ' - ' + (data?.phoneModel) : '' }}</td>
+
+
+        <!--        <td>{{ data?.milligram }}</td>-->
+        <!--        <td>{{ data.unit ? data.unit : "N/A" }}</td>-->
+        <td>{{ data?.category?.name }}</td>
+        <td>
+          {{
+            data?.subCategory && data?.subCategory?.name
+              ? data?.subCategory?.name
+              : "-"
+          }}
+        </td>
+        <td>{{ data?.brand?.name ? data?.brand?.name : "-" }}</td>
+        <td>{{ data?.purchaseType ? data?.purchaseType : "-" }}</td>
+        <td>{{ data?.quantity }}</td>
+        <td>{{ (((data?.regularPrice) * (data?.quantity)) | number : "" : "bn") | shopCurrency }}</td>
+        <td>{{ (data | productPrice : "discountAmount" : data?.variation?._id: data?.quantity ) | shopCurrency}}</td>
+        <td>
+          {{ ((((data?.regularPrice) * (data?.quantity)) - (data | productPrice : "discountAmount" : data?.variation?._id: data?.quantity)) ?? 0 | number : "" : "bn" ) | shopCurrency}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="bottom-view">
+    <div class="action info">
+      <!--      @if (order?.providerType === 'sent-money' || order?.providerType === 'payment') {-->
+      <!--        <div class="item" style="border-bottom: none">-->
+      <!--          <div class="left">Payment Method</div>-->
+      <!--          <div class="right">-->
+      <!--            <p>{{ order?.providerName }} : {{ order?.providerType }}</p>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="item" style="border-bottom: none">-->
+      <!--          <div class="left">Payment Info</div>-->
+      <!--          <div class="right">-->
+      <!--            <p>Payment From: {{ order?.customerPaymentNo }}, Transaction Id : {{ order?.paymentTransactionId }}</p>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      }-->
+
+
+      <div class="item" style="border-bottom: none">
+        <div class="left">Name</div>
+        <div class="right">
+          <p>{{ order?.name }}</p>
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none">
+        <div class="left">Phone No</div>
+        <div class="right">
+          <p>{{ order?.phoneNo }}</p>
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none">
+        <div class="left">Email</div>
+        <div class="right">
+          <p>{{ order?.email }}</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="left">Division</div>
+        <div class="right">
+          <p class="bold">{{ order?.division }}</p>
+        </div>
+      </div>
+      <!--      <div class="item">-->
+      <!--        <div class="left">Area</div>-->
+      <!--        <div class="right">-->
+      <!--          <p class="bold">{{ order?.area }}</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <!--      <div class="item">-->
+      <!--        <div class="left">Zone</div>-->
+      <!--        <div class="right">-->
+      <!--          <p class="bold">{{ order?.zone }}</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+
+      <div class="item test">
+        <div class="left left-Shipping">Shipping Address</div>
+        <div class="right">
+          <p class="bold">{{ order?.shippingAddress }}</p>
+        </div>
+      </div>
+
+      @if (order?.deliveryNote) {
+        <div class="item">
+          <div class="left order-note">Order Note</div>
+          <div class="right order-note">
+            <p class="bold">{{ order?.deliveryNote }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="action calculation">
+      <div class="item" style="border-bottom: none">
+        <div class="left">Sub Total ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>{{ order?.subTotal | number: '0.2-2' }}</p>
+
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none" *ngIf="order?.discount">
+        <div class="left">Discount Applied ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>-{{ order?.discount | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+
+      <!--      <div class="item" style="border-bottom: none" *ngIf="order?.totalSave">-->
+      <!--        <div class="left">Discount Applied (৳)</div>-->
+      <!--        <div class="right">-->
+      <!--          <p>-{{ order?.totalSave }}</p>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div class="item" style="border-bottom: none" *ngIf="order?.rewardPrice">
+        <div class="left">Reward Price ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>-{{ order?.rewardPrice | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+      <div class="item" style="border-bottom: none" *ngIf="order?.additionalDiscount">
+        <div class="left">Additional Discount ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>-{{ order?.additionalDiscount | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+      <div class="item" style="border-bottom: none" *ngIf="order?.couponDiscount">
+        <div class="left">Coupon Discount ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>-{{ order?.couponDiscount | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none">
+        <div class="left">Delivery Charge ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p>{{ order?.deliveryChargeAmount ?? 0 | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+
+      @if(order?.paidAmount) {
+        <div class="item" style="border-bottom: none">
+          <div class="left">Paid Amount ({{ '' | shopCurrency }})</div>
+          <div class="right">
+            <p>{{ order?.paidAmount | number : "0.2-2" : "bn" }} <span
+              *ngIf="order?.advancePaymentStatus">({{ order?.advancePaymentStatus | titlecase }})</span></p>
+          </div>
+        </div>
+      }
+
+      <div class="item">
+        <div class="left">Grand Total ({{ '' | shopCurrency }})</div>
+        <div class="right">
+          <p class="bold">{{ order?.grandTotal | number : "0.2-2" : "bn" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  *ngIf="order?.hasOrderTimeline"-->
+  <div class="order-timeline">
+    <div class="view">
+      <div class="title">
+        <h2>Order Timeline</h2>
+      </div>
+      <div class="content">
+        <app-order-timeline [order]="order"></app-order-timeline>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING TEMPLATE -->
+
+</section>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="content" >
+    @for (item of chats; let i = $index; track i) {
+      <div class="view-item" [ngClass]="{ 'active-item': selectedIndex === i }">
+        <div class="icon-checkbox"
+             (click)="toggleCheckbox(i)"
+             [ngClass]="{ active: item.status === 'active' }">
+          <mat-icon>
+            {{ item.status === 'active' ? 'check_circle' : 'radio_button_unchecked' }}
+          </mat-icon>
+        </div>
+        <div class="info" (click)="onSelectItem(i)">
+          <h5>{{ item.chatType | titlecase }}</h5>
+          <a class="manage-link">
+            Show Setting Form
+            <span class="material-icons">expand_more</span>
+          </a>
+        </div>
+      </div>
+    }
+    @if (chats.length < 5) {
+      <div class="add-item hide-menu" (click)="onAddNewDeliveryType()">
+        <div class="icon">
+          <span class="material-icons">add</span>
+        </div>
+        <div class="title">
+          <h5>Add New Option</h5>
+        </div>
+      </div>
+    }
+  </div>
+
+  <form [style.display]="formViewMode === '' ? 'none' : 'block'" [formGroup]="dataForm" (ngSubmit)="onSubmit()"
+        class="form-container">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Chat Type</mat-label>
+      <mat-select formControlName="chatType">
+        @for (item of chatTypes; track $index) {
+          <mat-option [value]="item.value" [disabled]="isDisabledOpt(item.value)">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="no-underline">
+      <mat-label>{{ dataForm?.value?.chatType === 'messenger' || dataForm?.value?.chatType === 'telegram' ? 'url' : 'Phone Number' }}</mat-label>
+      <input formControlName="url" matInput [placeholder]="dataForm?.value?.chatType === 'messenger' || dataForm?.value?.chatType === 'telegram' ? '' : 'Ex-01700000000'"/>
+    </mat-form-field>
+
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </form>
+
+
+</div>

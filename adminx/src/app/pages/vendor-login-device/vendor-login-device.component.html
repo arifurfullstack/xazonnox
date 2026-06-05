@@ -1,0 +1,25 @@
+<div class="session-grid">
+  <div *ngFor="let session of sessions" class="session-card">
+    <p><b>Device:</b> {{ session.browserName }} on {{ session.osName }} – {{ session.deviceType | titlecase }}</p>
+    <p><b>Login Time:</b> {{ session.createdAt | date: 'medium' }}</p>
+
+    <div *ngIf="!isCurrentDevice(session.deviceId)">
+      <button class="logout-btn" (click)="confirmLogout(session.deviceId)">Logout</button>
+    </div>
+    <div *ngIf="isCurrentDevice(session.deviceId)">
+      <p class="current-device">This is your current device</p>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Modal Section -->
+<div class="custom-modal-backdrop" *ngIf="confirmingDeviceId">
+  <div class="custom-modal">
+    <h3>Confirm Logout</h3>
+    <p>Are you sure you want to logout this device?</p>
+    <div class="modal-actions">
+      <button (click)="cancelLogout()">Cancel</button>
+      <button class="danger" (click)="proceedLogout()">Logout</button>
+    </div>
+  </div>
+</div>

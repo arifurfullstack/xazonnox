@@ -1,0 +1,54 @@
+<!--<div class="dashboard">-->
+
+<div class="section top-products">
+  <div class="header">
+    <h2>Top Products</h2>
+<!--    <button class="date-filter">{{todayDate1 | date: "dd,YYYY" }} <span class="arrow-down">▼</span></button>-->
+    <div>
+      @if (filter?.month !== this.selectedMonth && activeFilter6) {
+        <button style="margin-right: 5px;" color="warn" mat-button class="overview-filter-btn warn"
+                (click)="onClearDataQuery()">
+          <mat-icon>clear</mat-icon>
+          Clear Filter
+        </button>
+      }
+      <button mat-button class="overview-filter-btn" [matMenuTriggerFor]="menuOverviewFilter">
+        {{ month[activeFilter6]?.viewValue ? month[activeFilter6]?.viewValue :  month[this.selectedMonth - 1]?.viewValue }}
+        <mat-icon >arrow_drop_down</mat-icon>
+      </button>
+    </div>
+
+
+    <mat-menu #menuOverviewFilter="matMenu">
+      @for (data of month; track $index) {
+        <button mat-menu-item
+                (click)="filterData(data.value, $index, 'month')"
+                [class.dropdown-active]="activeFilter6 === $index">
+          {{ data.viewValue }}
+        </button>
+      }
+    </mat-menu>
+  </div>
+    <div class="product-list">
+      @for(data of allTableData;track data?._id){
+      <div class="product-item" >
+        <div class="product-image">
+          <img (click)="openGallery($event, data?.images)" [src]="data?.images?.length ? data?.images[0] : '/assets/images/temp/pl_1.png'" alt="Product Image">
+        </div>
+        <div class="product-details">
+          <p class="product-name">{{ data?.name }}</p>
+            <p class="product-price" >{{ (data | productPrice : "salePrice" : null ) | shopCurrency}}</p>
+        </div>
+
+        <div class="product-sales">{{ data?.totalSold ?? 0 }} ↗</div>
+      </div>
+      }
+    </div>
+</div>
+<!--</div>-->
+@if (isGalleryOpen) {
+  <app-gallery-image-viewer [images]="galleryImages"
+                            [startIndex]="selectedImageIndex"
+                            (closeEvent)="closeGallery()">
+  </app-gallery-image-viewer>
+}

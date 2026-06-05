@@ -1,0 +1,77 @@
+<div class="expire-dialog">
+  <div class="dialog-content">
+    <div class="top-area">
+      <!-- Warning Icon with Ripple Effect -->
+      <div class="warning-icon-wrapper">
+        <div class="warning-circle">
+          <div class="ripple-effect"></div>
+          <div class="ripple-effect delay-1"></div>
+          <div class="ripple-effect delay-2"></div>
+          <span class="warning-icon">!</span>
+        </div>
+      </div>
+
+      <!-- Title with Glow -->
+      <div class="title-section">
+        <h2> {{data.shopType ==='free'? 'Trial'  : 'Subscription' }}<span class="highlight"> Expired</span></h2>
+      </div>
+
+      <!-- Days Counter Card with Floating Effect -->
+      <div class="days-card">
+        <div class="floating-animation">
+          <div class="counter-content">
+            <div class="number">{{ data.expireDays }}</div>
+            <div class="label">
+              <div>DAYS</div>
+              <div>AGO</div>
+            </div>
+          </div>
+        </div>
+        <!-- Particle Effects -->
+        <div class="particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+      </div>
+
+      <!-- Message with Bell Animation -->
+      <div class="message-section">
+        <span class="bell-icon">🔔</span>
+        <p>Please {{data.shopType ==='free'? 'doing payment'  : 'renew your subscription' }}  to continue using all services</p>
+      </div>
+
+      <!-- Simple Contact Section -->
+      <div class="contact-section">
+        <div class="contact-divider">
+          <span>or</span>
+        </div>
+        <button class="btn-contact" (click)="onContactUs()">
+          <span class="contact-icon">💬</span>
+          Chat on WhatsApp
+        </button>
+      </div>
+
+    </div>
+    <!-- Buttons with Enhanced Effects -->
+    <div class="button-group">
+      <button  class="btn-close" *ngIf="(data.expireDays > 0  && data.expireDays < 7  && data.shopType !=='free')  " (click)="onClose()">
+        Close <span class="close-icon">×</span>
+      </button>
+      <button class="btn-pay" (click)="onPayNow()">
+        <div class="btn-content">
+          <span class="card-icon">💳</span>
+          <span>Pay Now</span>
+        </div>
+        <div class="btn-glow"></div>
+        <div class="btn-particles">
+          <span class="btn-particle"></span>
+          <span class="btn-particle"></span>
+          <span class="btn-particle"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+
+  <form [style.display]="formViewMode === '' ? 'block' : 'block'" [formGroup]="dataForm" (ngSubmit)="onSubmit()"
+        class="form-container">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Currency</mat-label>
+      <mat-select formControlName="code" >
+        @for (item of currenciesData; track $index) {
+          <mat-option [value]="item.code" [disabled]="isDisabledOpt(item.code)"  (click)="onCurrencySelect(item)">
+            {{ item.viewValue }} - {{ item.code }} ({{item.value}})
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    <form  [formGroup]="dataFormCountry" >
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Country</mat-label>
+      <mat-select formControlName="code" >
+        @for (item of countriesData; track $index) {
+          <mat-option [value]="item.code" [disabled]="isDisabledCountry(item.code)"  (click)="onCountrySelect(item)">
+            {{ item.viewValue }} ({{item.code}})
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+    </form>
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </form>
+
+
+</div>

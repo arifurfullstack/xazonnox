@@ -1,0 +1,227 @@
+
+
+@if (isHydrated && !carts?.length) {
+  <div class="empty-cart">
+    <app-empty-data
+      [needBorder]="false"
+      [iconWidth]="'280px'"
+      [title]="'Your Checkout is Empty!'"
+      [titleSize]="'20px'"
+      [desc]="'You don’t have any items to checkout. Please add some products first.'"
+      [filePath]="'/lottie/no-data-1.json'"
+      [btnTitle]="'Continue Shopping'"
+      [btnUrl]="'/products'">
+    </app-empty-data>
+  </div>
+} @else {
+
+  <div class="main-area">
+    <div class="container">
+      <div class="checkout-area">
+        <div>
+          <app-offers></app-offers>
+          <app-address-area-3 (formData)="onChangeAddress($event)"
+                              [user]="user"
+                              [needRefreshForm]="needRefreshForm"></app-address-area-3>
+          <div class="payment-area">
+            <app-delivery-charge-3 (onChangeDeliveryCharge)="onChangeDeliveryCharge($event)"
+                                 [division]="division"></app-delivery-charge-3>
+            <app-payment-method (onChangePaymentMethod)="onChangePaymentMethod($event)" (allPaymentMethod)="allPaymentMethod($event)"
+                                [userOfferDiscount]="userOfferDiscount"></app-payment-method>
+          </div>
+        </div>
+        <div>
+          <div class="order-area">
+            <app-title [title]="'Order Items' + ' (' + carts.length + ' Items)'"></app-title>
+            <div class="order-items pc-card">
+              @for (item of carts; track item; let i = $index) {
+                <app-order-item-card
+                  [data]="item"
+                  (onIncrementCartQty)="onIncrementQty(item?._id, i)"
+                  (onDecrementCartQty)="onDecrementQty(item?._id, i, item.selectedQty)">
+                </app-order-item-card>
+              }
+            </div>
+
+            <div class="order-items mobile-card">
+              @for (item of carts; track item; let i = $index) {
+                <app-order-item-card-mobile
+                  [data]="item"
+                  (onIncrementCartQty)="onIncrementQty(item?._id, i)"
+                  (onDecrementCartQty)="onDecrementQty(item?._id, i, item.selectedQty)">
+                </app-order-item-card-mobile>
+              }
+            </div>
+
+            <div class="summary">
+              <div class="summary-item">
+                <div class="label">Subtotal:</div>
+                <div class="value">{{ cartRegularSubTotal | currencyCtr}}</div>
+              </div>
+              <div class="summary-item">
+                <div class="label">Discount:</div>
+                <div class="value">- {{ cartDiscountAmount | currencyCtr}}</div>
+              </div>
+              @if (userOfferDiscount) {
+                <div class="summary-item">
+                  <div class="label">{{ userOfferDiscount?.name }}:</div>
+                  <div class="value">-{{ userOfferDiscount?.amount | currencyCtr}}</div>
+                </div>
+              }
+              <div class="summary-item border-bottom ">
+                <div class="label">Delivery Charge:</div>
+                <div class="value">{{ (deliveryChargeAmount ?? 0 ) | currencyCtr}}</div>
+              </div>
+
+
+
+
+
+              <div class="summary-item grand-total border-bottom">
+                <div class="label grand-total">Grand Total:</div>
+                <div class="value">{{ grandTotal | currencyCtr}}</div>
+              </div>
+
+              <!--              coupon section-->
+
+              @if (!isCoupon){
+                <div class="coupon-div">
+                  <button class="coupon-btn" (click)="onSelectCouponOpen()">Do have any coupon code?</button>
+
+                </div>
+
+              } @else {
+
+                <div class="close-btn-div">
+                  <button class="close-btn" (click)="onSelectCouponClose()">x</button>
+
+                </div>
+
+                <div class="summary-item ">
+                  <div class="coupon-area">
+                    <div class="coupon-input">
+                      <input
+                        [readOnly]="coupon"
+                        [(ngModel)]="couponCode"
+                        type="text"
+                        placeholder="Have coupon any code? Enter Here.."
+                      />
+                    </div>
+
+                    @if (!coupon){
+                      <div
+                        class="apply-btn"
+                        (click)="checkCouponAvailability()"
+                      >
+                        <button>Apply</button>
+                      </div>
+                    } @else {
+                      <div
+
+                        class="apply-btn"
+                        (click)="onRemoveCoupon()"
+                      >
+                        <button class="danger">Remove</button>
+                      </div>
+                    }
+
+
+
+                  </div>
+                </div>
+
+              }
+
+            </div>
+          </div>
+          <!-- END! Cart Item and Calculation Area -->
+
+          @if (userService.isUser) {
+            <app-user-offers [cartSaleSubTotal]="cartSaleSubTotal"
+                             (onChangeUserDiscount)="onChangeUserDiscount($event)"></app-user-offers>
+          }
+          <div class="button-area">
+            <button class="back-button" routerLink="/cart">
+              <svg height="30" viewBox="0 0 48 48" width="30" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
+              </svg>
+              <span> Back to Cart</span>
+            </button>
+            @if (!isLoading) {
+              <button class="order-button" (click)="onConfirmOrder()">
+                <svg height="30px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1"
+                     viewBox="0 0 512 512" width="30px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                ><g><path d="M223.9,329.7c-2.4,2.4-5.8,4.4-8.8,4.4s-6.4-2.1-8.9-4.5l-56-56l17.8-17.8l47.2,47.2l124.8-125.7l17.5,18.1L223.9,329.7z"/></g></svg>
+                <span> Confirm Order</span>
+              </button>
+            }
+            @if (isLoading) {
+              <button type="button" class="order-button wait-btn">
+                <div><span class="loader btn-loader"></span></div>
+                <div>Please Wait...</div>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--  <div class="bottom-nav">-->
+<!--    <div class="mobile-checkout">-->
+<!--      <div class="total-area">-->
+<!--        <p class="total">Total: <span>{{ grandTotal }}</span></p>-->
+<!--        <p class="button-text">Vat included, where applicable</p>-->
+<!--      </div>-->
+<!--      @if (!isLoading) {-->
+<!--        <button class="place-order" (click)="onConfirmOrder()">Place Order</button>-->
+<!--      }-->
+<!--      @if (isLoading) {-->
+<!--        <button type="button" class="order-button wait-btn">-->
+<!--          <div><span class="loader btn-loader"></span></div>-->
+<!--          <div>Please Wait...</div>-->
+<!--        </button>-->
+<!--      }-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="navbar-outside">-->
+<!--    <div class="container">-->
+<!--      <div class="product-details-navbar">-->
+<!--        <div class="store" routerLink="/">-->
+<!--          <svg-->
+<!--            xmlns="http://www.w3.org/2000/svg"-->
+<!--            enable-background="new 0 0 24 24"-->
+<!--            height="24"-->
+<!--            viewBox="0 0 24 24"-->
+<!--            width="24"-->
+<!--            fill=""-->
+<!--          >-->
+<!--            <g>-->
+<!--              <rect fill="none" height="20" width="20" />-->
+<!--              <path-->
+<!--                d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z"-->
+<!--              />-->
+<!--            </g>-->
+<!--          </svg>-->
+<!--          <p>Store</p>-->
+<!--        </div>-->
+
+<!--        <div class="buy-now" (click)="onConfirmOrder()">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14.283" viewBox="0 0 14 14.283">-->
+<!--            <g id="cart" transform="translate(-2 -2)">-->
+<!--              <path id="Path_1717" data-name="Path 1717" d="M2.6,2a.6.6,0,1,0,0,1.19h.292a.6.6,0,0,1,.572.432l1.887,6.605a1.785,1.785,0,0,0,1.717,1.295H12.5A1.785,1.785,0,0,0,14.159,10.4l1.755-4.387A1.19,1.19,0,0,0,14.809,4.38H4.914L4.6,3.295A1.785,1.785,0,0,0,2.888,2Z" transform="translate(0 0)" fill="#fff"/>-->
+<!--              <path id="Path_1718" data-name="Path 1718" d="M6.785,14.571A1.785,1.785,0,1,0,5,12.785,1.785,1.785,0,0,0,6.785,14.571Z" transform="translate(0.571 1.712)" fill="#fff"/>-->
+<!--              <path id="Path_1719" data-name="Path 1719" d="M10.785,14.571A1.785,1.785,0,1,0,9,12.785,1.785,1.785,0,0,0,10.785,14.571Z" transform="translate(1.332 1.712)" fill="#fff"/>-->
+<!--            </g>-->
+<!--          </svg>-->
+<!--          <p>Buy Now</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+}
+

@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="full-sec">
+    <h3>Order Setting</h3>
+  </div>
+
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+    <div class="input-fields">
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Order Note</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableOrderNote" color="primary">
+        Enable Order Note?
+      </mat-checkbox>
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Order Otp</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableOtp" color="primary">
+        Enable Order Otp?
+      </mat-checkbox>
+
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Order Notification</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableSMSNotification" color="primary">
+        Enable SMS Notification?
+      </mat-checkbox>
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableEmailNotification" color="primary">
+        Enable Email Notification?
+      </mat-checkbox>
+
+      <!-- Incomplete Order -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Incomplete Order</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableIncompleteOrder" color="primary">
+        Enable Incomplete Order?
+      </mat-checkbox>
+
+      <!-- Order Invoice Setting -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Invoice Setting</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableInvoiceSetting" color="primary">
+        Enable Invoice Setting?
+      </mat-checkbox>
+
+      <!-- Order Invoice Setting -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable phone validation</mat-label>
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableOutsideBd" color="primary">
+        Enable Checkout page phone number custom range validation?
+      </mat-checkbox>
+
+      <mat-form-field *ngIf="dataForm?.value.isEnableOutsideBd" appearance="outline" class="no-underline">
+        <input formControlName="minLength" matInput placeholder="Ex: 6"/>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="dataForm?.value.isEnableOutsideBd" appearance="outline" class="no-underline">
+        <input formControlName="maxLength" matInput placeholder="Ex: 11"/>
+      </mat-form-field>
+
+
+      <!-- Incomplete Order -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Delivery Option Type</mat-label>
+      <div formGroupName="deliveryOptionType">
+        <mat-radio-group formControlName="selection" style="display: flex; gap: 20px; margin-bottom: 20px;">
+          <mat-radio-button value="division">Enable Division?</mat-radio-button>
+          <mat-radio-button value="insideCity">Enable Inside City/Outside City?</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+
+      <div *ngIf="isAllowedShop()">
+        <!-- Incomplete Order -->
+        <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable home page recent order</mat-label>
+
+        <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableHomeRecentOrder" color="primary">
+          Enable home page recent order?
+        </mat-checkbox>
+      </div>
+
+
+      <!-- Incomplete Order -->
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Swap Payment And Order Item</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isSwapPaymentAndOrderItem" color="primary">
+        Is swap Payment and order item?
+      </mat-checkbox>
+
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Block Single User IP</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableSingleIpBlock" color="primary">
+        Is Enable Block Single User IP?
+      </mat-checkbox>
+
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Enable Previous Order Count ( Admin Orders List Page )</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnablePreviousOrderCount" color="primary">
+        Is Enable Previous Order Count?
+      </mat-checkbox>
+
+
+      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">User Ip Wise Order Limit And Block Time</mat-label>
+
+      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableIpWiseOrderLimitAndBlockTime" color="primary">
+        Is Enable IP-wise Order Limit & Block?
+      </mat-checkbox>
+
+      <!-- Conditional Inputs -->
+      <div *ngIf="dataForm.get('isEnableIpWiseOrderLimitAndBlockTime')?.value" class="ip-block-fields">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Max Order Per IP</mat-label>
+          <input matInput type="number" formControlName="ipWiseOrderLimit" placeholder="Ex: 3" min="1" />
+          <mat-icon matSuffix>shopping_cart</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Block Time (minutes)</mat-label>
+          <input matInput type="number" formControlName="ipWiseOrderBlockTime" placeholder="Ex: 60" min="1" />
+          <mat-icon matSuffix>schedule</mat-icon>
+        </mat-form-field>
+      </div>
+
+
+      <!-- Division Option -->
+      <!--      <mat-label style="font-weight: 500; display: block; margin-bottom: 8px;">Order Limit</mat-label>-->
+
+      <!--      <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableMaxOrderLimit" color="primary">-->
+      <!--        Enable Max Order Limit?-->
+      <!--      </mat-checkbox>-->
+
+      <!--      <mat-form-field appearance="outline" class="no-underline">-->
+      <!--        <mat-label>{{ dataForm?.value?.chatType === 'messenger' ? 'url' : 'Phone Number' }}</mat-label>-->
+      <!--        <input formControlName="maxOrderLimit" matInput [placeholder]="dataForm?.value?.chatType === 'messenger' ? '' : 'Ex-01700000000'"/>-->
+      <!--      </mat-form-field>-->
+
+
+    </div>
+
+    <button mat-button class="add-product-btn" color="primary" type="submit">Save</button>
+  </form>
+
+</div>

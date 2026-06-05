@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="content">
+      <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+        <div class="form-img-avatar">
+          <img [matTooltip]="id ? 'Change User Image' : 'Upload User Image'" (click)="profileImagePicker.click()" [src]="imgPlaceHolder" alt="">
+        </div>
+
+        <div class="upload-btn">
+          <input [hidden]="true" #profileImagePicker type="file" (change)="fileChangeEvent($event)" accept=".jpg, .jpeg, .png, .webp" />
+        </div>
+
+
+
+        <div class="d-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput placeholder="Enter name" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input noWhiteSpace type="text" formControlName="username" matInput placeholder="Enter username">
+            <mat-error>Username minimum value is 5 character</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="d-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{id ? 'New Password': 'Password'}}</mat-label>
+            <input [required]="!id" [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput
+              [placeholder]="id ? 'Enter new password': 'Enter password'" autocomplete="new-password">
+            <button type="button" mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+              <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Active Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let data of allStatus" [value]="data.value">
+                {{ data.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>This field is required.</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-array-container">
+          <div formArrayName="shops" class="form-array-input">
+            <div class="single-field" *ngFor="
+                let data of itemsDataArray?.controls;
+                let i = index
+              " [formGroupName]="i">
+<!--              <mat-form-field appearance="outline">-->
+<!--                <mat-label>Website</mat-label>-->
+<!--                <mat-select formControlName="_id">-->
+<!--                  <mat-option *ngFor="let data of shops" [value]="data._id">-->
+<!--                    {{ data.websiteName }}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error>This field is required.</mat-error>-->
+<!--              </mat-form-field>-->
+
+
+              <mat-form-field appearance="outline">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option *ngFor="let data of roles" [value]="data.value">
+                    {{ data.viewValue }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline">
+                <mat-label>Pages</mat-label>
+                <mat-select formControlName="pages" multiple>
+                  <mat-option *ngFor="let data of pages" [value]="data.value">
+                    {{ data.viewValue }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+
+<!--              <mat-form-field appearance="outline">-->
+<!--                <mat-label>Permissions</mat-label>-->
+<!--                <mat-select formControlName="permissions" multiple>-->
+<!--                  <mat-option *ngFor="let data of permissions" [value]="data.value">-->
+<!--                    {{ data.viewValue }}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--                <mat-error>This field is required.</mat-error>-->
+<!--              </mat-form-field>-->
+
+              @if (itemsDataArray?.controls.length > 1) {
+                <button class="btn-form-field-remove" style="margin-top: 10px" type="button" mat-mini-fab color="warn"
+                        (click)="removeFormArrayField('shops', i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          </div>
+
+          @if(shops.length > 1) {
+            <div class="button-container">
+              <button class="add-item-btn" type="button" (click)="onAddNewItems('shops')">
+                <span class="icon">+</span> Add New Shop
+              </button>
+            </div>
+          }
+
+        </div>
+
+        <div class="button-group">
+          @if (!isLoading) {
+            <ng-container>
+              <button class="btn save-btn" type="submit">
+                <mat-icon style="margin-right: 10px">save</mat-icon>
+                Save Now
+              </button>
+            </ng-container>
+          } @else {
+            <button class="btn save-btn btn-loader" type="button">
+              <div><span class="loader"></span></div>
+              <div><span class="txt">Saving</span></div>
+            </button>
+          }
+        </div>
+
+      </form> <!-- END! Form -->
+
+    </div> <!-- END! Content -->
+  </div>

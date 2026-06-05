@@ -1,0 +1,100 @@
+@import "variables";
+.button-area{
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.active{
+  background-color: $color-primary!important;
+  color: #fff!important;
+  text-wrap: nowrap;
+}
+
+.add-product-btn {
+  background-color: $color-primary!important; // Background color for Add Product button
+  color: #fff!important;
+  text-wrap: nowrap;
+}
+.view-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-buttons button {
+  //display: flex;
+  //gap: 1rem;
+  //align-items: center;
+  //padding: 10px 20px;
+  //font-size: 16px;
+  background-color: #f0f0f0;
+  //border: none;
+  //border-radius: 5px;
+  //cursor: pointer;
+}
+
+.view-buttons mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.view-buttons button:hover {
+  background-color: #e0e0e0;
+}
+
+.template {
+  width: 100%;
+  max-width: 1200px;
+  //margin: 20px auto;
+  //display: flex;
+  //flex-direction: row;
+  margin: 0 auto;
+}
+.mobile-template{
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.guide-area {
+  border: 1px solid #cccccc;
+}
+
+.left {
+  background: #dedede;
+  padding: 20px;
+  flex: 1;
+}
+
+.right {
+  background: #ffffff;
+  padding: 20px;
+  flex: 1;
+}
+
+.img-thumb {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+.save-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}

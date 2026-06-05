@@ -1,0 +1,326 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div class="d-row">
+        <mat-form-field appearance="outline" class="phone-input-field">
+          <mat-label class="phone-label">Phone No</mat-label>
+          <div matPrefix class="phone-prefix">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" class="flag-icon">
+              <rect width="72" height="48" fill="#006a4e"></rect>
+              <circle cx="36" cy="24" r="12" fill="#f42a41"></circle>
+            </svg>
+            <span>+88</span>
+          </div>
+          <input
+            matInput
+            type="tel"
+            formControlName="phoneNo"
+            placeholder="Enter your phone number"
+            maxlength="11"
+            (input)="onPhoneNumberInput($event)"
+          />
+          <mat-spinner *ngIf="isLoadingPhoneNo" matSuffix class="loading-spinner" diameter="20"></mat-spinner>
+          <mat-error *ngIf="dataForm.get('phoneNo').hasError('required')">Phone number is required</mat-error>
+        </mat-form-field>
+
+
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput placeholder="Enter name" required>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput placeholder="Enter email">
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="d-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Division</mat-label>
+          <mat-select
+            formControlName="division"
+            (selectionChange)="onChangeRegion($event)"
+          >
+            <mat-option [value]="d?._id" *ngFor="let d of divisions">{{
+                d?.name
+              }}</mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Area</mat-label>-->
+
+<!--          <mat-select-->
+<!--            formControlName="area"-->
+<!--            (selectionChange)="onChangeArea($event)"-->
+<!--          >-->
+<!--            <mat-option [value]="a?._id" *ngFor="let a of area">{{-->
+<!--                a?.name-->
+<!--              }}</mat-option>-->
+<!--          </mat-select>-->
+<!--          <mat-error>This field is required.</mat-error>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Zone</mat-label>-->
+<!--          <mat-select formControlName="zone">-->
+<!--            <mat-option [value]="z?._id" *ngFor="let z of zone">{{-->
+<!--                z?.name-->
+<!--              }}</mat-option>-->
+<!--          </mat-select>-->
+<!--          <mat-error>This field is required.</mat-error>-->
+<!--        </mat-form-field>-->
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Shipping Address</mat-label>
+        <textarea required formControlName="shippingAddress" matInput placeholder="Enter shipping address">
+          </textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <div class="d-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Order Status</mat-label>
+          <mat-select formControlName="orderStatus">
+            <mat-option *ngFor="let data of orderStatus" [value]="data.value">
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Payment Status</mat-label>
+          <mat-select formControlName="paymentStatus">
+            <mat-option *ngFor="let data of paymentStatus" [value]="data.value">
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="d-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Payment Type</mat-label>
+          <mat-select formControlName="paymentType">
+            <mat-option *ngFor="let data of paymentTypes" [value]="data.value" (click)="orderProviderName(data.viewValue)">
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Note</mat-label>
+        <input formControlName="deliveryNote" matInput placeholder="Enter Note">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if (!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update Order' : 'Add Order' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update Order' : 'Add Order' }}</span></div>
+          </button>
+        }
+      </div>
+
+    </form> <!-- END! Form -->
+
+    <div class="product-search-area">
+      <div class="title">
+        <h3>Order Item:</h3>
+      </div>
+      <app-product-search (onSelect)="onProductSelect($event)"></app-product-search>
+    </div>
+
+    <div class="table-wrapper">
+
+      <div class="table-action">
+        @if (selectedIds && selectedIds.length) {
+          <div class="right">
+            <button mat-stroked-button color="warn"
+                    (click)="deleteProducts()"
+                    matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div> <!-- END! right -->
+        }
+
+      </div> <!-- END! table-action -->
+
+      <table [style.display]="allTableData.length ? '' : 'none'">
+        <tr class="td-border first-heading-row">
+          <th class="t-checkbox">
+            <mat-checkbox [indeterminate]="isIndeterminate" #matCheckbox
+                          (change)="onAllSelectChange($event)"></mat-checkbox>
+          </th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Quantity</th>
+          <th>Sub Total</th>
+        </tr>
+        <tr class="td-gap"></tr>
+        @for (data of allTableData; track data._id; let i = $index) {
+          <ng-container>
+            <tr class="td-border" (click)="onTableRowClick(data._id)" [class.selected]="data.select">
+              <td class="t-checkbox">
+                <mat-checkbox
+                  (click)="$event.stopPropagation()"
+                  class="t-mat-checkbox"
+                  [(ngModel)]="data.select"
+                  (ngModelChange)="onCheckChange($event, data._id)">
+                </mat-checkbox>
+              </td>
+              <td class="img-wrapper">
+                <img class="table-image"
+                     matTooltip="Click to preview image"
+                     (click)="openGallery($event, data.images)"
+                     [src]="data.images?.length ? data.images[0] : '/assets/images/png/placeholder.png'" [alt]="''">
+              </td>
+              <td>
+                <div class="name-and-variation">
+                  <p [matTooltip]="data?.name">{{ data?.name | limitText: 45 }}{{data?.phoneModel ? ' - ' + (data?.phoneModel) : '' }}</p>
+                  <p *ngIf="data?.isVariation" class="variation">
+                    @for (item of data?.variationList; track item?._id; let j = $index) {
+                      <span [class.active]="selectedVariation === item.name" (click)="variationData(item , i)">{{ (item?.name) }} - {{ item?.salePrice }}{{ '' | shopCurrency }} </span>
+
+                    }
+                  </p>
+
+<!--                  <div class="variation">-->
+<!--                    <p class="variation-text">{{ data?.variation }}:</p>-->
+<!--                    <div class="variation-list-area">-->
+<!--                      @for (data of data?.variationOptions; track data) {-->
+<!--                        <p class="variation-list" (click)="variationData(item , i)">-->
+<!--                <span class="single-variation" [class.active]="selectedVariation === data">-->
+<!--                  {{ data }}-->
+<!--                </span>-->
+<!--                        </p>-->
+<!--                      }-->
+<!--                    </div>-->
+<!--                  </div>-->
+                </div>
+
+              </td>
+              <td>
+
+
+                <p>{{ data.regularPrice ?? 0 }}</p>
+
+              </td>
+              <td>
+
+
+                <p>{{ data | productPrice: 'discountAmount' : data?.variationData?._id : data.quantity }}</p>
+
+              </td>
+              <!--              <td class="quantity-td">-->
+              <td >
+                <div class="inc-dec-area">
+                 <div class="quantity-selector">
+                   <button (click)="decrement($event, i)" class="btn-decrement">-</button>
+                   <input (click)="$event.stopPropagation()" type="number" [value]="data.quantity"
+                          [(ngModel)]="data.quantity" class="quantity-input"/>
+                   <button (click)="increment($event, i)" class="btn-increment">+</button>
+                 </div>
+                </div>
+              </td>
+              <td>
+                <!--                  @if (data?.isVariation) {-->
+                <!--                    <p>{{ variationListData?.salePrice * data.quantity }}</p>-->
+                <!--                  } @else {-->
+                <p>{{ data | productPrice: 'salePrice' : data?.variationData?._id: data.quantity }}</p>
+                <!--                  }-->
+                <!--                  <p>{{ data.salePrice * data.quantity}}</p>-->
+                <!--                  <p>{{ data.salePrice * data.quantity}}</p>-->
+              </td>
+            </tr>
+            <tr class="td-gap"></tr>
+          </ng-container>
+        }
+      </table>
+    </div> <!-- END! table-wrapper -->
+
+
+    <div class="payment-summary">
+      <div class="summary-row">
+        <div class="summary-label">Sub Total ({{'' | shopCurrency }})</div>
+        <div class="summary-value">{{ cartRegularSubTotal | number : "" : "bn" }}</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-label">Delivery Charge ({{'' | shopCurrency }})</div>
+        <div class="summary-input">
+          <input type="number" [(ngModel)]="deliveryChargeAmount" (input)="grandTotal" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+        </div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-label">Coupon Discount ({{'' | shopCurrency }})</div>
+        <div class="summary-value">{{ couponDiscount }}</div>
+      </div>
+<!--      <div class="summary-row">-->
+<!--        <div class="summary-label">Advance Payment (-৳)</div>-->
+<!--        <div class="summary-input">-->
+<!--          <input type="number" [(ngModel)]="advancePayment" placeholder="Enter advance amount" (input)="grandTotal"/>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="summary-row">
+        <div class="summary-label">Discount (-{{'' | shopCurrency }})</div>
+        <!--          <div class="summary-input">-->
+        <!--            <input type="number" readonly [(ngModel)]="discount" (input)="calculateGrandTotal()" />-->
+        <!--          </div>-->
+        <div class="summary-value">{{ cartDiscountAmount | number : "" : "bn" }}</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-label">Additional Discount ({{'' | shopCurrency }})</div>
+        <div class="summary-input">
+          <input type="number" [(ngModel)]="additionalDiscount" (ngModelChange)="onAdditionalDiscountChange()" digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" />
+        </div>
+      </div>
+      <div class="summary-row grand-total">
+        <div class="summary-label">Grand Total ({{'' | shopCurrency }})</div>
+        <div class="summary-value">{{ grandTotal | number : "" : "bn" }}</div>
+      </div>
+    </div>
+
+
+  </div> <!-- END! Content -->
+</div>
+
+
+@if (isGalleryOpen) {
+  <app-gallery-image-viewer [images]="galleryImages"
+                            [startIndex]="selectedImageIndex"
+                            (closeEvent)="closeGallery()">
+  </app-gallery-image-viewer>
+}

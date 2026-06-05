@@ -1,0 +1,521 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Page</title>
+  <style>
+
+    .section1 {
+      background-color: #013220;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .section1 .content-box {
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section1 .highlight {
+      color: #ffcc00;
+    }
+
+    .section1 .button {
+      background-color: #ffcc00;
+      color: #013220;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .section1 .button:hover {
+      background-color: #e6b800;
+    }
+    .section1 .video-container {
+      position: relative;
+      border: 6px solid #28a745;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .section1 .video-container iframe {
+      width: 100%;
+      height: 400px;
+    }
+    .section1 .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+    .section1 .play-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .section1 .play-button svg {
+      width: 36px;
+      height: 36px;
+      fill: #013220;
+    }
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
+    @media (max-width: 768px) {
+      .section1 .video-container iframe {
+        height: 200px;
+      }
+    }
+    .section1 .border-box {
+      border: 2px solid #01632a;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .section2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 60px 20px;
+    }
+    .section2 .container1 {
+      background-color: #218838;
+      padding: 60px 20px;
+      border-radius: 10px;
+      max-width:1200px;
+      width:100%;
+      margin: 0;
+      text-align: center;
+    }
+
+    .section2 .header {
+      background-color:rgb(243, 19, 41);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .section2 .header span {
+      font-weight: bold;
+    }
+    .section2 .content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+
+    }
+    .section2 .content p {
+      color: #28a745;
+      margin: 0;
+    }
+    .section2 .content p.line-through {
+      text-decoration: line-through;
+      margin-bottom: 10px;
+    }
+    .section2 .button-container {
+      display: flex;
+      justify-content: center;
+    }
+    .section2 .button-container button {
+      background-color: #fd7e14;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .section2 .button-container button:hover {
+      background-color: #e67e22;
+    }
+
+
+    .section3{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #28a745;
+      margin: 0;
+    }
+
+    .section3 {
+      background-color: #f0f9e8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+
+    }
+    .section3 .container3 {
+      padding: 60px 20px;
+      border-radius: 10px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .section3 .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .section3 .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .section3 .box {
+      background-color: white;
+      border: 4px solid #2f9e44;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .section3 .box h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .section3 .box ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .section3 .box ul li {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .section3 .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .section3 .button-container button {
+      background-color: #ff922b;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .section3 .button-container button:hover {
+      background-color: #e07b24;
+    }
+
+    .section4{
+      background-color: #013220;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .section4 .container4 {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .section4 .header {
+      background-color: #2E8B57;
+      border: 4px solid #00FF00;
+      border-radius: 8px;
+      display: inline-block;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+    .section4  .header h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .section4 .content p {
+      margin: 10px 0;
+    }
+    .section4 .button {
+      background-color: #FFA500;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .section4 .button:hover {
+      background-color: #FF8C00;
+    }
+
+    .section5{
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section5 .container5 {
+      padding: 60px 20px;
+      border-radius: 10px;
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+    }
+    .section5 .title {
+      font-size: 1.5rem;
+      border-radius: 5px;
+      font-weight: bold;
+      color: #006400;
+      border: 2px solid #006400;
+      display: inline-block;
+      padding: 10px 20px;
+      margin-bottom: 20px!important;
+    }
+    .section5 .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: max-content;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    @media (min-width: 768px) {
+      .section5 .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .section5 .grid-item {
+      border: 2px solid #006400;
+      padding: 20px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+    }
+
+
+    .section5 .button {
+      background-color: #FFA500;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .section5 .button:hover {
+      background-color: #FF8C00;
+    }
+
+    .section6 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color:rgb(255, 255, 255);
+    }
+
+    .section6 .container6 {
+      border: 4px dotted #16a34a;
+      padding: 60px 20px;
+      border-radius: 10px;
+      max-width: 1000px;
+      text-align: center;
+    }
+    .section6 .title {
+      color: #15803d;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .section6 .subtitle {
+      color: #15803d;
+    }
+    .section6 .offer {
+      background-color: #dc2626;
+      color: white;
+      padding: 16px;
+      margin-top: 16px;
+      border-radius: 8px;
+    }
+    .section6 .offer p {
+      margin: 0;
+    }
+    .section6 .offer .highlight {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+  </style>
+</head>
+<body>
+<div class="section1">
+  <div class="container">
+    <div class="border-box">
+      <p class="text-2xl" contenteditable="true">
+        প্রতিদিন ১ গ্রাম সজনে পাতার জুস আপনাকে ও আপনার পরিবারকে <span class="highlight">৩০০টি রোগ</span> থেকে রক্ষা করবে যা গবেষণায় পরীক্ষিত !!
+      </p>
+    </div>
+    <div class="content-box">
+      <p class="text-lg" contenteditable="true">
+        ৫৫ গ্রাম প্রিমিয়াম সজিনা পাউডার + ১০০ গ্রাম কালোজিরা মধু ফ্রি।
+      </p>
+      <a href="#" class="button">অর্ডার করতে ক্লিক করুন</a>
+    </div>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+      <div class="play-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section2">
+  <div class="container1">
+    <div class="header" contenteditable="true">
+      আমাদের থেকে বিস্তারিত জানতে এই নাম্বারে কল করুন <span>1234567890</span>
+    </div>
+    <div class="content">
+      <p class="line-through" contenteditable="true">৪০০ গ্রাম সজিনা পাতার পাউডারের রেগুলার প্রাইস- ১৫০০/=</p>
+      <p contenteditable="true">৪০০ গ্রাম সজিনা পাতার পাউডারের অফার প্রাইস- ১০৫০/=</p>
+    </div>
+    <div class="button-container">
+      <button>অর্ডার করতে ক্লিক করুন</button>
+    </div>
+  </div>
+</div>
+
+<div class="section3">
+  <div class="container3">
+    <div class="grid">
+      <div class="box">
+        <h2 contenteditable="true">সজিনা পাতার উপকারিতা</h2>
+        <ul>
+          <li contenteditable="true" >উচ্চ রক্তচাপ নিয়ন্ত্রণে রাখে।</li>
+          <li contenteditable="true" >এটি এন্টি-ব্যাকটেরিয়াল বৈশিষ্ট্য বিদ্যমান। এটি ফ্লুতে ও কিডনী সুস্থ রাখতে এবং রক্তের সেলেনিয়াম বৃদ্ধি করতে সাহায্য করে।</li>
+          <li contenteditable="true" >রক্তে কোলেস্টেরল কমায়।</li>
+          <li contenteditable="true" >এন্টিডিপ্রেসেন্ট বা গ্যাস্ট্রিক নিয়ন্ত্রণে রাখে।</li>
+          <li contenteditable="true" >শরীরে কোলেস্টেরল এর মাত্রা নিয়ন্ত্রণেও অনন্য অবদান রাখে।</li>
+          <li contenteditable="true" >রক্ত শর্করা দূর করে।</li>
+          <li contenteditable="true" >মানুষের শরীরের যে ৯ টি এমাইনো এসিড খাদ্যের মাধ্যমে সরবরাহ করতে হয়, তার সবগুলোই এই সজিনা পাতা গুড়ার মধ্যে বিদ্যমান।</li>
+          <li contenteditable="true" >শরীরে সুরক্ষার মাত্রা নিয়ন্ত্রণে রাখার জন্য অ্যান্টিঅক্সিডেন্ট মত কঠিন রোগের বিরুদ্ধে কাজ করে থাকে।</li>
+          <li contenteditable="true" >চোখের জন্য উপকারী।</li>
+          <li contenteditable="true" >ঠান্ডা জ্বরের সমস্যা দূর করে।</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2 contenteditable="true" >সেবনে সঠিক নিয়ম</h2>
+        <ul>
+          <li contenteditable="true" >খালি পেটে এক গ্লাস পানিতে ২ চা চামচ সজিনা পাতা মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >মধুর সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >দুধের সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >ডালের সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >বিভিন্ন ধরনের ভাজির সাথে মিশ্রিত খাওয়া যায়।</li>
+          <li contenteditable="true" >পেয়ারার সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >আমড়ার সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >কাঁঠা আমের সাথে মিশ্রিত খেতে পারেন।</li>
+          <li contenteditable="true" >তরকারির সাথে মিশ্র করে খেতে পারেন।</li>
+          <li contenteditable="true" >চোখের জন্য উপকারী।</li>
+          <li contenteditable="true" >ঠান্ডা জ্বরের সমস্যা দূর করে।</li>
+        </ul>
+      </div>
+    </div>
+    <div class="button-container">
+      <button>অর্ডার করতে ক্লিক করুন</button>
+    </div>
+  </div>
+</div>
+
+<div class="section4">
+  <div class="container4">
+    <div class="header">
+      <h1 contenteditable="true" >আমাদের উপর কেন আস্থা রাখবেন ??</h1>
+    </div>
+    <div class="content">
+      <p contenteditable="true" >মূলানুসৃত শতভাগ হাইড্রোজেনিক মেইনটেইন করে, সম্পূর্ণ নিজস্ব তত্ত্বাবধানে প্রস্তুতকৃত প্রিমিয়াম সজিনা পাতা গুড়া</p>
+      <p contenteditable="true" >প্রোডাক্ট হাতে পেয়ে, দেখে, কোয়ালিটি চেক করে পেমেন্ট করার সুবিধা ।</p>
+      <p contenteditable="true" >সারা বাংলাদেশে কুরিয়ারের মাধ্যমে হোম ডেলিভারি পাবেন ।</p>
+      <p contenteditable="true" >যে কোন সময় আমাদের সাথে যোগাযোগ করতে পারবেন ।</p>
+      <p contenteditable="true" >অথবা এক টাকাও দিতে হবে না। ডেলিভারি ম্যান এর কাছ থেকে প্রোডাক্ট বুঝে পেয়ে তারপর টাকা দিবেন।</p>
+    </div>
+    <button class="button">অর্ডার করতে ক্লিক করুন</button>
+  </div>
+</div>
+
+<div class="section5">
+  <div class="container5">
+    <h1 class="title" contenteditable="true" >এতকিছু থাকতে সজিনা পাতার গুড়া কেনা খাবেন ?</h1>
+    <div class="grid">
+      <div class="grid-item">
+        <p contenteditable="true" >শরীরের সুগারের মাত্রা নিয়ন্ত্রণের মাধ্যমে ডায়াবেটিসের মত কঠিন রোগের বিরুদ্ধে কাজ করে থাকে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >নিয়মিত সজিনার পাতা খেলে মুখে রুচি বাড়ে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >লিভার ও কিডনি সুস্থ রাখতে সহায়তা করে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >উচ্চ রক্ত চাপ নিয়ন্ত্রণে থাকে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >শরীরে ময়েশ্চারের ছাপ সহজে পড়ে না।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >রোগ প্রতিরোধ ক্ষমতা বৃদ্ধি করে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >ওজন কমানোর জন্য দারুণ সহায়ক হবে।</p>
+      </div>
+      <div class="grid-item">
+        <p contenteditable="true" >জ্বর,কাশি ও ঠান্ডা জনিত সমস্যা দূর করে।</p>
+      </div>
+    </div>
+    <button class="button">অর্ডার করতে ক্লিক করুন</button>
+  </div>
+</div>
+
+<div class="section6">
+  <div class="container6">
+    <h1 class="title" contenteditable="true" >মরিসা পাউডার প্রাইস</h1>
+    <p class="subtitle" contenteditable="true" >সাশ্রয়ী দামে সেরা পণ্য</p>
+    <div class="offer">
+      <p contenteditable="true" >৫০০ গ্রাম মরিসা পাউডার এর পূর্ব মূল্যঃ ১২৫০ টাকা</p>
+      <p class="highlight" contenteditable="true" >১০৫০ টাকার প্যাকেজটি ৮৫০ টাকা অফারটি সীমিত সময়ের জন্য</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

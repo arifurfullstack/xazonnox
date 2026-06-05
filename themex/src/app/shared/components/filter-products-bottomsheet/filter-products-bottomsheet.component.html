@@ -1,0 +1,137 @@
+<div class="left-area" >
+  <div class="sidebar">
+    <div class="slide-top" (click)="onHideCategory()">
+      <span >X</span>
+    </div>
+    <!--    <app-products-filter-price (dataEmitter)="onPriceRangeChange($event)"></app-products-filter-price>-->
+    @defer (when !isLoading){
+      @switch (filterBottomsheetCategoryViews) {
+        @case ('Filter Bottomsheet Category View 2') {
+          <!-- Manual Nested Category Tree View (exact replica of ProductsCategoryViewComponent) -->
+          <div class="nested-category-sidebar">
+            <div class="sidebar-header">
+              <h3>Categories</h3>
+            </div>
+
+            <div class="category-tree">
+              @for (category of categories; track category._id) {
+                <div class="category-item" [class.selected]="selectedCategories.includes(category.slug)">
+                  <!-- Main Category -->
+                  <div class="category-row" (click)="toggleCategorySelection(category.slug)">
+                    <div class="category-content">
+                      @if (category.images && category.images.length > 0) {
+                        <img [src]="category.images[0]" [alt]="category.name" class="category-image">
+                      }
+                      <span class="category-name">{{ category.name }}</span>
+                    </div>
+                    @if (selectedCategories.includes(category.slug) && subCategories.length > 0) {
+                      <div class="expand-icon expanded">
+                        <svg width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                      </div>
+                    } @else if (selectedCategories.length === 0 || !selectedCategories.includes(category.slug)) {
+                      <div class="expand-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Subcategories -->
+                  @if (selectedCategories.includes(category.slug) && subCategories.length > 0) {
+                    <div class="subcategory-container">
+                      @for (subcategory of subCategories; track subcategory._id) {
+                        <div class="subcategory-item" [class.selected]="selectedSubCategories.includes(subcategory.slug)">
+                          <div class="subcategory-row" (click)="toggleSubCategorySelection(subcategory.slug)">
+                            <div class="subcategory-content">
+                              @if (subcategory.image) {
+                                <img [src]="subcategory.image" [alt]="subcategory.name" class="subcategory-image">
+                              }
+                              <span class="subcategory-name">{{ subcategory.name }}</span>
+                            </div>
+                            @if (selectedSubCategories.includes(subcategory.slug) && childCategories.length > 0) {
+                              <div class="expand-icon expanded">
+                                <svg width="10" height="10" viewBox="0 0 12 12">
+                                  <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                              </div>
+                            } @else if (selectedSubCategories.length === 0 || !selectedSubCategories.includes(subcategory.slug)) {
+                              <div class="expand-icon">
+                                <svg width="10" height="10" viewBox="0 0 12 12">
+                                  <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                              </div>
+                            }
+                          </div>
+
+                          <!-- Child Categories -->
+                          @if (selectedSubCategories.includes(subcategory.slug) && childCategories.length > 0) {
+                            <div class="child-category-container">
+                              @for (child of childCategories; track child._id) {
+                                <div class="child-category-item" [class.selected]="selectedChildCategories.includes(child.slug)">
+                                  <div class="child-category-row" (click)="toggleChildCategorySelection(child.slug)">
+                                    <div class="child-category-content">
+                                      @if (child.image) {
+                                        <img [src]="child.image" [alt]="child.name" class="child-category-image">
+                                      }
+                                      <span class="child-category-name">{{ child.name }}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              }
+                            </div>
+                          }
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+
+            <!-- Clear Filters Button -->
+            @if (selectedCategories.length > 0 || selectedSubCategories.length > 0 || selectedChildCategories.length > 0) {
+              <div class="clear-filters">
+                <button class="clear-btn" (click)="clearAllFilters()">
+                  Clear All Filters
+                </button>
+              </div>
+            }
+          </div>
+
+          @if (brands.length) {
+            <app-filter-brand [activeFilters]="selectedBrands" [data]="brands"
+                              (resetFilters)="resetBrandFilter()" (selectedFilters)="selectedFilter()"></app-filter-brand>
+          }
+        }
+        @default {
+          <!-- Original Category View -->
+          <app-products-category-filter [activeFilters]="selectedCategories" [data]="categories"
+                                        (resetFilters)="resetCategoryFilter()" (selectedFilters)="selectedFilter()"></app-products-category-filter>
+
+          @if (selectedCategories.length && subCategories.length) {
+            <app-filter-sub-category [activeFilters]="selectedSubCategories"
+                                     [data]="subCategories"
+                                     (resetFilters)="resetSubCategoryFilter()" (selectedFilters)="selectedFilter()"></app-filter-sub-category>
+          }
+          @if (selectedSubCategories.length && childCategories.length) {
+            <app-filter-child-category [activeFilters]="selectedChildCategories"
+                                       [data]="childCategories"
+                                       (resetFilters)="resetChildCategoryFilter()" (selectedFilters)="selectedFilter()">
+            </app-filter-child-category>
+          }
+
+          @if (brands.length) {
+            <app-filter-brand [activeFilters]="selectedBrands" [data]="brands"
+                              (resetFilters)="resetBrandFilter()" (selectedFilters)="selectedFilter()"></app-filter-brand>
+          }
+        }
+      }
+    }
+    @placeholder (minimum 50ms) {
+      <app-product-details-category-loader ></app-product-details-category-loader>
+    }
+  </div>
+</div>

@@ -1,0 +1,249 @@
+@import "variables";
+
+.sub-content {
+  //height: 75vh;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  padding: 0;
+  margin-bottom: 100px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  //overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #efefef;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: $color-primary;
+  }
+
+  &.space {
+    padding: 10px;
+  }
+
+  .table-action {
+
+    display: flex;
+    justify-content: flex-end;
+    margin: 8px 0;
+
+    &.dual {
+      justify-content: space-between;
+    }
+
+    .left {
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .right {
+      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+  }
+}
+
+.table-wrapper table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  font-family: $font-en-primary;
+  border-color: inherit;
+}
+
+
+.table-wrapper table tr {
+}
+
+.table-wrapper table th {
+  font-size: $table-heading-font-size;
+  font-weight: 600;
+  color: #1d1d1d;
+  text-wrap: nowrap;
+  min-width: 70px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  text-align: center;
+  text-transform: capitalize;
+  background: lighten($color-primary, 36%);
+}
+
+.table-wrapper table td {
+  padding: 0 5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: $table-data-font-size;
+}
+
+.td-action {
+  gap: 4px;
+}
+
+.table-wrapper .t-checkbox {
+  width: 60px;
+}
+
+.table-wrapper .img-wrapper {
+  width: 80px;
+}
+
+.table-wrapper .table-image {
+  width: 50px;
+  height: 50px;
+  object-fit: scale-down;
+  cursor: pointer;
+
+  &.circle {
+    // width: 60px !important;
+    // height: 60px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+}
+
+.td-gap {
+  height: 0.75rem;
+}
+
+.td-border {
+  border: 1px solid #eaeaea;
+
+  &:hover {
+    background: #efefef;
+    cursor: pointer;
+  }
+
+  &.selected {
+    background: #efefef;
+  }
+  th{
+    height: 40px;
+  } td{
+      height: 40px;
+    }
+
+}
+
+.t-head-action {
+  .filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button {
+    //position: absolute;
+    margin-left: 5px;
+    background: transparent;
+    border: none;
+
+    span {
+      font-size: 18px;
+      color: #6c6c6c;
+    }
+
+    &.active {
+      span {
+        color: $color-primary;
+      }
+    }
+  }
+
+}
+
+.capsule-green {
+  background: #DBF0DD;
+  color: #2DA52D;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.capsule-orange {
+  background: #fce1d3;
+  color: #de4d11;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+
+.capsule-red {
+  background: #F9DAE0;
+  color: #D83333;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+
+.pendingDesign {
+  background-color: #f5932a;
+  color: $color-white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.confirmDesign {
+  background-color: blue;
+  color: $color-white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.onHoldDesign {
+  background-color: rgba(174,122,122);
+  color: $color-white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.processingDesign {
+  background-color: rgba(253, 191, 115, 0.74);
+  color: rgb(255, 140, 0);
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.shippingDesign {
+  background-color: violet;
+  color: $color-white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+.courierDesign {
+  background-color: #bdffda;
+  color: #004c21;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}
+
+
+.cancelDesign {
+  background: #F9DAE0;
+  color: #D83333;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-transform: capitalize;
+}

@@ -1,0 +1,175 @@
+<div style="position: relative;padding:10px" >
+
+  <div class="header-dialog">
+    <h1>Website Information</h1>
+  </div>
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-around center">
+
+    <div class="gallery-picker">
+      <app-gallery-image-picker
+        [type]="'multiple'"
+        [maxImages]="1"
+        [isInvalid]="this.dataForm.get('logoPrimary').touched && this.dataForm.get('logoPrimary').invalid"
+        (onPicked)="onPickedImage($event,'logo')"
+        infoText="The website logo should be horizontal, (256x56px)"
+        [images]="pickedImages">
+      </app-gallery-image-picker>
+    </div>
+
+    <div class="gallery-picker" style="margin: 15px 0">
+      <app-gallery-image-picker
+        [type]="'multiple'"
+        [maxImages]="1"
+        [isInvalid]="this.dataForm.get('fabIcon').touched && this.dataForm.get('fabIcon').invalid"
+        (onPicked)="onPickedImage($event,'febIcon')"
+        infoText="A small image displayed in the browser tab, typically sized at 32x32 pixels."
+        [images]="pickedImage">
+      </app-gallery-image-picker>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Website Name</mat-label>
+      <input formControlName="websiteName" matInput placeholder="Enter website name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Short Description</mat-label>
+      <input formControlName="shortDescription" matInput placeholder="Enter Short Description">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Whatsapp Number</mat-label>
+      <input formControlName="whatsappNumber" matInput placeholder="Enter your Whatsapp Number">
+    </mat-form-field>
+    <div class="form-array-container">
+      <div class="add-form-array-action">
+        <button type="button" mat-button class="add-product-btn" color="primary" (click)="onAddNewShopObject('addresses')">
+          <mat-icon>add</mat-icon>
+          Add New Address
+        </button>
+
+      </div>
+      <div formArrayName="addresses" class="form-array-input">
+        <div class="single-field" *ngFor="let data of addressesDataArray?.controls; let i = index" [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Type Address {{i + 1}}</mat-label>
+            <input formControlName="value" matInput [placeholder]="'Enter Address ' + i + 1">
+          </mat-form-field>
+          <button type="button" mat-mini-fab color="warn" (click)="removeFormArrayField('addresses', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div> <!-- END ADDRESS FORM ARRAY -->
+
+    <div class="form-array-container">
+      <div class="add-form-array-action">
+        <button type="button" mat-button class="add-product-btn" color="primary" (click)="onAddNewShopObject('emails')">
+          <mat-icon>add</mat-icon>
+          Add New Email
+        </button>
+
+      </div>
+      <div formArrayName="emails" class="form-array-input">
+        <div class="single-field" *ngFor="let data of emailsDataArray?.controls; let i = index" [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Type Email {{i + 1}}</mat-label>
+            <input formControlName="value" matInput [placeholder]="'Enter email ' + i + 1" type="email">
+          </mat-form-field>
+          <button type="button" mat-mini-fab color="warn" (click)="removeFormArrayField('emails', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div> <!-- END EMAILS FORM ARRAY -->
+
+    <div class="form-array-container">
+      <div class="add-form-array-action">
+        <button type="button" mat-button class="add-product-btn" color="primary" (click)="onAddNewShopObject('phones')">
+          <mat-icon>add</mat-icon>
+          Add New Phone No
+        </button>
+
+      </div>
+      <div formArrayName="phones" class="form-array-input">
+        <div class="single-field" *ngFor="let data of phonesDataArray?.controls; let i = index" [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Type Phone No {{i + 1}}</mat-label>
+            <input formControlName="value" matInput [placeholder]="'Enter phone no ' + i + 1" type="tel">
+          </mat-form-field>
+          <button type="button" mat-mini-fab color="warn" (click)="removeFormArrayField('phones', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div> <!-- END PHONES FORM ARRAY -->
+
+
+    <div class="form-array-container">
+      <div class="add-form-array-action">
+        <button type="button" mat-button class="add-product-btn" color="primary" (click)="onAddNewShopObject('socialLinks')">
+          <mat-icon>add</mat-icon>
+          Add New Social Link
+        </button>
+
+      </div>
+      <div formArrayName="socialLinks" class="form-array-input">
+        <div class="single-field" *ngFor="let data of socialLinksArray?.controls; let i = index" [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Select Social Network {{i + 1}}</mat-label>
+            <mat-select formControlName="type" required>
+              <mat-option *ngFor="let m of socialTypes" [value]="m.value">
+                {{m.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error>This field is required.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Type Social Link {{i + 1}}</mat-label>
+            <input formControlName="value" matInput [placeholder]="'Enter social link  ' + i + 1" type="tel">
+          </mat-form-field>
+          <button type="button" mat-mini-fab color="warn" (click)="removeFormArrayField('socialLinks', i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Header Slider Text</mat-label>
+        <textarea formControlName="headerNews" matInput placeholder="Enter header text"></textarea>
+      </mat-form-field>
+
+      <div>
+        <mat-checkbox formControlName="showCopyright" class="example-margin">Hide Copyright Section in Footer</mat-checkbox>
+      </div>
+
+    <mat-checkbox formControlName="showBranding" class="example-margin">{{ radioLabel }}</mat-checkbox>
+
+      @if(!dataForm.get('showBranding').value){
+        <mat-form-field appearance="outline" >
+          <mat-label>Branding Text</mat-label>
+          <input formControlName="brandingText" matInput placeholder="Powered By Your Brand">
+        </mat-form-field>
+      }
+    </div>
+    <button mat-button class="add-product-btn" color="accent" type="submit">
+      <mat-icon>done</mat-icon>
+      Save Data
+    </button>
+  </form>
+</div>
+
+
+<!-- LOADING TEMPLATE -->
+<!-- <ngx-spinner style="width: 100vw; height: 100vh" bdColor="rgba(0,0,0,0.25)" size="medium" color="#fff"
+             type="ball-clip-rotate" [fullScreen]="true"><p style="color: white"> Loading... </p></ngx-spinner>
+ -->

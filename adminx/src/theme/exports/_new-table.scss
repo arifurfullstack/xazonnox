@@ -1,0 +1,40 @@
+@import "variables";
+
+.action-drop-button {
+  button {
+    transform: rotate(90deg);
+  }
+}
+
+.top-right-button {
+
+  width: 160px;
+
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 8px 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.top-right-button-1 {
+  border: 1px solid $color-primary;
+  color: $color-primary;
+}
+
+.top-right-button-2 {
+  border: 1px solid  green;
+  color: green;
+}
+
+.status-filter-parent {
+  position: relative;
+  .status-filter-icon {
+    position: absolute;
+    top: 28%;
+    right: 29%;
+  }
+}

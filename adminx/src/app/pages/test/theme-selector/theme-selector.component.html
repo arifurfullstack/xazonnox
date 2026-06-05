@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="grid">
+<!--    {{thiemeData | json}}-->
+<!--    @for (data of thiemeData;track data){-->
+      <div class="card" *ngFor="let data of themeSelected">
+        <img [src]="data?.image" alt="Natural Powder product image" class="border-green">
+        <h2>{{data?.name}}</h2>
+        <div class="button-area">
+          <button (click)="selectTheme(data)">Select</button>
+          <a class="demo" [href]="data?.link" target="_blank">View Demo</a>
+        </div>
+      </div>
+<!--    }-->
+  </div>
+</div>

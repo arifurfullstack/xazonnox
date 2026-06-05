@@ -1,0 +1,28 @@
+<div class="container">
+
+  <div class="content">
+    <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Enter name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+      <div class="description-area">
+        <h2>Description</h2>
+        <app-html-editor formControlName="description"></app-html-editor>
+      </div>
+
+      <button mat-button class="add-product-btn" color="primary" type="submit">
+        <mat-icon>check</mat-icon>
+        {{'Save Page' | uppercase}}
+      </button>
+
+
+    </form> <!-- END! Form -->
+
+  </div>
+</div>

@@ -1,0 +1,136 @@
+/**
+  * font-family: "Satoshi", sans-serif
+  * Available Font Weight: 300, 400, 500, 700, 900
+  * Available Font Style: normal, italic
+ */
+
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Light.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Italic.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Medium.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Bold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi/Satoshi-Black.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hind Siliguri';
+  src: url('fonts/HindSiliguri/HindSiliguri-Light.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hind Siliguri';
+  src: url('fonts/HindSiliguri/HindSiliguri-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hind Siliguri';
+  src: url('fonts/HindSiliguri/HindSiliguri-Medium.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hind Siliguri';
+  src: url('fonts/HindSiliguri/HindSiliguri-SemiBold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hind Siliguri';
+  src: url('fonts/HindSiliguri/HindSiliguri-Bold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif Bengali';
+  src: url('fonts/NotoSerifBangla/NotoSerifBengali-Light.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif Bengali';
+  src: url('fonts/NotoSerifBangla/NotoSerifBengali-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif Bengali';
+  src: url('fonts/NotoSerifBangla/NotoSerifBengali-Medium.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif Bengali';
+  src: url('fonts/NotoSerifBangla/NotoSerifBengali-Bold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Serif Bengali';
+  src: url('fonts/NotoSerifBangla/NotoSerifBengali-Black.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Then use the same class definitions as above */

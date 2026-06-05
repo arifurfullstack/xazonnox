@@ -1,0 +1,30 @@
+<div class="preview-dialog-container">
+  <div class="dialog-header">
+    <h2>Landing Page Preview</h2>
+    <button mat-icon-button (click)="onClose()" class="close-btn" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <div class="preview-wrapper">
+      <!-- For customizable landing pages -->
+      <div *ngIf="isCustomizableLandingPage" class="customizable-preview">
+        <div class="preview-html" [innerHTML]="mockLandingPageData.theme | safeHtmlCustom"></div>
+      </div>
+      
+      <!-- For fixed landing pages -->
+      <app-landing-page2 
+        *ngIf="!isCustomizableLandingPage"
+        [previewData]="mockLandingPageData"
+        [isPreviewMode]="true">
+      </app-landing-page2>
+    </div>
+  </div>
+
+  <div class="dialog-footer">
+    <button mat-button (click)="onClose()" color="primary">
+      Close Preview
+    </button>
+  </div>
+</div> 

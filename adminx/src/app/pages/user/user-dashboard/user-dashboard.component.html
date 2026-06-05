@@ -1,0 +1,50 @@
+<div class="container">
+  <!--  <div class="header">-->
+  <!--    <div class="left">-->
+  <!--      <h1 class="title">Dashboard</h1>-->
+  <!--      <div class="line"></div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="content1">-->
+  <!--    <ng-container *ngFor="let data of adminMenu">-->
+  <!--      <app-menu-card [data]="data"></app-menu-card>-->
+  <!--    </ng-container>-->
+  <!--    &lt;!&ndash; END! list-main-cards &ndash;&gt;-->
+  <!--  </div>-->
+
+  @if (user) {
+    <div class="chart-graph-container">
+      <!--     <app-chart></app-chart>-->
+      <!--    <app-sales-information></app-sales-information>-->
+      <app-dashboard-card [userData]="user" ></app-dashboard-card>
+      <!--    <app-chart-section></app-chart-section>-->
+      <app-recent-order [userData]="user"></app-recent-order>
+      <app-user-cart-and-wishlist [userData]="user"></app-user-cart-and-wishlist>
+    </div>
+
+  }@else {
+    <div class="chart-graph-container">
+      <app-dashboard-card [phoneNo]="id"></app-dashboard-card>
+      <app-recent-order [phoneNo]="id"></app-recent-order>
+    </div>
+  }
+
+
+
+
+  <!--</div>-->
+
+  <!--  Notification PopUp-->
+
+  <!--  <div class="container">-->
+  <!--    <app-notification-->
+  <!--      *ngFor="let notification of notifications"-->
+  <!--      [colorClass]="notification.colorClass"-->
+  <!--      [title]="notification.title"-->
+  <!--      [message]="notification.message"-->
+  <!--      [matIcon]="notification.matIcon"-->
+  <!--    ></app-notification>-->
+  <!--  </div>-->
+
+</div>

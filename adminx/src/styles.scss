@@ -1,0 +1,66 @@
+/**
+** Added This Option in angular.json
+"stylePreprocessorOptions": {
+  "includePaths": [
+    "src/theme"
+    ]
+  }
+ */
+@import "base";
+@import "material/theme";
+@import "fonts";
+@import "print";
+
+.subscription-expire-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0;
+  }
+  
+  .mdc-dialog__surface {
+    border-radius: 8px !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .mdc-dialog__content {
+    padding: 0 !important;
+  }
+}
+
+.landing-page-preview-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0;
+  }
+  
+  .mdc-dialog__surface {
+    border-radius: 8px !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .mdc-dialog__content {
+    padding: 0 !important;
+  }
+  
+  // Improve accessibility
+  .cdk-overlay-pane {
+    outline: none !important;
+  }
+  
+  .cdk-overlay-backdrop {
+    pointer-events: auto !important;
+  }
+  
+  // Prevent focus issues
+  .cdk-global-overlay-wrapper {
+    pointer-events: auto;
+  }
+}
+
+// Suppress development mode warnings for route progress
+.cdk-overlay-container {
+  pointer-events: none;
+  
+  .cdk-overlay-pane {
+    pointer-events: auto;
+  }
+}
+

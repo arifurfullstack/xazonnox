@@ -1,0 +1,105 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div class="gallery-picker">
+        <app-gallery-image-picker
+          [type]="'multiple'"
+          [maxImages]="2"
+          [isInvalid]="this.dataForm.get('images').touched && this.dataForm.get('images').invalid"
+          (onPicked)="onPickedImage($event)"
+          infoText="The image for desktop (1200px * 110px) and for mobile (1053px * 210px)"
+          [images]="pickedImages">
+        </app-gallery-image-picker>
+        <!--          infoText="The 1st image for desktop (700px * 700px)  and the 2nd image for mobile image (1200px * any)"-->
+      </div>
+
+      <div class="header-row1" style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+        <!--            <h2 class="title" style="margin: 0;">General Information</h2>-->
+        <mat-checkbox formControlName="autoSlug" color="primary">Auto Slug</mat-checkbox>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Enter Title" >
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+      @if (!dataForm.value['autoSlug']){
+        <mat-form-field appearance="outline">
+          <mat-label>Slug</mat-label>
+          <input formControlName="slug" matInput required (input)="onSlugChange()" />
+          <mat-error *ngIf="dataForm.get('slug')?.hasError('required')">
+            This field is required.
+          </mat-error>
+        </mat-form-field>
+      }
+
+      <div class="from">
+        <mat-form-field appearance="outline">
+          <mat-label>Author Name</mat-label>
+          <input formControlName="authorName" matInput  />
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="description-area">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Short Description</mat-label>
+          <textarea matInput formControlName="shortDesc" placeholder="Write short description..." rows="5"></textarea>
+        </mat-form-field>
+      </div>
+
+
+      <div class="description-area">
+        <mat-label>Description</mat-label>
+        <app-html-editor formControlName="description"></app-html-editor>
+      </div>
+
+
+      <div class="d-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
+          <input formControlName="priority" matInput placeholder="Enter priority" digitOnly>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for(data of dataStatus; track data.value) {
+              <mat-option [value]="data.value">
+                {{ data.viewValue }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div> <!-- END! d-row -->
+
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update Blog' : 'Add Blog' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update Blog' : 'Add Blog' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->

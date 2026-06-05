@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="content">
+    @for (item of courierMethods; let i = $index; track i) {
+      <div class="view-item" [ngClass]="{ 'active-item': selectedIndex === i}">
+        <div class="icon-checkbox"
+             (click)="toggleCheckbox(i)"
+             [ngClass]="{ active: item.status === 'active' }">
+          <mat-icon>
+            {{ item.status === 'active' ? 'check_circle' : 'radio_button_unchecked' }}
+          </mat-icon>
+        </div>
+        <div class="info" (click)="onSelectItem(i)">
+          <h5>{{ item.providerName }}</h5>
+          <a class="manage-link">
+            Show Setting Form
+            <span class="material-icons">expand_more</span>
+          </a>
+        </div>
+      </div>
+    }
+
+    @if (courierMethods.length < courierProviders.length) {
+      <div class="add-item" (click)="onAddNewPaymentType()">
+        <div class="icon">
+          <span class="material-icons">add</span>
+        </div>
+        <div class="title">
+          <h5>Add New Courier Method</h5>
+        </div>
+      </div>
+    }
+  </div>
+
+  <form [style.display]="formViewMode === '' ? 'none' : 'block'" [formGroup]="dataForm" (ngSubmit)="onSubmit()"
+        class="form-container">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Provider</mat-label>
+      <mat-select formControlName="providerName">
+        @for (item of courierProviders; track $index) {
+          <mat-option [value]="item.value" [disabled]="isDisabledOpt(item.value)">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    @if (dataForm.get('providerName').value === 'REDX') {
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+    }
+
+    @if (dataForm.get('providerName').value === 'Pathao Courier') {
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Api Key</mat-label>
+        <input formControlName="apiKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Secret Key</mat-label>
+        <input formControlName="secretKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Store Id</mat-label>
+        <input digitOnly formControlName="storeId" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Special Instruction</mat-label>
+        <input  formControlName="specialInstruction" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+    }
+
+    @if (dataForm.get('providerName').value === 'Steadfast Courier' || dataForm.get('providerName').value === 'REDX') {
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Api Key</mat-label>
+        <input formControlName="apiKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Secret Key</mat-label>
+        <input formControlName="secretKey" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Special Instruction</mat-label>
+        <input  formControlName="specialInstruction" matInput placeholder="Enter here..."/>
+      </mat-form-field>
+    }
+
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </form>
+
+
+</div>

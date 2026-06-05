@@ -1,0 +1,53 @@
+@import "exports/all-orders";
+
+
+td{
+  height: 61px!important;
+}
+
+.copy-area{
+  display: flex;
+  justify-content: center;
+  height: 18px;
+  .material-icons {
+    font-size: 14px !important;
+  }
+}
+
+.download-box {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.customer-status {
+  p {
+    //width: 113px;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+
+}
+
+
+.new-order {
+  margin-top: 3px;
+  background: #00c153;
+  color: white;
+  padding: 3px 10px;
+  width: 50px;
+  border-radius: 15px;
+  font-size: 10px;
+}
+
+
+.old-order {
+  margin-top: 3px;
+  padding: 3px 10px;
+  width: 50px;
+  border-radius: 15px;
+  font-size: 10px;
+  background: #1aa4e0;
+  color: white;
+}

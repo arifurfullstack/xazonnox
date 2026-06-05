@@ -1,0 +1,169 @@
+@import "variables";
+@import "common/container-base";
+@import "common/title-header";
+@import "common/data-form";
+@import "exports/mat-button-loader";
+
+.content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px 32px;
+  height: calc(100vh - 150px);
+}
+
+.btn-loader {
+  background: $color-accent;
+  opacity: 0.85;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .content {
+    padding: 5px 8px;
+    height: calc(100vh - 205px);
+  }
+}
+
+.form-img-avatar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  img {
+    cursor: pointer;
+    border: 2px solid #c9c9c9;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 85px;
+    transition: 0.3s all linear;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn {
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  //width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.print-btn {
+  background-color: #20c997;
+}
+
+.save-btn {
+  background-color: #6f42c1;
+}
+
+.btn i {
+  margin-right: 8px;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+
+.button-container {
+  text-align: center;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.add-item-btn {
+  background-color: #f0fff4;
+  border: 1px solid #20c997;
+  border-radius: 8px;
+  color: #20c997;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-item-btn .icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.add-item-btn:hover {
+  background-color: #eaffea;
+  border-color: #18a878;
+}
+
+
+/**
+FORM ARRAY
+ */
+
+.form-array-container {
+  width: 100%;
+}
+
+.form-array-input {
+  display: flex;
+}
+
+.add-form-array-action {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.form-array-input {
+  width: 100%;
+
+  .single-field {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    button {
+      margin-top: 10px;
+    }
+  }
+}
+
+.submit-btn {
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+  padding: 4px 30px;
+}
+
+.form-array-input {
+  display: flex;
+  flex-direction: column;
+}

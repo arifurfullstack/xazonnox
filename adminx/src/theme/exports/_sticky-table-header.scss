@@ -1,0 +1,35 @@
+
+.table-tab-container {
+  position: sticky;
+  top: 60px;
+  z-index: 10;
+  background: #fff;
+  width: 100%;
+  overflow: auto;
+}
+
+// Table Head Sticky
+.table-wrapper {
+  overflow-x: inherit;
+
+  .first-heading-row {
+    position: sticky;
+    top: 100px;
+    z-index: 9;
+
+  }
+}
+
+@media only screen and (max-width: 1399px) {
+  .table-wrapper {
+    overflow-x: scroll;
+
+    .first-heading-row {
+      position: static;
+      top: 0;
+      z-index: 1;
+    }
+  }
+}
+
+

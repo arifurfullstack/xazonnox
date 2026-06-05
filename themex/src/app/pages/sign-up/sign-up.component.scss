@@ -1,0 +1,59 @@
+@import 'variables';
+
+.side-bar {
+  margin-top: 80px;
+  padding-top: 10px;
+  width: 300px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 200px;
+  background: #fff;
+  box-shadow: 0 0 5px #555;
+}
+
+ul li{
+  display: flex;
+  padding: 16px;
+  gap: 25px;
+  &:hover{
+    background-color:#6cb3fe;
+    svg{
+      fill: #be0101;
+    }
+    a{
+      color: #be0101;
+    }
+  }
+}
+
+.information{
+display: flex;
+}
+
+.logo{
+padding: 3px 10px 0px 10px;
+}
+
+.contact-info p{
+margin: 2px;
+font-size: $font-readable;
+}
+
+@media screen and (max-width: 599px) {
+    .side-bar {
+      margin-top: 80px;
+      margin-left: 10px;
+      width: 95%;
+      align-items: center;
+      position: absolute;
+      top: 10px;
+      left: 0;
+      background: #eee;
+      overflow: scroll;
+      box-shadow: 0 0 5px #555;
+    }
+  }
+
+

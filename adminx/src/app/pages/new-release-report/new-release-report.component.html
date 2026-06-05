@@ -1,0 +1,64 @@
+<section class="full-gallery">
+
+  <div class="header">
+    <div class="left">
+      <h1 class="title">New Release</h1>
+    </div> <!-- END! left -->
+
+    <form class="table-search" #searchForm=ngForm>
+      <input type="text"
+             name="searchTerm"
+             autocomplete="off"
+             [(ngModel)]="searchQuery"
+             placeholder="Search">
+      @if (!searchQuery) {
+        <button>
+          <mat-icon>search</mat-icon>
+        </button>
+      } @else {
+        <button (click)="onClearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </form> <!-- END! table-search -->
+
+  </div> <!-- END! header -->
+
+
+      <ng-container>
+
+        <div class="card-container">
+          <mat-card class="version-card" *ngFor="let data of allTableData">
+            <mat-card-header>
+<!--              <div mat-card-avatar class="version-avatar"></div>-->
+              <mat-card-title>{{ data.name }}</mat-card-title>
+              <mat-card-subtitle>Version {{ data.version }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p >Note: <strong [innerHTML]="data.note"></strong> </p>
+
+              <p><strong>Release:</strong> {{ data.createdAt | date: 'medium' }}</p>
+            </mat-card-content>
+
+
+          </mat-card>
+        </div>
+
+
+
+
+        <div class="full-width-container">
+          <div *ngIf="isLoading" class="spinner">
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+
+
+  <!-- Loader spinner -->
+
+</section>

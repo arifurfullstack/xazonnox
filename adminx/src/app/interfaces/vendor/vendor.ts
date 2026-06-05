@@ -1,0 +1,53 @@
+import {VendorPermissions} from '../../enum/vendor-permission.enum';
+import {VendorRolesEnum} from '../../enum/vendor.roles.enum';
+
+export interface Vendor {
+  readOnly?: boolean;
+  _id?: string;
+  name: string;
+  vendorName?: string;
+  profileBanner?: string;
+  bankAccount?: string;
+  nidNumber?: string;
+  profileImg?: string;
+  identityImage?:any;
+  email?: string;
+  username: string;
+  shopLogo: string;
+  shopName: string;
+  deliveryDay?: number;
+  deliveryFree?: boolean;
+  Name: string;
+  phoneNo: string;
+  gender?: string;
+  role: VendorRolesEnum;
+  permissions: VendorPermissions[];
+  hasAccess: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  registrationAt?: string;
+  lastLoggedIn?: Date;
+  select?: boolean;
+  showTotalOrderValue?: boolean;
+  downloadExcel?: boolean;
+  downloadOrderMultiplePdf?: boolean;
+  customizeOrderControl?: boolean;
+  orderStatusPermissions?: [number];
+
+  shown?: number;
+  age?: number;
+  hairColor?: string;
+  eyeColor?: string;
+  growth?: string;
+  bustSize?: string;
+  shoeSize?: string;
+  ethnicGroup?: string;
+  virgin?: string;
+  bDSMPreference?: string;
+  hairs?: string;
+  description?: string;
+  shortDescription?: string;
+  like?: number;
+  images?: string[];
+  licenceImages?: string[];
+}

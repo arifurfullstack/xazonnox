@@ -1,0 +1,46 @@
+@import "variables";
+@import "common/container-base";
+@import "common/title-header";
+@import "common/table-scroll";
+@import "common/search-table";
+@import "exports/table-tab";
+@import "exports/sticky-table-header";
+@import "exports/bottom-action";
+
+.payment-type-box {
+  display: flex;
+  //flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+
+  .payment-status {
+    font-size: 11px;
+    padding: 5px 15px;
+  }
+}
+
+.hoverLink {
+  &:hover {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+}
+
+.cod {
+  background: #fce1d3;
+  color: #D83333;
+  padding: 5px 10px;
+  width: 50px;
+  border-radius: 15px;
+  font-size: 11px;
+}
+
+.order-status {
+  p {
+    display: inline-block;
+    width: 113px;
+  }
+}
+

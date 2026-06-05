@@ -1,0 +1,72 @@
+@import "variables";
+
+
+form {
+  mat-form-field {
+    width: 100%;
+  }
+
+  .d-row {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .action {
+    position: fixed;
+    top: 65px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    button {
+      font-size: 16px;
+      padding: 24px;
+      color: #FFFFFF;
+      &.discard {
+        color: $color-warn;
+        border: 1px solid $color-warn;
+        background-color: white;
+      }
+
+      &.preview {
+        color: $color-white;
+        background-color: $color-secondary;
+      }
+    }
+  }
+
+  .action-bottom {
+    button {
+      font-size: 16px;
+      padding: 24px;
+      color: #FFFFFF;
+      &.discard {
+        color: $color-warn;
+        border: 1px solid $color-warn;
+        background-color: white;
+      }
+    }
+  }
+}
+
+.d-flex-justify-end {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  form {
+    .d-row {
+      flex-direction: column;
+      gap: 0;
+    }
+    .action {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      top: auto;
+    }
+  }
+}

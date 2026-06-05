@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+@defer (when !isLoading) {
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="printInvoice()" class="print-button">
+      <mat-icon>print</mat-icon>
+      Print
+    </button>
+  </div>
+
+  <div class="preview-container" [style.--bill-invoice-color]="invoice?.color ?? '#5d36ff'">
+    <div id="print-section" class="invoice-container">
+      <div class="header-content">
+        <a href="/" class="logo" routerLink="/">
+          @if (invoice?.shopLogo) {
+            <img [src]="invoice?.shopLogo" alt="image" loading="lazy">
+          } @else {
+            <p>{{ invoice?.websiteName }}</p>
+          }
+        </a>
+        <div class="heater-right">
+          <span>{{ invoice?.shopAddress }}</span>
+          <span>Visit: {{ invoice?.domain }}</span>
+          <span>Mobile: {{ invoice?.shopPhoneNo }}</span>
+          <!--      <span >{{item?.orderId}}</span>-->
+          <!--          <div class="qr-code"> <ngx-barcode  [bc-height]="50" [bc-width]="2" [bc-value]="item?.orderId"  [bc-display-value]="true"></ngx-barcode></div>-->
+          <!--          <span class="qr-code-id">{{invoice?.orderId}}</span>-->
+
+        </div>
+      </div>
+
+
+      <div class="invoice-content">
+        <h4>Order Date: {{ invoice?.date }}</h4>
+        <div class="shipping-info">
+          <p>Ship to:{{ invoice?.address }}</p>
+          <p class="order-number">Order Number: {{ invoice?.orderId }}</p>
+        </div>
+        <div class="customer-info">
+          <span>Name: {{ invoice?.name }}</span>
+          <span>Address: {{ invoice?.shippingAddress }}</span>
+          <span>Phone: {{ invoice?.phoneNo }}</span>
+        </div>
+
+        @if(isEnableInvoiceSetting){
+          <div class="total-amount">
+            <input type="hidden" id="yourID" name="msg" value="item?.orderedItems" style="display:none"/>
+            <p class="quantity">Total Quantity: {{ getTotaQuantity(invoice?.items) }}</p>
+          </div>
+        }@else {
+          <div class="total-amount">
+            <p>Total Amount: {{ (invoice?.grandTotal) | shopCurrency }}</p>
+            <input type="hidden" id="yourID" name="msg" value="item?.orderedItems" style="display:none"/>
+            <p class="quantity">Total Quantity: {{ getTotaQuantity(invoice?.items) }}</p>
+          </div>
+        }
+
+      </div>
+
+      @if (invoice?.deliveryNote) {
+        <div class="invoice-content">
+          <div class="customer-info">
+            <p>Note: {{ invoice?.deliveryNote }}</p>
+          </div>
+        </div>
+      }
+
+      <div class="product-infos">
+        <div class="product-info-header">
+          <p class="border header-style">Product</p>
+          <p class="border header-style">Image</p>
+          <p class="border header-style">Price</p>
+          <p class="border header-style">Qty</p>
+          <!--          <p class="border header-style">Tax</p>-->
+          <p class="border header-style">Total</p>
+        </div>
+
+        <div class="product-info-content" *ngFor="let order of invoice.items">
+          <p class="border">{{ order?.name }}{{ order?.variation ? ' - ' + order?.variation?.name : '' }}{{order?.phoneModel ? ' - ' + (order?.phoneModel) : '' }}</p>
+          <p class="border"><img [src]="order?.image + '?&auto=format&w=384' " alt=""></p>
+          <p class="border">{{ (order?.salePrice) | shopCurrency }}</p>
+          <p class="border">{{ order?.quantity }}</p>
+          <!--          <p class="border">৳{{0}}</p>-->
+          <p class="border">{{ (order?.quantity * order?.salePrice) | shopCurrency }}</p>
+        </div>
+      </div>
+
+
+      <div class="bottom-area">
+
+        @if (!isEnableInvoiceSetting){
+          <div class="product-total-content">
+            <div class="product-total">
+              <div class="product-total-price">
+                <p>SubTotal :</p>
+                <p class="quantity">{{ (invoice?.subTotal) | shopCurrency }}</p>
+              </div>
+              <div class="product-total-price">
+                <p>Delivery Charge :</p>
+                <p class="quantity">{{ (invoice?.deliveryCharge) | shopCurrency }}</p>
+              </div>
+              <div class="product-total-price">
+                <p>Discount Amount :</p>
+                <p class="quantity">-{{ (invoice?.discount ?? '0') | shopCurrency }}</p>
+              </div>
+              @if (invoice?.additionalDiscount) {
+                <div class="product-total-price">
+                  <p>Additional Discount :</p>
+                  <p class="quantity">-{{ (invoice?.additionalDiscount ?? '0') | shopCurrency }}</p>
+                </div>
+              }
+              @if (invoice?.couponDiscount) {
+                <div class="product-total-price">
+                  <p>Coupon Discount :</p>
+                  <p class="quantity">{{ (invoice?.couponDiscount ?? '0') | shopCurrency }}</p>
+                </div>
+              }
+              <div class="product-total-price border-btm">
+                <p>Grand Total :</p>
+                <p class="quantity">{{ (invoice?.grandTotal) | shopCurrency }}</p>
+              </div>
+              @if(invoice?.paidAmount && invoice?.paidAmount > 0) {
+                <div class="product-total-price">
+                  <p>Paid Amount :</p>
+                  <p class="quantity">{{ (invoice?.paidAmount ?? '0') | shopCurrency }}</p>
+                </div>
+                <div class="product-total-price">
+                  <p>Total Due :</p>
+                  <p class="quantity">{{ ((invoice?.grandTotal ?? 0) - (invoice?.paidAmount ?? 0)) | shopCurrency }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="invoice-bottom">
+        <p>Thank you for your order from {{ invoice?.domain }}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  </body>
+  </html>
+
+} @placeholder (minimum 200ms) {
+  <app-page-loader></app-page-loader>
+}
+
+
+
+
+
+
+
+

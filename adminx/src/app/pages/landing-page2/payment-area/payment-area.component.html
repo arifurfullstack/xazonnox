@@ -1,0 +1,86 @@
+<div class="payment-area-main" id="payment1" *ngIf="singleLandingPage?.product">
+  <div class="container">
+    <div class="order-container">
+      <h2 class="header">
+        <span class="red-text">{{ singleLandingPage?.paymentTitle || 'Payment Area' }}</span>
+      </h2>
+      <div class="order-content">
+        <div class="product-section">
+          <div class="product-area">
+            <img [src]="singleLandingPage.product.images?.[0] || 'https://via.placeholder.com/300x300?text=Product'" alt="Product" class="product-image" loading="lazy">
+            <h3 class="product-title">{{ singleLandingPage.product.name }}</h3>
+          </div>
+          <ul *ngIf="singleLandingPage.product.variationList?.length">
+            <li class="increment-btn" *ngFor="let variation of singleLandingPage.product.variationList">
+              <div class="variant-left">
+                <span>{{ variation.name }}</span>
+              </div>
+              <div class="varaint-right">
+                <div class="color-variant">
+                  <button class="active">{{ variation.name }} <span>&#10003;</span></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <h3 class="price">
+            সর্বমোট মূল্য: {{ cartSaleSubTotal | currency:'BDT':'symbol':'1.0-0' }}
+          </h3>
+        </div>
+        <form class="billing-section">
+          <h3>Delivery Details</h3>
+          <label>সম্পূর্ণ নাম লিখুন <sup class="required" title="required">*</sup></label>
+          <input type="text" placeholder="আপনার নাম লিখুন">
+          <small>Name is required</small>
+          <label>মোবাইল নাম্বার লিখুন <sup class="required" title="required">*</sup></label>
+          <input type="tel" placeholder="আপনার মোবাইল নাম্বার লিখুন">
+          <small>Valid phone number is required</small>
+          <label>সম্পূর্ণ ঠিকানা লিখুন</label>
+          <textarea placeholder="আপনার ঠিকানা লিখুন"></textarea>
+          <small>Address is required</small>
+          <div class="custom-select-container">
+            <label for="division">আপনার বিভাগ বাছাই করুন <sup class="required" title="required">*</sup></label>
+            <div id="division" class="custom-select" (click)="toggleDivisionDropdown()">
+              <div class="custom-select__selected">{{ selectedDivision }}</div>
+              <div class="custom-select__options" [class.show]="isDivisionDropdownOpen">
+                <div class="custom-select__option" *ngFor="let division of divisions" (click)="selectDivision(division)">{{ division }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="payment-area1">
+            <div class="delivery-charge">Delivery Charge: ৫০</div>
+          </div>
+          <h3 class="payment-title">Payment Option</h3>
+          <div class="delivery-options">
+            <p class="option">
+              <span class="radio"></span>
+              <span class="label-text">Cash On Delivery</span>
+            </p>
+          </div>
+          <div class="order-summary">
+            <h3>Your Order</h3>
+            <div class="order-details">
+              <p>{{ singleLandingPage?.product?.name || 'Product Name' }}</p>
+              <p *ngIf="singleLandingPage?.product?.variationList?.length">{{ singleLandingPage.product.variationList[0].name }}</p>
+              <div class="quantity">
+                <span>Quantity</span>
+                <div>
+                  <button type="button">-</button>
+                  <input type="text" value="1" readonly>
+                  <button type="button">+</button>
+                </div>
+              </div>
+              <div class="pricing">
+                <p>Subtotal <span>{{ cartSaleSubTotal | currency:'BDT':'symbol':'1.0-0' }}</span></p>
+                <p>Discount <span>৳ ০</span></p>
+                <p>Shipping <span> ৳ ৫০</span></p>
+                <p class="total">Total <span>{{ (cartSaleSubTotal + 50) | currency:'BDT':'symbol':'1.0-0' }}</span></p>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="order-btn">অর্ডার করুন {{ (cartSaleSubTotal + 50) | currency:'BDT':'symbol':'1.0-0' }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- All dynamic modals, popups, and gallery components removed for static version -->

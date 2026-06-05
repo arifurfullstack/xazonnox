@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="full-sec">
+    <h3>Product Setting</h3>
+  </div>
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-radio-group formControlName="productType">
+      <mat-radio-button value="physicalProduct">Physical Product</mat-radio-button>
+      <mat-radio-button value="digitalProduct">Digital Product</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableSoldQuantitySort" color="primary">
+      Enable Sold Quantity sort?
+    </mat-checkbox>
+
+    <mat-checkbox style="margin-bottom: 20px;" formControlName="isEnablePrioritySort" color="primary">
+      Enable Priority Sort?
+    </mat-checkbox>
+
+    <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableProductDetailsView" color="primary">
+      Enable Product Details View In Bottom
+    </mat-checkbox>
+
+    <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnablePhoneModel" color="primary">
+      Enable Product Details Model input
+    </mat-checkbox>
+
+    <div *ngIf="isDigitalProductSelected" formGroupName="digitalProduct" class="checkbox-group">
+      <mat-checkbox formControlName="isEmailEnable">Enable Email</mat-checkbox>
+      <mat-checkbox formControlName="isAddressEnable">Enable Address</mat-checkbox>
+      <mat-checkbox formControlName="isDivisionEnable">Enable Division</mat-checkbox>
+    </div>
+
+<!--  </form>-->
+<!--</div>-->
+
+
+
+<div class="container" *ngIf="isAllowedShop()">
+  <div class="full-sec">
+    <h3>Product Payment Setting</h3>
+  </div>
+
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="form-container">
+
+    <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableDeliveryCharge" color="primary">
+      Enable Delivery Charge?
+    </mat-checkbox>
+
+    <mat-checkbox  style="margin-bottom: 20px;" formControlName="isEnableAdvancePayment" color="primary">
+      Enable Advance Payment?
+    </mat-checkbox>
+
+  </form>
+</div>
+
+
+
+<div class="container">
+  <div class="full-sec">
+    <h3>Product Checkout Setting</h3>
+  </div>
+ 
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-radio-group style="margin-bottom: 20px;" formControlName="checkoutType">
+      <mat-radio-button style="margin-right: 10px;" value="easyCheckout">Easy Checkout</mat-radio-button>
+      <mat-radio-button value="onePageCheckout">One Page Checkout</mat-radio-button>
+    </mat-radio-group>
+  </form>
+ </div>
+
+
+<div class="container">
+ <div class="full-sec">
+   <h3>Product URL Setting</h3>
+ </div>
+
+   <mat-radio-group style="margin-bottom: 20px;" formControlName="urlType" class="urlsetting">
+     <mat-radio-button style="margin-bottom: 5px;" value="website.com/product-details/test-product">website.com/product-details/test-product</mat-radio-button>
+     <mat-radio-button style="margin-bottom: 5px;" value="website.com/products/test-product">website.com/products/test-product</mat-radio-button>
+     <mat-radio-button value="website.com/test-product">website.com/test-product</mat-radio-button>
+   </mat-radio-group>
+</div>
+
+
+
+
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+
+  </form>
+
+</div>
+
+
+

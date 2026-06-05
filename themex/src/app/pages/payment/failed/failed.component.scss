@@ -1,0 +1,431 @@
+@import "variables";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-container {
+  margin-top: 30px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(161, 161, 161, 0.16),
+  0 3px 6px rgba(124, 124, 124, 0.16);
+  max-width: 600px;
+  width: 100%;
+  padding: 50px;
+
+  border-radius: 8px;
+  position: relative;
+
+  .checkmark-container {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    .circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #c03636;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .cross {
+      top: 29px;
+      left: 6px;
+      position: absolute;
+      height: 5px;
+      width: 30px;
+      animation: draw-cross 0.5s ease-out forwards;
+    }
+
+    .cross::before,
+    .cross::after {
+      content: "";
+      position: absolute;
+      height: 5px;
+      width: 30px;
+      background: $color-white;
+      left: 50%;
+      top: 50%;
+      transform-origin: center;
+    }
+
+    .cross::before {
+      transform: rotate(45deg);
+    }
+
+    .cross::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .button-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    color: $color-white;
+    .button {
+      font-family: $font-en-primary;
+      font-size: $font-readable;
+      display: flex;
+      border-radius: 5px;
+      align-items: center;
+      justify-content: center;
+      background: #c03636;
+      width: 130px;
+      height: 45px;
+      cursor: pointer;
+      transition:all 0.5s ease;
+    }
+    .button:hover{
+      background: rgba(140, 26, 26, 0.89);
+      transition:all 0.5s ease;
+    }
+  }
+
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .particle {
+      position: absolute;
+      opacity: 0;
+      animation: float 3s infinite ease-in-out alternate;
+    }
+    .ball {
+      background-color: #ffcb57;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      top: 20%;
+      left: 30%;
+      animation-delay: 0.2s;
+      animation-duration: 2.5s;
+    }
+
+    .bubble {
+      background-color: #4dd0e1;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      top: 34%;
+      left: 64%;
+      animation-delay: 0.4s;
+      animation-duration: 3s;
+    }
+
+    .star1 {
+      background-color: #ffd700;
+      clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+      );
+      width: 15px;
+      height: 15px;
+      top: 6%;
+      left: 50%;
+      animation-delay: 0.6s;
+      animation-duration: 1.5s;
+
+      &.small {
+        width: 10px;
+        height: 10px;
+        animation-duration: 1s;
+      }
+    }
+
+    .star2 {
+      position: absolute;
+      background-color: #6732e0;
+      clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+      );
+      width: 20px;
+      height: 20px;
+      top: 30%;
+      left: 55%;
+      animation: rotate 4s linear infinite;
+    }
+
+    .star3 {
+      position: absolute;
+      background-color: #ff81ab;
+      clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+      );
+      width: 15px;
+      height: 15px;
+      top: 8%;
+      left: 35%;
+      animation: rotate 4s linear infinite;
+    }
+    .fireworks1 {
+      background-color: #d35dff;
+      border-radius: 50%;
+      width: 5px;
+      height: 5px;
+      top: 10%;
+      left: 58%;
+      animation: explode 1s infinite ease-in-out alternate;
+      animation-delay: 1s;
+
+      &.large {
+        width: 12px;
+        height: 12px;
+        animation-duration: 1.2s;
+      }
+    }
+
+    .ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+
+    .ring:before {
+      content: "";
+      position: absolute;
+      top: 35%;
+      left: 46%;
+      width: 5px;
+      height: 5px;
+      border: 3px solid rgb(209, 13, 13);
+      border-radius: 50%;
+      background: $color-white;
+      animation: explodee 1s infinite;
+    }
+
+    .fireworks2 {
+      background-color: #df6a0b;
+      border-radius: 50%;
+      top: 8%;
+      left: 45%;
+      animation: explode 1s infinite ease-in-out alternate;
+      animation-delay: 0.5s;
+
+      &.large {
+        width: 10px;
+        height: 10px;
+        animation-duration: 0.5s;
+      }
+    }
+
+    .large {
+      width: 10px;
+      height: 10px;
+      animation-duration: 4s;
+    }
+
+    .small {
+      width: 8px;
+      height: 8px;
+      animation-duration: 2s;
+    }
+
+    .squire1 {
+      position: absolute;
+      background-color: #ce0909;
+      width: 5px;
+      border-radius: 5px;
+      height: 20px;
+      top: 30%;
+      left: 37%;
+      animation: rotate 5s linear infinite;
+    }
+    .squire2 {
+      position: absolute;
+      background-color: #d44107;
+      width: 10px;
+      height: 10px;
+      top: 20%;
+      left: 65%;
+      animation: rotate 5s linear infinite;
+    }
+    .squire3 {
+      position: absolute;
+      background-color: #0ffc56;
+      width: 8px;
+      height: 8px;
+      top: 20%;
+      left: 57%;
+      animation: rotate 2s linear infinite;
+    }
+    .squire4 {
+      position: absolute;
+      background-color: #a11878;
+      width: 10px;
+      height: 10px;
+      top: 37%;
+      left: 52%;
+      animation: rotate 1s linear infinite;
+    }
+    .squire5 {
+      position: absolute;
+      background-color: #a11878;
+      width: 8px;
+      height: 8px;
+      top: 20%;
+      left: 40%;
+      animation: rotate 6s linear infinite;
+    }
+  }
+  .content {
+    margin-top: 70px;
+
+    h2 {
+      font-size: $font-readable;
+      margin: 0;
+      font-family: $font-en-primary;
+    }
+    h3 {
+      font-size: $font-sub-title-sm;
+      margin: 10px 0;
+      font-family: $font-en-primary;
+    }
+    p {
+      font-size: $font-title-desc;
+      margin: 10px 0;
+      font-family: $font-en-primary;
+
+      a {
+        color:  $color-black;
+        text-decoration: none;
+      }
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.8);
+    opacity: 0.2;
+  }
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+@keyframes explodee {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+//for mobile
+@media only screen and (max-width: 599px) {
+  .confirmation-container {
+    padding: 50px 20px;
+    .particles {
+      .squire1 {
+        top: 28%;
+        left: 45%;
+      }
+      .squire2 {
+        left: 66%;
+      }
+      .squire3 {
+        left: 60%;
+        top: 15%;
+      }
+      .squire5 {
+        left: 25%;
+        background: #ece90d;
+        top: 25%;
+      }
+      .squire4 {
+        left: 35%;
+        top: 30%;
+      }
+
+      .ring:before {
+        top: 12%;
+        left: 28%;
+      }
+      .bubble {
+        left: 65%;
+        top: 28%;
+      }
+      .ball {
+        left: 32%;
+      }
+      .star3{
+        top: 5%;
+      }
+      .fireworks1{
+        left: 65%;
+      }
+    }
+  }
+}

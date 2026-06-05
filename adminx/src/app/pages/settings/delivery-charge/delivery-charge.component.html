@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="content">
+    @for (item of deliveryCharges; let i = $index; track i) {
+      <div class="view-item" [ngClass]="{ 'active-item': selectedIndex === i }">
+        <div class="icon-checkbox"
+             (click)="toggleCheckbox(i)"
+             [ngClass]="{ active: item.status === 'active' }">
+          <mat-icon>
+            {{ item.status === 'active' ? 'check_circle' : 'radio_button_unchecked' }}
+          </mat-icon>
+        </div>
+        <div class="info" (click)="onSelectItem(i)">
+          <h5>{{ item.name }}</h5>
+          <a class="manage-link">
+            Show Setting Form
+            <span class="material-icons">expand_more</span>
+          </a>
+        </div>
+      </div>
+    }
+
+    @if (deliveryCharges.length < 3) {
+      <div class="add-item" (click)="onAddNewDeliveryType()">
+        <div class="icon">
+          <span class="material-icons">add</span>
+        </div>
+        <div class="title">
+          <h5>Add New Delivery Type</h5>
+        </div>
+      </div>
+    }
+  </div>
+
+  <form [style.display]="formViewMode === '' ? 'none' : 'block'" [formGroup]="dataForm" (ngSubmit)="onSubmit()"
+        class="form-container">
+
+<!--    @if (dataForm.get('type').value !== 'free') {-->
+<!--    <div class="checkbox-for-advance-payment">-->
+<!--      <mat-checkbox formControlName="isAdvancePayment">Advance Payment</mat-checkbox>-->
+<!--    </div>-->
+
+
+<!--    }-->
+
+    <mat-form-field appearance="outline">
+      <mat-label>Delivery Type</mat-label>
+      <mat-select formControlName="type">
+        @for (item of deliveryTypes; track $index) {
+          <mat-option [value]="item.value" [disabled]="isDisabledOpt(item.value)">
+            {{ item.viewValue }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>This field is required.</mat-error>
+    </mat-form-field>
+
+    @if (dataForm.get('type').value !== 'free') {
+      <mat-form-field appearance="outline">
+        <mat-label>Your Division</mat-label>
+        <mat-select formControlName="city">
+          @for (item of divisions; track item._id) {
+            <mat-option [value]="item.name">
+              {{ item?.name }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error>This field is required.</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Delivery Charge Inside {{ dataForm.get('city').value }} Division</mat-label>
+        <input formControlName="insideCity" matInput digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" placeholder="Inside Delivery Charge"/>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Delivery Charge Outside {{ dataForm.get('city').value }} Division</mat-label>
+        <input formControlName="outsideCity" matInput digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" placeholder="Outside Delivery Charge"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="no-underline">
+        <mat-label>Minimum Order Amount for Free Delivery</mat-label>
+        <input formControlName="freeDeliveryMinAmount" matInput digitOnly decimal="true" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" placeholder="Enter Amount"/>
+      </mat-form-field>
+    }
+
+    <mat-form-field appearance="outline" class="no-underline">
+      <mat-label>Delivery Schedule Note</mat-label>
+      <textarea formControlName="note" matInput placeholder="Ex. Delivery within 2-3 days" rows="2"></textarea>
+    </mat-form-field>
+
+
+    @if (!isLoading) {
+      <button mat-button class="add-product-btn" color="primary">
+        <mat-icon>check</mat-icon>
+        Save Changes
+      </button>
+    } @else {
+      <button class="btn-loader" mat-raised-button type="button" color="primary">
+        <div><span class="loader"></span></div>
+        <div><span class="txt">Save Changes</span></div>
+      </button>
+    }
+  </form>
+
+
+</div>

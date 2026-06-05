@@ -1,0 +1,464 @@
+.container {
+  display: block;
+  max-width: 1400px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.main-body-area{
+  margin-bottom: 30px;
+}
+
+.main-area {
+  box-shadow: rgba(67, 71, 85, 0.27) 0 0 0.25em, rgba(90, 125, 188, 0.05) 0 0.25em 1em;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.wholesale-area{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+  padding-bottom: 10px;
+}
+
+.sub-title {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-bottom: 8px;
+}
+
+.add-btn {
+  border: 1px solid #00b894; // Border color for Publish button
+  background-color: rgba(0, 184, 148, 0.05);
+  color: #00b894 !important;
+  text-wrap: nowrap;
+}
+
+.cancel-btn {
+  border: 1px solid #ec0808; // Border color for Publish button
+  background-color: rgba(236, 8, 8, 0.05);
+  color: #ec0808 !important;
+  margin-bottom: 8px;
+  text-wrap: nowrap;
+}
+.remove-btn{
+  background: none;
+  border: none;
+  color: red;
+}
+
+.button-area {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.category-content-area{
+  margin-top: 15px;
+}
+
+
+.gallery-picker-product{
+  ::ng-deep.gallery-image-picker .multiple-image-view {
+    flex-wrap: wrap!important;
+    justify-content: center;
+  }
+
+  ::ng-deep.gallery-image-picker .multiple-image-view .image-wrapper {
+    height: 75px;
+    width: 75px;
+    min-width: 75px!important;
+    img{
+      height: 75px;
+      width: 75px;
+    }
+  }
+  ::ng-deep.gallery-image-picker .multiple-image-view {
+    display: flex;
+    align-items: center;
+  }
+  ::ng-deep.gallery-image-picker .multiple-image-view .image-wrapper img{
+    height: 75px!important;
+    width: 75px;
+  }
+  ::ng-deep.gallery-image-picker .multiple-image-view .small-image-picker {
+    width: 78px!important;
+    height: 78px!important;
+  }
+  ::ng-deep.gallery-image-picker .multiple-image-view .small-image-picker .upload-button-small svg {
+    width: 23px!important;
+    height: 23px!important;
+    margin-bottom: 10px;
+    fill: #5d5d5d;
+  }
+  ::ng-deep.gallery-image-picker .multiple-image-view .small-image-picker .upload-button-small .upload-text{
+    font-size: 11px!important;
+    font-weight: normal;
+
+  }
+}
+
+
+
+
+.header-area {
+  //background-color: #f8f9fa; // Adjust as needed
+  //border: 1px solid #ddd; // Optional border for clarity
+  box-shadow: rgba(14, 63, 126, 0.04) 0 0 0 1px, rgba(42, 51, 69, 0.04) 0 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+  position: sticky;
+  top: 60px;
+  background: white;
+  z-index: 100;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    .instruction {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .instruction-content-area {
+        display: flex;
+        flex-direction: column;
+      }
+
+      mat-icon {
+        font-size: 18px;
+        color: #333; // Icon color
+      }
+
+      .instruction-title {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .instruction-text {
+        color: #666;
+        font-size: 14px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+
+      .publish-btn {
+        border: 1px solid #00b894; // Border color for Publish button
+        background-color: rgba(0, 184, 148, 0.05);
+        color: #00b894;
+      }
+      .draft-btn {
+        border: 1px solid #ee4d2d; // Border color for Publish button
+        background-color: rgba(238, 77, 45, 0.05);
+        color: #ee4d2d;
+      }
+
+      .add-product-btn {
+        background-color: #5d36ff; // Background color for Add Product button
+        color: #fff;
+        text-wrap: nowrap;
+      }
+    }
+  }
+}
+
+.content-area-left{
+  scroll-behavior: smooth;
+}
+
+.stock-area{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+.padding-bottom{
+  padding-bottom: 10px;
+}
+.content-area-right{
+  display: block;
+  width: 100%;
+}
+
+.container-right-main {
+  display: block;
+  width: 100%;
+  position: sticky;
+  top: 100px;
+  left: 0;
+  //overflow: visible;
+}
+.main-content-area{
+  display: block;
+  max-height: 90vh;
+  overflow: scroll;
+  padding: 3px;
+}
+
+.content-area {
+  display: grid;
+  grid-template-columns: 67% 32%;
+  grid-gap: 15px;
+  margin-top: 15px;
+  ::ng-deep.mat-mdc-form-field-subscript-wrapper {
+    height: 0 !important;
+  }
+}
+
+///specification-area
+.specification-area{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.general-info-area {
+  margin-bottom: 15px;
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+.price-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  //grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 15px;
+}
+
+.gallery-picker {
+  box-shadow: rgba(67, 71, 85, 0.27) 0 0 0.25em, rgba(90, 125, 188, 0.05) 0 0.25em 1em;
+  padding: 15px;
+}
+
+.courier-area {
+  display: grid;
+  grid-template-columns: 74% 22%;
+  grid-gap: 15px;
+}
+
+
+
+.variation-option-area {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  //grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  .variation-option {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+}
+
+.variation-price-area{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.variation-list-area{
+  margin-top: 15px;
+}
+
+.variation-area-main{
+  display: grid;
+  grid-template-columns: 15% 85%;
+  border: 1px solid #dfdede;
+  margin: 2% 0;
+  .variation-image{
+    border-right: 1px solid #dfdede;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .flex-icon-img {
+      position: relative;
+      .icon-img{
+        position: relative;
+        img{
+          border-radius: 5px;
+          width: 80px;
+          height: 80px;
+        }
+      }
+      .icon-area{
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        background: #989898;
+        color: white;
+        z-index: 20;
+        bottom: -27px;
+        width: 100%;
+        padding: 0 2px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .view{
+        color: #5d36ff;
+        &:hover{
+          color: #2f05dd;
+        }
+      }
+      .delete{
+        color: #cf0b0b;
+        &:hover{
+          color: #9e0000;
+        }
+      }
+      mat-icon{
+        margin: 5px;
+        cursor: pointer;
+      }
+
+
+    }
+  }
+
+  .image-btn{
+    padding: 25px 10px;
+    border: 1px dotted #555555;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: none;
+    margin: 10px;
+    mat-icon{
+      color: #555555;
+      margin-bottom: 5px;
+    }
+    .span{
+      color: #555555;
+    }
+  }
+
+  .right-section{
+    width: 100%;
+    .left-content{
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      grid-gap: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #dfdede;
+    }
+    .right-content{
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      grid-gap: 10px;
+      padding: 10px;
+    }
+
+  }
+}
+
+@media (max-width: 878px) {
+  .content-area {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 754px) {
+  .variation-price-area {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .variation-option-area{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .variation-area-main {
+    overflow: auto;
+    .variation-image {
+      position: sticky;
+      width: 100px; // Adjust width as needed
+      z-index: 10;
+      left: 0;
+      top: 0;
+      border-right: 1px solid #dfdede;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff; // Add a background color to cover content behind
+    }
+
+    .right-section {
+      margin-left: 48px;
+      overflow-y: auto;
+      min-width: 500px;
+    }
+  }
+}
+@media (max-width: 540px) {
+  .header-area .header-container .instruction{
+    display: none;
+  }
+  .header-area .header-container{
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 500px) {
+  .price-area {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .variation-option-area{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Styles for the popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.popup-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+::ng-deep.close-btn {
+  top: 125px!important;
+}

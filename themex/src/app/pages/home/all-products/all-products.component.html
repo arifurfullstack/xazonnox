@@ -1,0 +1,93 @@
+<div class="container">
+  @if (products?.length) {
+    <div class="products-header">
+      <div class="flash-title-counter">
+        <b></b>
+        <h2>  {{shopId === '6874c8b1c74bb203b3cbf147' ? 'Supplements' : ('AllProduct' | translate)}}</h2>
+        <b></b>
+      </div>
+    </div>
+  }
+
+  <div class="products-cards">
+
+    @defer (when !isLoading) {
+      @if (products?.length) {
+        @switch (productCardViews) {
+          @case ('Product Card 1') {
+            @for (item of products; track $index) {
+              <app-product-card-1 [product]="item"></app-product-card-1>
+            }
+          }
+          @case ('Product Card 2') {
+            @for (item of products; track $index) {
+              <app-product-card-2 [product]="item"></app-product-card-2>
+            }
+          }
+          @case ('Product Card 3') {
+            @for (item of products; track $index) {
+              <app-product-card-3 [product]="item"></app-product-card-3>
+            }
+          }
+          @case ('Product Card 4') {
+            @for (item of products; track $index) {
+              <app-product-card-4 [product]="item"></app-product-card-4>
+            }
+          }
+          @case ('Product Card 5') {
+            @for (item of products; track $index) {
+              <app-product-card-5 [product]="item"></app-product-card-5>
+            }
+          }
+        }
+      }
+    } @placeholder (minimum 50ms) {
+      @for (data of [].constructor(10); track $index) {
+        <app-product-card-loader/>
+      }
+    }
+
+  </div>
+  @if(!products?.length && !isLoading){
+    <div class="no-data" >
+      <app-empty-data
+        [needBorder]="false"
+        [iconWidth]="'150px'"
+        [title]="'No Product Found!'"
+        [titleSize]="'20px'"
+        [desc]="'Try to search another category.'"
+        [filePath]="'/lottie/no-data-1.json'"
+        [btnTitle]="'Continue Shopping'"
+        [btnUrl]="'/products'"
+      >
+      </app-empty-data>
+    </div>
+  }
+  <!-- END Product View -->
+
+
+  @if(totalProducts > products?.length){
+    @if(!isLoadMore){
+      <div class="see-more-btn" (click)="onLoadMore()" >
+        <a>{{'LOAD MORE'}}</a>
+      </div>
+    }
+  }@else{
+    <!--      @if (!isLoadMore) {-->
+      <!--        <p class="no-product">You have reached the end. Do a search to keep exploring!</p>-->
+      <!--      }-->
+
+  }
+
+  @if(isLoadMore){
+    <div class="loading1">
+      <div class="abgne-loading-20140104-2">
+        <div class="loading"></div>
+        <div class="word">
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
+

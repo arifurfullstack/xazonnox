@@ -1,0 +1,786 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+    Web Page Design
+  </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /*.container {*/
+    /*    @media (min-width: 1400px) {max-width: 1320px;}*/
+    /*    @media (min-width: 1200px) {max-width: 1140px;}*/
+    /*    @media (min-width: 992px) {max-width: 1320px;}*/
+    /*    @media (min-width: 768px) {max-width: 720px;}*/
+    /*    @media (min-width: 576px) {max-width: 540px;}*/
+    /*}*/
+
+    .section0 {
+      background: #2a3a8a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .section0 .top-heading {
+      color: white;
+      max-width: 992px;
+
+      h3 {
+        font-size: clamp(1rem, 2.5vw, 2.5rem);
+        line-height: clamp(1.5rem, 4vw, 4.2rem);
+        text-align: center;
+      }
+    }
+
+    .section1 {
+      /*background-image: url("/assets/page/bg.png");*/
+      /*  background-position: center;*/
+      /*  background-size: cover;*/
+      /* background-repeat: no-repeat;*/
+      background: #d9edf4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0;
+      padding: 0 10px 10px 10px;
+    }
+
+    .section1 .use-time {
+      padding-bottom: 60px;
+      text-align: center;
+      max-width: 1024px;
+      width: 100%;
+    }
+
+
+    .section1 .use-time h3 {
+      font-size: clamp(1rem, 2.5vw, 2rem);
+      line-height: clamp(1.5rem, 2.5vw, 2.5rem);
+      background: #f2d468;
+      margin: 0;
+      padding: 20px 0;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .section1 .theme-container {
+      text-align: center;
+      max-width: 990px;
+      width: 88%;
+      padding: 20px;
+      margin: 0 auto;
+      border-radius: 24px;
+      background-color: white;
+      box-shadow: 0 -1px 24px 0 #1e85d6;
+    }
+
+    .section1 .header {
+      background-color: #fff1b7;
+      color: #cc0000;
+      font-weight: bold;
+      font-size: 22px;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+      border: 8px solid #ffcc00;
+    }
+
+    /* .section1 .content {
+        padding: 20px;
+    } */
+    .section1 .content p {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .section1 .image-container {
+      display: flex;
+      justify-content: center;
+      /* margin-bottom: 20px; */
+    }
+
+    .section1 .image-container img {
+      width: 100%;
+      /* height: auto; */
+      max-height: 600px;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    .section1 .price {
+      padding-left: 10px;
+      color: #ffffff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 17px;
+      margin-bottom: 20px;
+      border-radius: 16px 0;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(242, 211, 53);
+    }
+
+    .section1 .price span {
+      text-align: right;
+      background-color: #cc0000;
+      color: #ffffff;
+      text-wrap: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      height: 100%;
+      border-radius: 0 0 16px;
+    }
+
+    .section1 .button {
+      text-align: center;
+      font-size: 20px;
+      line-height: 45px;
+      font-weight: 700;
+      display: inline-block;
+      width: auto;
+      margin-top: 30px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 20px 20px 0;
+      background: linear-gradient(90deg, rgb(242, 211, 53) 0px, rgb(242, 211, 53) 51%, rgb(201, 172, 31)) 0% 0% / 200%;
+      transition: 0.5s;
+      padding: 5px 15px;
+      border-radius: 10px;
+      border-width: 3px;
+      border-style: solid;
+      border-color: rgb(242, 68, 29);
+      border-image: initial;
+    }
+
+    .section3 {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .section3 .header-container {
+      padding: 0 20px;
+    }
+    .section3 .single-card{
+      padding: 20px;
+    }
+
+    .section3 .header {
+      background-color: #2a3a8a;
+      /*border: 2px solid #38A169;*/
+      box-shadow: 0 -1px 24px 0 #1e85d6;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 1024px;
+      width: 100%;
+    }
+
+    .section3 .header h1 {
+      color: white;
+      font-size: clamp(1.5rem, 2.5vw, 30px);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section3 .header h1 i {
+      margin: 0 8px;
+    }
+
+    .section3 .content {
+      background-color: white;
+      border-radius: 8px;
+      padding: 0;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 1024px;
+    }
+
+    .section3 .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .section3 .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section3 .header-container .grid-container {
+        padding: 0;
+      }
+
+      .section3 .content {
+        padding: 24px;
+      }
+
+      .section3 {
+        padding: 60px 0;
+      }
+    }
+
+    .section3 .grid .single-card {
+      /*border: 1px solid #E2E8F0;*/
+      box-shadow: 0 -1px 24px 0 #1e85d6;
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .section3 .grid .single-card .product-title {
+      h3 {
+        font-size: clamp(1rem, 2.5vw, 30px);
+        color: #2a3a8a;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #2a3a8a;
+      }
+
+      h4 {
+        color: #2a3a8a;
+        font-size: clamp(1rem, 2.5vw, 24px);
+      }
+    }
+
+    .section3 .grid .single-card .single-content {
+      color: #7a7a7a;
+      font-size: clamp(1rem, 2.5vw, 22px);
+      font-weight: 600;
+    }
+
+    .section3 .button {
+      background: linear-gradient(to right, #ffcc00, #ff9900);
+      color: #ffffff;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section3 .button:hover {
+      background: linear-gradient(to right, #ff9900, #ffcc00);
+    }
+
+    .section3 .footer {
+      color: #E53E3E;
+      text-align: center;
+    }
+
+    .section6 {
+      margin: 60px 0;
+    }
+
+    .section6 .container {
+      background-color: #1b5e20;
+      color: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .section6 .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .section6 .header i {
+      color: #ff5722;
+      margin-right: 10px;
+    }
+
+    .section6 .header h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .section6 .content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .section6 .content div {
+      display: flex;
+      align-items: start;
+    }
+
+    .section6 .content i {
+      color: #4caf50;
+      margin-right: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .section6 .content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .section7 {
+      max-width: 800px;
+      width: 100%;
+      margin-top: 50px;
+    }
+
+    .section7 .offer-container {
+      margin: 0 auto;
+      background-color: #f2f4ff;
+      border: 6px solid #2a3a8a;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /*max-width: 600px;*/
+      /*width: 100%;*/
+    }
+
+    .section7 .offer-container p {
+      color: #065f46;
+      margin-bottom: 16px;
+      font-size: 16px;
+      line-height: 2.5em;
+    }
+
+    .section7 .offer-container .regular-price {
+      color: #000000;
+      font-size: clamp(1rem, 2.5vw, 30px);
+      /*font-weight: bold;*/
+      margin-bottom: 8px;
+    }
+
+    .section7 .offer-container .free-home-delivery {
+      color: #000000;
+      font-size: clamp(1rem, 2.5vw, 24px);
+    }
+
+    .section7 .offer-container .offer-price {
+      color: #f82d6f;
+      font-size: clamp(1rem, 2.5vw, 32px);
+      line-height: 2px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .section7 .offer-container .contact-button {
+      background-color: #f97316;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 18px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .section7 .offer-container .contact-button i {
+      margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .section7 {
+        width: 90%;
+        margin: 30px auto;
+      }
+
+      .section1 .theme-container {
+        width: 100%;
+      }
+    }
+
+    .section4 {
+      background: #2a3a8a;
+      width: 100%;
+    }
+
+    .section4 .container {
+      max-width: 1024px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 60px 20px;
+
+      .top-heading {
+        h3 {
+          color: #e8a878;
+          font-size: clamp(1.3rem, 2.5vw, 32px);
+          text-align: center;
+          line-height: 1.7em;
+        }
+      }
+    }
+
+    /*.section4 .video-section {*/
+    /*    margin-bottom: 20px;*/
+    /*    background: white;*/
+    /*    padding: 20px;*/
+    /*}*/
+    .section4 .info-offer-section {
+      background-color: #4CAF50;
+      color: #FFD700;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      border: 4px solid #006400;
+      margin-bottom: 20px;
+    }
+
+    .section4 .info-offer-section p {
+      margin: 10px 0;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .section4 .offer-box {
+      background-color: #C8E6C9;
+      color: #2E7D32;
+      padding: 20px;
+      border-radius: 10px;
+      border: 4px solid #4CAF50;
+      display: inline-block;
+    }
+
+    .section4 .offer-box span {
+      background-color: #FF5722;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    .section4 .order-button {
+      text-align: center;
+    }
+
+    .section4 .order-button button {
+      background-color: #FFEB3B;
+      color: #D32F2F;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .video-container {
+      margin: 50px 0;
+      padding: 10px;
+      width: 100%;
+      background: #fff;
+
+      iframe {
+        height: 100%;
+        width: 100%;
+        min-height: 250px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .video-container {
+        height: 450px;
+        padding: 25px;
+      }
+    }
+
+    .section8 {
+      background: linear-gradient(rgb(255, 225, 202), rgba(255, 225, 202, 0));
+
+      padding-top: 80px;
+      width: 100%;
+
+      .container {
+        max-width: 1024px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .list {
+        margin-top: 60px;
+        padding: 20px 0;
+        background: #fff;
+        box-shadow: 0 11px 16px -11px rgba(0, 0, 0, 0.06);
+        border-radius: 20px;
+        svg {
+          fill: #F2D368;
+          width: 60px;
+          height: 50px;
+        }
+
+        .list-item {
+          font-size: clamp(1.2em, 2.5vw, 25px);
+          font-weight: 600;
+          color: #2A3AA8;
+          border-bottom: 1px solid #c4c4c4;
+          list-style-type: none;
+          padding: 15px 36px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+
+          &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+        }
+      }
+
+    }
+
+    @media (max-width: 768px) {
+      .section8{
+        padding-top: 40px;
+      }
+      .section8 .list {
+        padding-top: 30px;
+        .list-item {
+          padding: 5px 10px 10px;
+          margin: 16px 0;
+          align-items: start;
+          svg {
+            width: 50px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="section0">
+  <div class="top-heading">
+    <h3>আপনার সৌন্দর্যের জন্য সেরা কম্বো প্যাকেজ একটাই প্রাকৃতিক সমাধান</h3>
+  </div>
+</div>
+
+<div class="section1">
+  <div class="use-time">
+    <h3>কমপক্ষে ১ বছর ঘরে বসে ব্যবহার করুন</h3>
+  </div>
+  <div class="theme-container">
+    <div class="content">
+      <div class="image-container">
+        <img id="image" alt="Two bottles of a health supplement with a red ribbon around them" height="300"
+             src="https://storage.googleapis.com/a1aa/image/hGWOwM92DsOoO1L3YyFbyOR2XfXsgGkpv1jOMhTpUFg.jpg"
+             width="200"/>
+      </div>
+
+      <!--         <button class="button">-->
+      <!--          অর্ডার করতে ক্লিক করুন-->
+      <!--         </button>-->
+    </div>
+  </div>
+
+  <div style="border: 2px solid #003366;margin-top: 50px; margin-bottom: 30px; padding: 20px; border-radius: 10px; text-align: center; background: transparent; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+    <p style="color: red; font-size: clamp(1rem, 2.5vw, 24px); text-decoration: line-through; margin: 0;">
+      প্রথম অর্ডার করলে পাচ্ছেন ১৯৯০ টাকার প্যাকেজ
+    </p>
+    <p style="color: #003366; font-size: clamp(1rem, 2.5vw, 30px); font-weight: bold; margin: 10px 0;">
+      অফার প্রাইসঃ মাত্র ১২৫০ টাকা।
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center">
+      <button style="background-color: #fdd835; color: white; margin-top: 20px; font-size: clamp(1rem, 2.5vw, 22px); font-weight: bold; padding: 12px 16px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 3px solid #e91e63; display: flex; align-items: center; gap: 10px">
+        অর্ডার করতে ক্লিক করুন
+        <span>
+                  <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 902.86 902.86"
+                       xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
+                                                                                              stroke-linecap="round"
+                                                                                              stroke-linejoin="round"></g><g
+                    id="SVGRepo_iconCarrier"> <g> <g> <path
+                    d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z"></path> <path
+                    d="M578.418,825.641c59.961,0,108.743-48.783,108.743-108.744s-48.782-108.742-108.743-108.742H168.717 c-59.961,0-108.744,48.781-108.744,108.742s48.782,108.744,108.744,108.744c59.962,0,108.743-48.783,108.743-108.744 c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107,12.59-7.928,26.342-7.928,40.742 C469.675,776.858,518.457,825.641,578.418,825.641z M209.46,716.897c0,22.467-18.277,40.744-40.743,40.744 c-22.466,0-40.744-18.277-40.744-40.744c0-22.465,18.277-40.742,40.744-40.742C191.183,676.155,209.46,694.432,209.46,716.897z M619.162,716.897c0,22.467-18.277,40.744-40.743,40.744s-40.743-18.277-40.743-40.744c0-22.465,18.277-40.742,40.743-40.742 S619.162,694.432,619.162,716.897z"></path> </g> </g> </g></svg>
+              </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="section3">
+  <div class="header-container">
+    <div class="header">
+      <h1>
+        <i class="fas fa-angle-double-left"></i> বাংলাদেশে তৈরি একমাত্র আমাদের হাতে তৈরি সাবান
+        <i class="fas fa-angle-double-right"></i>
+      </h1>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="grid-container">
+      <div class="grid">
+        <div class="single-card">
+          <div class="product-title">
+            <h3>দারুচিনি সাবান বার</h3>
+            <h4>উপকারিতাঃ</h4>
+          </div>
+          <p class="single-content">ব্রণ ও ব্রণের দাগ দূর করে।</p>
+          <p class="single-content">ডার্ক সার্কেল রিমুভ করে ভুক টাইট করে।</p>
+          <p class="single-content">ত্বকের যে কোন দাগ রিমুভ করে।</p>
+          <p class="single-content">প্রাকৃতিকভাবে চেহারা ফর্সা করে ৫ শেড পর্যন্ত।</p>
+          <p class="single-content">সঠিক পুষ্টি যুগিয়ে ত্বকে ময়শ্চারাইজিং আনে।</p>
+          <div>
+          </div>
+        </div>
+        <div class="single-card">
+          <div class="product-title">
+            <h3>পেঁপে সাদা করার সাবান</h3>
+            <h4>উপকারিতাঃ</h4>
+          </div>
+          <p class="single-content">ত্বক ফর্সা করে।</p>
+          <p class="single-content">ত্বকের উজ্জলতা বৃদ্ধি করে।</p>
+          <p class="single-content">ব্রণ ও ব্রণের দাগ দূর করে।</p>
+          <p class="single-content">রোদ্রে পোড়া দাগ দূর করে।</p>
+          <p class="single-content">আগুনে পোড়া দাগ দূর করে।</p>
+          <p class="single-content">ব্রনের দাগ দূর করে।</p>
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center">
+      <button style="background-color: #fdd835; color: white; margin-top: 20px; font-size: clamp(1rem, 2.5vw, 22px); font-weight: bold; padding: 12px 16px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 3px solid #e91e63; display: flex; align-items: center; gap: 10px">
+        অর্ডার করতে ক্লিক করুন
+        <span>
+                  <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 902.86 902.86"
+                       xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
+                                                                                              stroke-linecap="round"
+                                                                                              stroke-linejoin="round"></g><g
+                    id="SVGRepo_iconCarrier"> <g> <g> <path
+                    d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z"></path> <path
+                    d="M578.418,825.641c59.961,0,108.743-48.783,108.743-108.744s-48.782-108.742-108.743-108.742H168.717 c-59.961,0-108.744,48.781-108.744,108.742s48.782,108.744,108.744,108.744c59.962,0,108.743-48.783,108.743-108.744 c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107,12.59-7.928,26.342-7.928,40.742 C469.675,776.858,518.457,825.641,578.418,825.641z M209.46,716.897c0,22.467-18.277,40.744-40.743,40.744 c-22.466,0-40.744-18.277-40.744-40.744c0-22.465,18.277-40.742,40.744-40.742C191.183,676.155,209.46,694.432,209.46,716.897z M619.162,716.897c0,22.467-18.277,40.744-40.743,40.744s-40.743-18.277-40.743-40.744c0-22.465,18.277-40.742,40.743-40.742 S619.162,694.432,619.162,716.897z"></path> </g> </g> </g></svg>
+              </span>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="section4">
+    <div class="container">
+      <div class="top-heading">
+        <h3>ফেস কেয়ার সেট কম্বো সব সমস্যা সমাধানে প্রাকৃতিক সেরা কম্বো প্যাকেজ অম্পর্ক আরো জানুন</h3>
+      </div>
+      <!-- Video Section -->
+      <div class="video-container">
+        <iframe id="video" src="https://www.youtube.com/embed/0IHfyRidDlE" frameborder="0"
+                allowfullscreen></iframe>
+      </div>
+
+      <!-- Order Button -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button style="background-color: #fdd835; color: white; margin-top: 20px; font-size: clamp(1rem, 2.5vw, 22px); font-weight: bold; padding: 12px 16px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 3px solid #e91e63; display: flex; align-items: center; gap: 10px">
+          অর্ডার করতে ক্লিক করুন
+          <span>
+                  <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 902.86 902.86"
+                       xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
+                                                                                              stroke-linecap="round"
+                                                                                              stroke-linejoin="round"></g><g
+                    id="SVGRepo_iconCarrier"> <g> <g> <path
+                    d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z"></path> <path
+                    d="M578.418,825.641c59.961,0,108.743-48.783,108.743-108.744s-48.782-108.742-108.743-108.742H168.717 c-59.961,0-108.744,48.781-108.744,108.742s48.782,108.744,108.744,108.744c59.962,0,108.743-48.783,108.743-108.744 c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107,12.59-7.928,26.342-7.928,40.742 C469.675,776.858,518.457,825.641,578.418,825.641z M209.46,716.897c0,22.467-18.277,40.744-40.743,40.744 c-22.466,0-40.744-18.277-40.744-40.744c0-22.465,18.277-40.742,40.744-40.742C191.183,676.155,209.46,694.432,209.46,716.897z M619.162,716.897c0,22.467-18.277,40.744-40.743,40.744s-40.743-18.277-40.743-40.744c0-22.465,18.277-40.742,40.743-40.742 S619.162,694.432,619.162,716.897z"></path> </g> </g> </g></svg>
+              </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section8">
+    <div class="container">
+      <div class="header">
+        <h1>
+          <i class="fas fa-angle-double-left"></i> বাংলাদেশে তৈরি একমাত্র আমাদের হাতে তৈরি সাবান
+          <i class="fas fa-angle-double-right"></i>
+        </h1>
+      </div>
+      <ul class="list">
+        <li class="list-item">
+                    <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#434343">
+                        <path d="M320-273v-414q0-17 12-28.5t28-11.5q5 0 10.5 1.5T381-721l326 207q9 6 13.5 15t4.5 19q0 10-4.5 19T707-446L381-239q-5 3-10.5 4.5T360-233q-16 0-28-11.5T320-273Zm80-207Zm0 134 210-134-210-134v268Z"/>
+                    </svg>
+                        </span>
+          <span>আকর্ষনীয় প্যাকিং সুবিধা।</span></li>
+
+        <li class="list-item">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#434343">
+                        <path d="M320-273v-414q0-17 12-28.5t28-11.5q5 0 10.5 1.5T381-721l326 207q9 6 13.5 15t4.5 19q0 10-4.5 19T707-446L381-239q-5 3-10.5 4.5T360-233q-16 0-28-11.5T320-273Zm80-207Zm0 134 210-134-210-134v268Z"/>
+                    </svg>
+                        </span>
+          <span>সাশ্রয়ী মূল্যে বাংলাদেশে হাতে তৈরি কোয়ালিটি প্রোডাক্ট।</span></li>
+        <li class="list-item">
+                    <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#434343">
+                        <path d="M320-273v-414q0-17 12-28.5t28-11.5q5 0 10.5 1.5T381-721l326 207q9 6 13.5 15t4.5 19q0 10-4.5 19T707-446L381-239q-5 3-10.5 4.5T360-233q-16 0-28-11.5T320-273Zm80-207Zm0 134 210-134-210-134v268Z"/>
+                    </svg>
+                        </span>
+          <span>১০০% কোয়ালিটি এবং ৩ দিনের রিটার্ন গ্যারান্টি। সার্বক্ষনিক কল</span></li>
+        <li class="list-item">
+                    <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#434343">
+                        <path d="M320-273v-414q0-17 12-28.5t28-11.5q5 0 10.5 1.5T381-721l326 207q9 6 13.5 15t4.5 19q0 10-4.5 19T707-446L381-239q-5 3-10.5 4.5T360-233q-16 0-28-11.5T320-273Zm80-207Zm0 134 210-134-210-134v268Z"/>
+                    </svg>
+                        </span>
+          <span>সারাদেশে ২৪ থেকে ৭২ ঘন্টায় হোম ডেলিভারি।</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section7">
+    <div class="offer-container">
+      <p class="regular-price">৪০০ গ্রামের রেগুলার মূল্য ১২০০ টাকা।</p>
+      <p class="offer-price">অফার মূল্য = ৮৫০/-টাকা</p>
+      <p class="free-home-delivery">(ফ্রি হোম ডেলিভারি!!)</p>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button style="background-color: #fdd835; color: white; margin-top: 20px; font-size: clamp(1rem, 2.5vw, 22px); font-weight: bold; padding: 12px 16px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 3px solid #e91e63; display: flex; align-items: center; gap: 10px">
+          অর্ডার করতে ক্লিক করুন
+          <span>
+                  <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 902.86 902.86"
+                       xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
+                                                                                              stroke-linecap="round"
+                                                                                              stroke-linejoin="round"></g><g
+                    id="SVGRepo_iconCarrier"> <g> <g> <path
+                    d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z"></path> <path
+                    d="M578.418,825.641c59.961,0,108.743-48.783,108.743-108.744s-48.782-108.742-108.743-108.742H168.717 c-59.961,0-108.744,48.781-108.744,108.742s48.782,108.744,108.744,108.744c59.962,0,108.743-48.783,108.743-108.744 c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107,12.59-7.928,26.342-7.928,40.742 C469.675,776.858,518.457,825.641,578.418,825.641z M209.46,716.897c0,22.467-18.277,40.744-40.743,40.744 c-22.466,0-40.744-18.277-40.744-40.744c0-22.465,18.277-40.742,40.744-40.742C191.183,676.155,209.46,694.432,209.46,716.897z M619.162,716.897c0,22.467-18.277,40.744-40.743,40.744s-40.743-18.277-40.743-40.744c0-22.465,18.277-40.742,40.743-40.742 S619.162,694.432,619.162,716.897z"></path> </g> </g> </g></svg>
+              </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

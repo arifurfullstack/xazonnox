@@ -1,0 +1,130 @@
+<div class="container">
+
+  <div class="content add-page">
+    <form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <mat-form-field appearance="outline">
+        <mat-label>What you want to show?</mat-label>
+        <mat-select formControlName="type" (selectionChange)="onTypeChange()">
+          @for(data of showType; track data.value) {
+            <mat-option [value]="data.value">
+              {{ data.viewValue }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error>This field is required.</mat-error>
+      </mat-form-field>
+
+      <div class="gallery-picker" *ngIf="dataForm?.value.type === 'image'">
+        <app-gallery-image-picker
+          [type]="'multiple'"
+          [maxImages]="1"
+          [isInvalid]="this.dataForm.get('images').touched && this.dataForm.get('images').invalid"
+          (onPicked)="onPickedImage($event)"
+          infoText="The  image for any (154px * 100px)"
+          [images]="pickedImages">
+        </app-gallery-image-picker>
+      </div>
+
+      <mat-form-field appearance="outline" *ngIf="dataForm?.value.type === 'video'">
+        <mat-label>Enter youtube Url</mat-label>
+        <input formControlName="url" matInput placeholder="Enter url" >
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <div class="product-search-area">
+        <div class="title">
+          <h3>Product:</h3>
+        </div>
+        <app-product-search (onSelect)="onProductSelect($event)"></app-product-search>
+      </div>
+      <div class="product-area">
+        <!-- <p>Name: {{allTableData[0]?.name}}</p>-->
+        <div class="search-results" [ngClass]="{'has-results': allTableData?.length > 0}">
+          <div class="search-item" >
+            <img [src]="allTableData[0]?.images && allTableData[0]?.images?.length ? allTableData[0]?.images[0] : ''" alt="product image" />
+            <div class="item-info">
+              <h3>{{ allTableData[0]?.name }}</h3>
+              <p>Category: {{ allTableData[0]?.category?.name }} > {{ allTableData[0]?.subCategory?.name }}</p>
+              <div class="price-info">
+                <span class="discounted-price">{{ allTableData[0]?.salePrice }}</span>
+                <span class="original-price">{{ allTableData[0]?.salePrice }}</span>
+              </div>
+            </div>
+            <div class="stock-info">In Stock: {{ allTableData[0]?.quantity }}pcs</div>
+            <button type="button" class="remove-btn" (click)="deleteProduct(0)"><mat-icon>close</mat-icon></button> <!-- Remove button -->
+          </div>
+        </div>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="name" matInput placeholder="Enter name" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Slug</mat-label>
+        <input  formControlName="slug" matInput placeholder="Enter slug" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Short Description</mat-label>
+        <textarea formControlName="shortDes" matInput placeholder="Enter short description" required></textarea>
+<!--        <input formControlName="shortDes" matInput placeholder="Enter short description" required>-->
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+
+
+      <div class="description-area">
+        <label>Description</label>
+        <div class="description-main">
+          <app-html-editor  formControlName="description"></app-html-editor>
+        </div>
+      </div>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Background Color</mat-label>
+<!--        <textarea formControlName="background" matInput placeholder="Enter background color" required></textarea>-->
+                <input formControlName="background" matInput placeholder="Ex- #000000" required>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <div class="d-row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            @for(data of dataStatus; track data.value) {
+              <mat-option [value]="data.value">
+                {{ data.viewValue }}
+              </mat-option>
+            }
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </div> <!-- END! d-row -->
+
+      <div class="action">
+        <button (click)="onDiscard()" mat-stroked-button color="warn" type="button" class="discard">
+          <mat-icon>arrow_back_ios</mat-icon>
+          Discard
+        </button>
+
+        @if(!isLoading) {
+          <button mat-button class="add-product-btn" color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            {{ id ? 'Update OfferPage' : 'Add OfferPage' }}
+          </button>
+        } @else {
+          <button class="btn-loader" mat-button type="button" color="primary">
+            <div><span class="loader"></span></div>
+            <div><span class="txt">{{ id ? 'Update OfferPage' : 'Add OfferPage' }}</span></div>
+          </button>
+        }
+      </div> <!-- END! action -->
+
+    </form> <!-- END! form -->
+  </div> <!-- END! content -->
+</div> <!-- END! container -->

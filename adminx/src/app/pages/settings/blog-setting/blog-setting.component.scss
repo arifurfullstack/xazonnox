@@ -1,0 +1,15 @@
+@import "common/settings";
+
+.row {
+  display: flex;
+  gap: 5px;
+  //align-items: center;
+
+  mat-form-field {
+    flex: 1;
+  }
+
+  button {
+    width: 60px;
+  }
+}

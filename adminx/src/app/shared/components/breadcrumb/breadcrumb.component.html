@@ -1,0 +1,31 @@
+<div class="all-page-info">
+  <div class="page-info">
+    <h6>{{navArray[1]?.name}}</h6>
+
+      <ul>
+        @for (nav of navArray; track $index) {
+          <li>
+            <a [routerLink]="nav.url"> {{nav.name}}
+              <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="5.718" viewBox="0 0 10 5.718">
+                <path id="Icon_ionic-ios-arrow-down" data-name="Icon ionic-ios-arrow-down"
+                      d="M11.189,15.241l3.781-3.784a.712.712,0,0,1,1.009,0,.721.721,0,0,1,0,1.012L11.7,16.756a.713.713,0,0,1-.985.021L6.4,12.472a.715.715,0,1,1,1.009-1.012Z"
+                      transform="translate(-6.188 -11.246)" opacity="0.5" />
+              </svg>
+            </a>
+          </li>
+        }
+
+      </ul>
+
+
+  </div>
+
+  <div class="links">
+    <a (click)="openYoutubeVideoDialog($event,navArray[1]?.url)" matTooltip="Tutorial Guide">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" width="300" height="300"><g width="100%" height="100%" transform="matrix(1,0,0,1,0,0)"><g id="XMLID_184_">
+	          <path d="M23.498,6.186c-0.276-1.039-1.089-1.858-2.122-2.136C19.505,3.546,12,3.546,12,3.546s-7.505,0-9.377,0.504   C1.591,4.328,0.778,5.146,0.502,6.186C0,8.07,0,12,0,12s0,3.93,0.502,5.814c0.276,1.039,1.089,1.858,2.122,2.136   C4.495,20.454,12,20.454,12,20.454s7.505,0,9.377-0.504c1.032-0.278,1.845-1.096,2.122-2.136C24,15.93,24,12,24,12   S24,8.07,23.498,6.186z M9.546,15.569V8.431L15.818,12L9.546,15.569z" fill="#a31a1a" fill-opacity="1" data-original-color="#000000ff" stroke="none" stroke-opacity="1"/></g></g>
+      </svg>
+      <p>Tutorial Guide</p>
+    </a>
+  </div>
+</div>

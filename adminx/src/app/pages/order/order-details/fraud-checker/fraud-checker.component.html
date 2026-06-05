@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="close-icon" (click)="closeDialog()">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+      <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+    </svg>
+  </div>
+  <div class="left-area">
+    <div class="image-area">
+      <img [src]="'https://huipper.com/wp-content/uploads/2025/11/huipper-logo-300x98.png'" alt="">
+    </div>
+    <div class="ratio-area">
+      <p class="ratio-title">Delivery Success Ratio</p>
+      <div class="ratio-circle" [attr.isRisk]="data?.courierData?.summary?.success_ratio < 50 ? true : false">
+        {{ data?.courierData?.summary?.success_ratio }}%
+      </div>
+      <h1>{{ data?.courierData?.summary?.success_ratio < 50 ? 'High Risk' : 'Excellent' }}</h1>
+    </div>
+    <p class="status">
+      {{ data?.courierData?.summary?.success_ratio < 50
+        ? 'এই মানুষ কে পার্সেল ডেলিভার করা অনেকটাই রিস্কি। Delivery charge advanced না নিয়ে পণ্য পাঠানো ঠিক হবেনা।'
+        : 'এটি একটি নিরাপদ ডেলিভারি' }} </p>
+
+  </div>
+  <div class="right-content">
+    <div class="header">
+      <h1>Overview</h1>
+    </div>
+    <!--    <form action="">-->
+    <!--  <div class="search-area">-->
+    <!--    <input type="text" class="serch-input" placeholder="{{ data?.mobile }}" readonly>-->
+    <!--  </div>-->
+    <!--    </form>-->
+    <div class="info">
+      <p>Your Number is <span>{{ data?.mobile }}</span></p>
+      <div class="summary">
+        <div class="item">
+          <span>{{data?.courierData?.summary?.total_parcel}}</span>
+          <p>মোট অর্ডার</p>
+        </div>
+        <div class="item">
+          <span>{{data?.courierData?.summary?.success_parcel}}</span>
+          <p>মোট ডেলিভারি</p>
+        </div>
+        <div class="item">
+          <span>{{data?.courierData?.summary?.cancelled_parcel}}</span>
+          <p>মোট বাতিল</p>
+        </div>
+      </div>
+      <ul class="heading">
+        <li>কুরিয়ার</li>
+        <li>অর্ডার</li>
+        <li>ডেলিভারি</li>
+        <li>বাতিল</li>
+        <li>বাতিল হার</li>
+      </ul>
+
+      <ul class="data-container">
+        <li>
+          <div class="logo">
+            <img src="https://fraud-checker.storex.com.bd/media/steadfast.svg" alt="">
+          </div>
+        </li>
+        <li>{{ data?.courierData?.steadfast?.total_parcel}}</li>
+        <li>{{ data?.courierData?.steadfast?.success_parcel}}</li>
+        <li>{{ data?.courierData?.steadfast?.cancelled_parcel}}</li>
+        <li>{{ data?.courierData?.steadfast?.success_ratio}}</li>
+      </ul>
+      <ul class="data-container">
+        <li>
+          <div class="logo">
+            <img src="https://fraud-checker.storex.com.bd/media/pathao.svg" alt="">
+          </div>
+        </li>
+        <li>{{ data?.courierData?.pathao?.total_parcel}}</li>
+        <li>{{ data?.courierData?.pathao?.success_parcel}}</li>
+        <li>{{ data?.courierData?.pathao?.cancelled_parcel}}</li>
+        <li>{{ data?.courierData?.pathao?.success_ratio}}</li>
+      </ul>
+      <ul class="data-container">
+        <li>
+          <div class="logo">
+            <img src="https://fraud-checker.storex.com.bd/media/redx.svg" alt="">
+          </div>
+        </li>
+        <li>{{ data?.courierData?.redx?.total_parcel}}</li>
+        <li>{{ data?.courierData?.redx?.success_parcel}}</li>
+        <li>{{ data?.courierData?.redx?.cancelled_parcel}}</li>
+        <li>{{ data?.courierData?.redx?.success_ratio}}</li>
+      </ul>
+      <ul class="data-container">
+        <li>
+          <div class="logo">
+            <img src="https://fraud-checker.storex.com.bd/media/paperfly.svg" alt="">
+          </div>
+        </li>
+        <li>{{ data?.courierData?.paperfly?.total_parcel}}</li>
+        <li>{{ data?.courierData?.paperfly?.success_parcel}}</li>
+        <li>{{ data?.courierData?.paperfly?.cancelled_parcel}}</li>
+        <li>{{ data?.courierData?.paperfly?.success_ratio}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

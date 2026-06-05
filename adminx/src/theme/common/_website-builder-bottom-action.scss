@@ -1,0 +1,45 @@
+@import "variables";
+@import "exports/btn";
+
+.bottom-action {
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.go-back {
+  max-width: 120px;
+  display: inline-flex;
+  align-items: center;
+  font-size: calc($font-readable + 2px);
+  color: #5f6368;
+  text-decoration: none;
+  cursor: pointer;
+
+  svg {
+    margin-right: 8px;
+    fill: #5f6368;
+    transition: transform 0.3s ease, fill 0.3s ease;
+  }
+
+  &:hover {
+    color: $color-primary;
+
+    svg {
+      transform: translateX(-5px);
+      fill: $color-primary;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 599px) {
+  .bottom-action {
+    padding: 10px;
+  }
+}
