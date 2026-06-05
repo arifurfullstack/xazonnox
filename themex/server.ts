@@ -41,7 +41,12 @@ export function app(): express.Express {
         publicPath: browserDistFolder,
         providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
       })
-      .then((html) => res.send(html))
+      .then((html) => {
+        const apiBaseLink = process.env['API_BASE_LINK'] || `${protocol}://api.${headers.host.replace('www.', '')}`;
+        const envScript = `<script>window.__env = { apiBaseLink: '${apiBaseLink}' };</script>`;
+        const modifiedHtml = html.replace('</head>', `${envScript}</head>`);
+        res.send(modifiedHtml);
+      })
       .catch((err) => next(err));
   });
 

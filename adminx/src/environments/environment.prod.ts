@@ -1,13 +1,34 @@
+const isBrowser = typeof window !== 'undefined';
+let apiBase = 'https://api.azonno.com';
+let adminDomain = 'admin.azonno.com';
+
+if (isBrowser) {
+  if ((window as any).__env?.apiBaseLink) {
+    apiBase = (window as any).__env.apiBaseLink;
+    adminDomain = (window as any).__env.adminDomain || window.location.hostname;
+  } else {
+    const hostname = window.location.hostname;
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      adminDomain = hostname;
+      if (hostname.startsWith('admin.')) {
+        apiBase = `${window.location.protocol}//${hostname.replace('admin.', 'api.')}`;
+      } else {
+        apiBase = `${window.location.protocol}//api.${hostname}`;
+      }
+    }
+  }
+}
+
 export const environment = {
   production: true,
-  name: 'admin.azonno.com',
-  domain: 'admin.azonno.com',
-  baseLink: 'https://api.azonno.com',
-  paymentBaseLink: 'https://api.azonno.com',
-  apiBaseLink: 'https://api.azonno.com',
-  ftpBaseLink: 'https://api.azonno.com',
-  ftpPrefixPath: 'https://api.azonno.com/api/upload/images',
-  apiBaseLinkSaleecom: 'https://api.azonno.com',
+  name: adminDomain,
+  domain: adminDomain,
+  baseLink: apiBase,
+  paymentBaseLink: apiBase,
+  apiBaseLink: apiBase,
+  ftpBaseLink: apiBase,
+  ftpPrefixPath: `${apiBase}/api/upload/images`,
+  apiBaseLinkSaleecom: apiBase,
   ftpPrefix: '/api',
   userLoginUrl: 'login',
   userBaseUrl: '',
