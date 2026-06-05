@@ -4,9 +4,10 @@ export default () => ({
   productionBuild: process.env.PRODUCTION_BUILD === 'true',
   prefix: process.env.PREFIX ?? null,
   hostname:
-    process.env.PRODUCTION_BUILD === 'true'
-      ? 'https://api.luxanvo.com'
-      : `http://localhost:${process.env.PORT || 3000}`,
+    process.env.API_BASE_URL ||
+    (process.env.PRODUCTION_BUILD === 'true'
+      ? 'https://api.chatbotmini.com'
+      : `http://localhost:${process.env.PORT || 3000}`),
   port: parseInt(process.env.PORT, 10) || 3000,
   mongoCluster:
     process.env.MONGODB_URI ||
@@ -24,16 +25,15 @@ export default () => ({
 
   // CDN Api
   cdnUrlBase:
-    process.env.PRODUCTION_BUILD === 'true'
-      ? 'https://api.luxanvo.com/api'
-      : 'http://localhost:4000/api',
+    `${process.env.API_BASE_URL || (process.env.PRODUCTION_BUILD === 'true' ? 'https://api.chatbotmini.com' : 'http://localhost:3000')}/api`,
 
   // Build Script
   themeTargetPath: process.env.THEME_TARGET_PATH || 'c:/rif/azonnox/themex',
   apiBaseUrl:
-    process.env.PRODUCTION_BUILD === 'true'
-      ? 'https://api.luxanvo.com'
-      : 'http://localhost:3000',
+    process.env.API_BASE_URL ||
+    (process.env.PRODUCTION_BUILD === 'true'
+      ? 'https://api.chatbotmini.com'
+      : 'http://localhost:3000'),
 
   // Gmail Api
   gmail: process.env.GMAIL_SMTP_USER || 'saleecom.server@gmail.com',
