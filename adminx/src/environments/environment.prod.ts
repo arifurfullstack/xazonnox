@@ -1,20 +1,18 @@
 const isBrowser = typeof window !== 'undefined';
-let apiBase = 'https://api.azonno.com';
-let adminDomain = 'admin.azonno.com';
+let apiBase = '';
+let adminDomain = '';
 
 if (isBrowser) {
+  const hostname = window.location.hostname;
+  adminDomain = hostname;
   if ((window as any).__env?.apiBaseLink) {
     apiBase = (window as any).__env.apiBaseLink;
-    adminDomain = (window as any).__env.adminDomain || window.location.hostname;
+    adminDomain = (window as any).__env.adminDomain || hostname;
   } else {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      adminDomain = hostname;
-      if (hostname.startsWith('admin.')) {
-        apiBase = `${window.location.protocol}//${hostname.replace('admin.', 'api.')}`;
-      } else {
-        apiBase = `${window.location.protocol}//api.${hostname}`;
-      }
+    if (hostname.startsWith('admin.')) {
+      apiBase = `${window.location.protocol}//${hostname.replace('admin.', 'api.')}`;
+    } else {
+      apiBase = `${window.location.protocol}//api.${hostname}`;
     }
   }
 }
