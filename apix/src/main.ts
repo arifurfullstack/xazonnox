@@ -16,10 +16,10 @@ async function bootstrap() {
 
   // Enable CORS securely
   app.enableCors({
-    origin: '*',
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: '*',
-    credentials: false,
+    credentials: true,
   });
 
   // Enable security headers
