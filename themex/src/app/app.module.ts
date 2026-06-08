@@ -67,8 +67,10 @@ export function initConfig(configService: AppConfigService) {
     },
     provideClientHydration(withNoHttpTransferCache()),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
-    provideHttpClient(withInterceptors([authUserInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authUserInterceptor])
+    ),
     provideImgixLoader(environment.ftpPrefixPath),
     provideLottieOptions({
       player: () => import('lottie-web'),
