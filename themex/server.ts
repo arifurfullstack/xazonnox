@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import AppServerModule from './src/main.server';
 import * as dotenv from 'dotenv';
+import fs from 'node:fs';
 
 // Load environment variables
 dotenv.config();
@@ -23,6 +24,20 @@ export function app(): express.Express {
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
+
+  // Serve shop-settings.json dynamically from external volume mount or fallback to local browser dist folder
+  server.get('/shop-settings.json', (req, res) => {
+    const externalPath = join('/app', 'settings', 'shop-settings.json');
+    const localPath = join(browserDistFolder, 'shop-settings.json');
+    if (fs.existsSync(externalPath)) {
+      res.sendFile(externalPath);
+    } else if (fs.existsSync(localPath)) {
+      res.sendFile(localPath);
+    } else {
+      res.status(404).json({ error: 'shop-settings.json not found' });
+    }
+  });
+
   // Serve static files from /browser
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',

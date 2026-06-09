@@ -72,9 +72,9 @@ export class AppComponent implements OnInit, OnDestroy {
    */
 
   private getSettingData() {
-    const themeViewSettings: ThemeViewSetting[] = this.appConfigService.getSettingData('themeViewSettings');
-    this.headerViews = themeViewSettings.find(f => f.type == 'headerViews').value.join();
-    this.bottomNavViews = themeViewSettings.find(f => f.type == 'bottomNavViews')?.value?.join();
+    const themeViewSettings: ThemeViewSetting[] = this.appConfigService.getSettingData('themeViewSettings') || [];
+    this.headerViews = themeViewSettings.find(f => f.type == 'headerViews')?.value?.join() || 'Header 1';
+    this.bottomNavViews = themeViewSettings.find(f => f.type == 'bottomNavViews')?.value?.join() || 'Bottom Nav 1';
   }
 
   private setColorVariable() {

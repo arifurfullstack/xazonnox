@@ -157,8 +157,8 @@ export class ProductDetails2Component implements OnInit, OnDestroy {
 
   private getSettingData() {
     this.themeColors = this.appConfigService.getSettingData('themeColors');
-    const themeViewSettings: ThemeViewSetting[] = this.appConfigService.getSettingData('themeViewSettings');
-    this.productCardViews = themeViewSettings.find(f => f.type == 'productCardViews').value.join();
+    const themeViewSettings: ThemeViewSetting[] = this.appConfigService.getSettingData('themeViewSettings') || [];
+    this.productCardViews = themeViewSettings.find(f => f.type == 'productCardViews')?.value?.join() || 'Product Card 1';
   }
 
   /**

@@ -57,8 +57,13 @@ export class AppConfigService {
 
   private async checkForUpdates(): Promise<void> {
     try {
+      let url = `/shop-settings.json?v=${new Date().getTime()}`;
+      if (!isPlatformBrowser(this.platformId)) {
+        const port = process.env['PORT'] || '4220';
+        url = `http://localhost:${port}${url}`;
+      }
       const newConfig = await firstValueFrom(
-        this.http.get(`/shop-settings.json?v=${new Date().getTime()}`)
+        this.http.get(url)
       );
 
       if (
@@ -148,6 +153,31 @@ export class AppConfigService {
   }
 
   getSettingData(field: string): any {
-    return field ? this.config?.[field] : this.config;
+    const data = field ? this.config?.[field] : this.config;
+    if (data !== undefined && data !== null) {
+      return data;
+    }
+
+    // Fallback/Default mock data to prevent runtime crashes if config fails to load
+    switch (field) {
+      case 'themeViewSettings':
+      case 'pageViewSettings':
+      case 'searchHints':
+        return [];
+      case 'themeColors':
+        return {
+          primary: '#00a0db',
+          secondary: '#333333',
+          tertiary: '#f5f5f5'
+        };
+      case 'productSetting':
+      case 'analytics':
+      case 'currency':
+        return {};
+      case 'orderLanguage':
+        return 'en';
+      default:
+        return undefined;
+    }
   }
 }
